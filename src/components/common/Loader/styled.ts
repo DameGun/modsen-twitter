@@ -1,14 +1,24 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 import { SPINNER_ANIMATION_DURATION } from '@/constants/loader';
 
-export const StyledLoader = styled.div`
-  background-color: ${(props) => props.theme.colors.secondaryAlpha};
-  position: fixed;
+export interface StyledLoaderProps {
+  $isLoaderFullScreen?: boolean;
+}
+
+export const StyledLoader = styled.div<StyledLoaderProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
+
+  ${({ $isLoaderFullScreen }) =>
+    $isLoaderFullScreen &&
+    css`
+      position: fixed;
+      background-color: ${(props) => props.theme.colors.secondaryAlpha};
+      height: 100%;
+    `}
+
   width: 100%;
   top: 0;
   left: 0;

@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
 import { LOADER_MIN_WAITING_TIME } from '@/constants/loader';
+import { FormatStyledProps } from '@/types/misc';
 
-import { Spinner, StyledLoader } from './styled';
+import { Spinner, StyledLoader, StyledLoaderProps } from './styled';
 
-interface LoaderProps {
-  isLoading: boolean;
+export interface LoaderProps extends FormatStyledProps<StyledLoaderProps> {
+  children?: ReactNode;
+  isLoading?: boolean;
 }
 
-export function Loader({ isLoading }: LoaderProps) {
+export function Loader({ isLoaderFullScreen, isLoading, children }: LoaderProps) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -19,14 +21,20 @@ export function Loader({ isLoading }: LoaderProps) {
       clearTimeout(timeoutId);
     }
 
-    return () => clearTimeout(timeoutId);
+    return () => {
+      setIsVisible(false);
+      clearTimeout(timeoutId);
+    };
   }, [isLoading]);
 
   return (
-    isVisible && (
-      <StyledLoader>
-        <Spinner />
-      </StyledLoader>
-    )
+    <>
+      {isLoaderFullScreen ? children : !isLoaderFullScreen && !isVisible && children}
+      {isVisible && (
+        <StyledLoader $isLoaderFullScreen={isLoaderFullScreen}>
+          <Spinner />
+        </StyledLoader>
+      )}
+    </>
   );
 }

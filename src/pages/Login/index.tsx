@@ -1,48 +1,58 @@
 import { useForm } from 'react-hook-form';
 
 import { yupResolver } from '@hookform/resolvers/yup';
+import { AuthError } from 'firebase/auth';
 
-import { GoogleIcon, Logo } from '@/assets/icons';
-import { Loader } from '@/components/common';
-import { AuthWrapper } from '@/components/containers';
+import { AuthWrapper, GoogleAuthButton, Logo } from '@/components/containers';
 import {
   Container,
   CustomInput,
   FormField,
   Heading2,
-  IconButton,
   Paragraph,
   StyledButton,
-  StyledIcon,
   StyledLink,
 } from '@/components/ui';
+import { AuthResponseErrors } from '@/constants/auth';
 import { Routes } from '@/constants/routes';
-import { useAuth } from '@/hooks/useAuth';
-import type { UserLogin } from '@/types/auth';
+import { useAsyncWithLoading } from '@/hooks/useAsyncWithLoading';
+import { AuthService } from '@/services/firestore/auth';
+import { ManualLoadingHandleProps } from '@/types/loader';
+import type { UserLogin } from '@/types/user';
+import { withLoader } from '@/utils/withLoader';
 
 import { loginValidationSchema } from './validation';
 
-export function LoginPage() {
+function BaseLoginPage({ handleLoading }: ManualLoadingHandleProps) {
   const {
     register,
     handleSubmit,
     setError,
     formState: { isValid, errors },
-  } = useForm<UserLogin>({ resolver: yupResolver(loginValidationSchema) });
+  } = useForm<UserLogin>({ resolver: yupResolver(loginValidationSchema), mode: 'onChange' });
 
-  const handleError = (message: string) => {
-    setError('email', { message });
+  const handleError = (err: unknown) => {
+    const { code } = err as AuthError;
+
+    if (code === AuthResponseErrors.INVALID_CREDENTIALS) {
+      setError('email', { message: 'Invalid credentials provided' });
+    } else {
+      setError('email', { message: 'Error happened while trying to login with Google' });
+    }
   };
 
-  const { isLoading, signInEmail, signInWithGoogle } = useAuth({ handleError });
+  const { call } = useAsyncWithLoading({
+    call: AuthService.signInEmail,
+    errorHandler: handleError,
+    handleLoading,
+  });
+
+  const handleFormSubmit = async (data: UserLogin) => await call(data);
 
   return (
-    <Container size='sm'>
-      <Loader isLoading={isLoading} />
-      <AuthWrapper onSubmit={handleSubmit(signInEmail)}>
-        <StyledIcon size='xl'>
-          <Logo />
-        </StyledIcon>
+    <Container size='sm' isCentered>
+      <AuthWrapper onSubmit={handleSubmit(handleFormSubmit)}>
+        <Logo />
         <Heading2>Log in to Twitter</Heading2>
         <FormField errorText={errors.email?.message}>
           <CustomInput
@@ -61,10 +71,10 @@ export function LoginPage() {
             isInvalid={!!errors.password}
           />
         </FormField>
-        <IconButton IconComponent={<GoogleIcon />} isContentCentered onClick={signInWithGoogle}>
-          Log in with Google
-        </IconButton>
-        <StyledButton isDisabled={!isValid}>Log in</StyledButton>
+        <GoogleAuthButton type='signIn' errorHandler={handleError} isLoaderFullScreen />
+        <StyledButton isDisabled={!isValid} variant='filled'>
+          Log in
+        </StyledButton>
         <Paragraph>
           Dont have an account yet? <StyledLink to={Routes.SignUp}>Sign up to twitter</StyledLink>
         </Paragraph>
@@ -72,3 +82,5 @@ export function LoginPage() {
     </Container>
   );
 }
+
+export const LoginPage = withLoader(BaseLoginPage);

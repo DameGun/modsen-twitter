@@ -1,10 +1,9 @@
 import { useForm } from 'react-hook-form';
 
 import { yupResolver } from '@hookform/resolvers/yup';
+import { AuthError } from 'firebase/auth';
 
-import { Logo } from '@/assets/icons';
-import { Loader } from '@/components/common';
-import { AuthWrapper, DateOfBirthControl } from '@/components/containers';
+import { AuthWrapper, DateOfBirthControl, Logo } from '@/components/containers';
 import {
   Container,
   CustomInput,
@@ -12,16 +11,18 @@ import {
   Heading2,
   Paragraph,
   StyledButton,
-  StyledIcon,
   StyledListItem,
 } from '@/components/ui';
-import { PasswordValidationChecks } from '@/constants/auth';
-import { useAuth } from '@/hooks/useAuth';
-import type { UserCreate } from '@/types/auth';
+import { AuthResponseErrors, PasswordValidationChecks } from '@/constants/auth';
+import { useAsyncWithLoading } from '@/hooks/useAsyncWithLoading';
+import { AuthService } from '@/services/firestore/auth';
+import type { ManualLoadingHandleProps } from '@/types/loader';
+import type { UserCreate } from '@/types/user';
+import { withLoader } from '@/utils/withLoader';
 
 import { signUpValidationSchema } from './validation';
 
-export function SignUpPage() {
+export function BaseSignUpPage({ handleLoading }: ManualLoadingHandleProps) {
   const {
     setValue,
     setError,
@@ -33,21 +34,28 @@ export function SignUpPage() {
     mode: 'onChange',
   });
 
-  const handleError = (message: string) => {
-    setError('email', { message });
-  };
+  const handleError = (err: unknown) => {
+    const { code } = err as AuthError;
 
-  const { isLoading, signUpEmail } = useAuth({ handleError });
+    if (code === AuthResponseErrors.EMAIL_IN_USE) {
+      setError('email', { message: 'Email is already in use' });
+    }
+  };
 
   const handleDateOfBirth = (date: Date) => setValue('dateOfBirth', date);
 
+  const { call } = useAsyncWithLoading({
+    call: AuthService.signUpEmail,
+    errorHandler: handleError,
+    handleLoading,
+  });
+
+  const handleFormSubmit = async (data: UserCreate) => await call(data);
+
   return (
-    <Container size='sm'>
-      <Loader isLoading={isLoading} />
-      <AuthWrapper onSubmit={handleSubmit(signUpEmail)}>
-        <StyledIcon size='xl'>
-          <Logo />
-        </StyledIcon>
+    <Container size='sm' isCentered>
+      <AuthWrapper onSubmit={handleSubmit(handleFormSubmit)}>
+        <Logo />
         <Heading2>Create an account</Heading2>
         <FormField errorText={errors.fullName?.message}>
           <CustomInput
@@ -121,10 +129,12 @@ export function SignUpPage() {
           </ul>
         </div>
         <DateOfBirthControl onChange={handleDateOfBirth} errorText={errors.dateOfBirth?.message} />
-        <StyledButton type='submit' isDisabled={!isValid}>
+        <StyledButton type='submit' isDisabled={!isValid} variant='filled'>
           Next
         </StyledButton>
       </AuthWrapper>
     </Container>
   );
 }
+
+export const SignUpPage = withLoader(BaseSignUpPage);

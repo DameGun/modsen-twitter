@@ -1,43 +1,46 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import { GoogleIcon, Logo, MailIcon } from '@/assets/icons';
+import { MailIcon } from '@/assets/icons';
 import { backTwitterImg } from '@/assets/images';
-import { Loader } from '@/components/common';
-import { Heading1, Heading2, IconButton, Paragraph, StyledIcon, StyledLink } from '@/components/ui';
-import { Routes } from '@/constants/routes';
-import { useAuth } from '@/hooks/useAuth';
-
+import { GoogleAuthButton, Logo } from '@/components/containers';
 import {
-  ButtonsGroupWrapper,
-  RightColumnWrapper,
-  WelcomePageImage,
-  WelcomePageWrapper,
-} from './styled';
+  FlexContainer,
+  Heading1,
+  Heading2,
+  Paragraph,
+  StyledButton,
+  StyledIcon,
+  StyledLink,
+} from '@/components/ui';
+import { Routes } from '@/constants/routes';
+
+import { ButtonsGroupWrapper, WelcomePageImageWrapper, WelcomePageWrapper } from './styled';
 
 export function WelcomePage() {
   const [error, setError] = useState(false);
 
   const handleError = () => setError(true);
 
-  const { isLoading, signInWithGoogle } = useAuth({ handleError });
-
   return (
     <WelcomePageWrapper>
-      <Loader isLoading={isLoading} />
-      <WelcomePageImage src={backTwitterImg} />
-      <RightColumnWrapper>
-        <StyledIcon size='xl'>
-          <Logo />
-        </StyledIcon>
+      <WelcomePageImageWrapper>
+        <img src={backTwitterImg} />
+      </WelcomePageImageWrapper>
+      <FlexContainer direction='column' justify='center' gap='lg'>
+        <Logo />
         <Heading1>Happening now</Heading1>
         <Heading2>Join twitter today</Heading2>
         <ButtonsGroupWrapper>
-          <IconButton IconComponent={<GoogleIcon />} onClick={signInWithGoogle}>
-            Sign up with Google
-          </IconButton>
-          <IconButton IconComponent={<MailIcon />} to={Routes.SignUp} invertIconColor>
-            Sign up with email
-          </IconButton>
+          <GoogleAuthButton type='signUp' errorHandler={handleError} isLoaderFullScreen />
+          <Link to={Routes.SignUp}>
+            <StyledButton variant='outline'>
+              <StyledIcon>
+                <MailIcon />
+              </StyledIcon>
+              Sign up with email
+            </StyledButton>
+          </Link>
         </ButtonsGroupWrapper>
         {error && (
           <Paragraph color='error'>
@@ -50,7 +53,7 @@ export function WelcomePage() {
         <Paragraph>
           Already have an account? <StyledLink to={Routes.SignIn}>Log in</StyledLink>
         </Paragraph>
-      </RightColumnWrapper>
+      </FlexContainer>
     </WelcomePageWrapper>
   );
 }

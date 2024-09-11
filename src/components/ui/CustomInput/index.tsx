@@ -58,7 +58,12 @@ export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(functi
         </LengthConstraint>
       )}
       {type === 'password' && (
-        <VisibilityOption size='sm' $isInvalid={isInvalid} onClick={handleShowPassword}>
+        <VisibilityOption
+          $size='sm'
+          $isInvalid={isInvalid}
+          $notInvertColor
+          onClick={handleShowPassword}
+        >
           {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
         </VisibilityOption>
       )}

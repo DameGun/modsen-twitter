@@ -1,2 +1,9 @@
 export { AuthWrapper } from './AuthWrapper';
 export { DateOfBirthControl } from './DateOfBirthControl';
+export { GoogleAuthButton } from './GoogleAuthButton';
+export { Logo } from './Logo';
+export { NavButton } from './NavButton';
+export { Sidebar } from './Sidebar';
+export { UserBackgroundPhoto } from './UserBackgroundPhoto';
+export { UserButton } from './UserButton';
+export { UserPhoto } from './UserPhoto';

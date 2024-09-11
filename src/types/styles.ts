@@ -21,20 +21,16 @@ type FontConstants = {
   };
 };
 
-type MainColors = {
+type ColorsConstants = {
   main: string;
   secondary: string;
   accent: string;
-};
-
-type ColorsConstants = MainColors & {
   secondaryAlpha: string;
   textMain: string;
   textSecondary: string;
   accentAlpha: string;
   focus: string;
   error: string;
-  buttonHover: MainColors;
 };
 
 type MediaConstants = {
@@ -43,7 +39,7 @@ type MediaConstants = {
 };
 
 type VariablesConstants = {
-  iconSize: StylesOptions<'xl'>;
+  iconSize: StylesOptions<'xl' | 'xl2'>;
   spacing: StylesOptions<'xl'>;
   containerSize: StylesOptions;
   borderWidth: StylesOptions;
@@ -52,4 +48,4 @@ type VariablesConstants = {
   zIndex: StylesOptions;
 };
 
-export type { ColorsConstants, FontConstants, MainColors, MediaConstants, VariablesConstants };
+export type { ColorsConstants, FontConstants, MediaConstants, VariablesConstants };

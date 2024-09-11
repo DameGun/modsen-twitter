@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 
-import { FormFieldWrapper } from './styled';
-
+import { FlexContainer } from '../FlexContainer';
 import { Paragraph } from '../Text';
 
 interface FormFieldProps {
@@ -11,9 +10,9 @@ interface FormFieldProps {
 
 export function FormField({ children, errorText }: FormFieldProps) {
   return (
-    <FormFieldWrapper>
+    <FlexContainer direction='column' justify='space-between' gap='sm'>
       {children}
       <Paragraph color='error'>{errorText}</Paragraph>
-    </FormFieldWrapper>
+    </FlexContainer>
   );
 }

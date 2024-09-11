@@ -5,9 +5,9 @@ import { useAuthPersist } from '@/hooks/useAuthPersist';
 
 import { Loader } from '../Loader';
 
-interface AuthGateProps {
+type AuthGateProps = {
   isProtectedRoute?: boolean;
-}
+};
 
 export function AuthGate({ isProtectedRoute }: AuthGateProps) {
   const { isLoading, isAuthenticated } = useAuthPersist();

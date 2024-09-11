@@ -3,10 +3,10 @@ import styled, { css } from 'styled-components';
 import { ColorMode } from '@/constants/theme';
 import type { VariablesConstants } from '@/types/styles';
 
-export interface StyledIconProps {
+export type StyledIconProps = {
   $size?: keyof VariablesConstants['iconSize'];
   $notInvertColor?: boolean;
-}
+};
 
 export const StyledIcon = styled.span<StyledIconProps>`
   height: ${({ theme, $size = 'md' }) => theme.variables.iconSize[$size]};

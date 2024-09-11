@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-import { Sidebar } from '@/components/containers/Sidebar';
+import { Sidebar } from '@/components/containers';
 
 import { LayoutWrapper } from './styled';
 

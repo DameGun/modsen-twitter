@@ -2,13 +2,13 @@ import { GoogleIcon } from '@/assets/icons';
 import { StyledButton, StyledIcon } from '@/components/ui';
 import { useAsyncWithLoading } from '@/hooks/useAsyncWithLoading';
 import { AuthService } from '@/services/firestore/auth';
-import { ManualLoadingHandleProps } from '@/types/loader';
+import type { ManualLoadingHandleProps } from '@/types/loader';
 import { withLoader } from '@/utils/withLoader';
 
-interface GoogleAuthButtonProps extends ManualLoadingHandleProps {
+type GoogleAuthButtonProps = ManualLoadingHandleProps & {
   type: 'signIn' | 'signUp';
   errorHandler(err: unknown): void;
-}
+};
 
 function BaseGoogleAuthButton({ type, errorHandler, handleLoading }: GoogleAuthButtonProps) {
   const { call } = useAsyncWithLoading({

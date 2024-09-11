@@ -21,8 +21,8 @@ type UserDoc = {
   createdAt: number | string;
 };
 
-interface UserState {
+type UserState = {
   currentUser?: UserDoc;
-}
+};
 
 export type { UserCreate, UserDoc, UserLogin, UserState };

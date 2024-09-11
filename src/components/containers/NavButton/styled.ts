@@ -2,9 +2,9 @@ import styled, { css } from 'styled-components';
 
 import { StyledButton } from '@/components/ui';
 
-export interface StyledNavButtonProps {
+export type StyledNavButtonProps = {
   $isActive: boolean;
-}
+};
 
 export const StyledNavButton = styled(StyledButton)<StyledNavButtonProps>`
   width: max-content;

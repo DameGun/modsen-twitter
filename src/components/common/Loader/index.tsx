@@ -1,14 +1,14 @@
 import { ReactNode, useEffect, useState } from 'react';
 
 import { LOADER_MIN_WAITING_TIME } from '@/constants/loader';
-import { FormatStyledProps } from '@/types/misc';
+import type { FormatStyledProps } from '@/types/styles';
 
 import { Spinner, StyledLoader, StyledLoaderProps } from './styled';
 
-export interface LoaderProps extends FormatStyledProps<StyledLoaderProps> {
+export type LoaderProps = FormatStyledProps<StyledLoaderProps> & {
   children?: ReactNode;
   isLoading?: boolean;
-}
+};
 
 export function Loader({ isLoaderFullScreen, isLoading, children }: LoaderProps) {
   const [isVisible, setIsVisible] = useState(false);

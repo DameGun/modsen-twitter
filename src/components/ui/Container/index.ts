@@ -4,10 +4,10 @@ import type { VariablesConstants } from '@/types/styles';
 
 import { FlexContainer } from '../FlexContainer';
 
-interface ContainerProps {
+type ContainerProps = {
   size?: keyof VariablesConstants['containerSize'];
   isCentered?: boolean;
-}
+};
 
 export const Container = styled(FlexContainer)<ContainerProps>`
   align-self: ${({ isCentered }) => isCentered && 'center'};

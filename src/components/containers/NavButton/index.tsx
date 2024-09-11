@@ -5,12 +5,12 @@ import { StyledIcon } from '@/components/ui';
 
 import { StyledNavButton } from './styled';
 
-interface NavButtonProps {
+type NavButtonProps = {
   IconComponent: ReactNode;
   ActiveIconComponent: ReactNode;
   children: ReactNode;
   to: string;
-}
+};
 
 export function NavButton({ IconComponent, ActiveIconComponent, children, to }: NavButtonProps) {
   return (

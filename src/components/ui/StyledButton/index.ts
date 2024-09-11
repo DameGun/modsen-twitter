@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { ButtonVariants } from '@/constants/theme';
 import { commonButtonStyles } from '@/styles/common';
 
-interface StyledButtonProps {
+type StyledButtonProps = {
   isDisabled?: boolean;
   variant?: keyof typeof ButtonVariants;
-}
+};
 
 export const StyledButton = styled.button<StyledButtonProps>`
   ${commonButtonStyles};

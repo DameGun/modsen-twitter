@@ -13,7 +13,8 @@ import {
   StyledButton,
   StyledListItem,
 } from '@/components/ui';
-import { AuthResponseErrors, PasswordValidationChecks } from '@/constants/auth';
+import { AuthResponseErrors } from '@/constants/auth';
+import { PasswordValidationChecks, ValidationErrorsText } from '@/constants/validation';
 import { useAsyncWithLoading } from '@/hooks/useAsyncWithLoading';
 import { AuthService } from '@/services/firestore/auth';
 import type { ManualLoadingHandleProps } from '@/types/loader';
@@ -37,7 +38,7 @@ export function BaseSignUpPage({ handleLoading }: ManualLoadingHandleProps) {
   const handleError = (err: unknown) => {
     const { code } = err as AuthError;
 
-    if (code === AuthResponseErrors.EMAIL_IN_USE) {
+    if (code === AuthResponseErrors.EmailInUse) {
       setError('email', { message: 'Email is already in use' });
     }
   };
@@ -88,7 +89,7 @@ export function BaseSignUpPage({ handleLoading }: ManualLoadingHandleProps) {
         </FormField>
         <FormField
           errorText={
-            errors.password?.message === PasswordValidationChecks.REQUIRED
+            errors.password?.message === ValidationErrorsText.Required
               ? errors.password?.message
               : undefined
           }
@@ -107,21 +108,21 @@ export function BaseSignUpPage({ handleLoading }: ManualLoadingHandleProps) {
           <ul>
             <StyledListItem
               color={
-                errors.password?.message === PasswordValidationChecks.CAPITAL ? 'error' : undefined
+                errors.password?.message === PasswordValidationChecks.Capital ? 'error' : undefined
               }
             >
               contain at least 1 capital letter
             </StyledListItem>
             <StyledListItem
               color={
-                errors.password?.message === PasswordValidationChecks.DIGIT ? 'error' : undefined
+                errors.password?.message === PasswordValidationChecks.Digit ? 'error' : undefined
               }
             >
               contain at least 1 digit
             </StyledListItem>
             <StyledListItem
               color={
-                errors.password?.message === PasswordValidationChecks.LENGTH ? 'error' : undefined
+                errors.password?.message === PasswordValidationChecks.Length ? 'error' : undefined
               }
             >
               contain minimum 8 characters

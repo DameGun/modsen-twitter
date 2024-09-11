@@ -1,7 +1,7 @@
 import { getDoc, getDocs, query, setDoc, where } from 'firebase/firestore';
 
 import { FirestoreCollections } from '@/constants/firebase';
-import { UserDoc } from '@/types/user';
+import type { UserDoc } from '@/types/user';
 import { getCollectionRef, getDocRef } from '@/utils/firestore';
 
 export class UsersRepositoryService {

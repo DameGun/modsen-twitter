@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { VariablesConstants } from '@/types/styles';
+import type { VariablesConstants } from '@/types/styles';
 
 export type UserPhotoWrapperProps = {
   size?: keyof VariablesConstants['iconSize'];

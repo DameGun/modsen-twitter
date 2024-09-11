@@ -6,11 +6,11 @@ import { getDateOfBirthDays, getDateOfBirthYears } from '@/utils/dateOfBirth';
 
 import { DateOfBirthWrapper } from './styled';
 
-interface DateOfBirthControlProps {
+type DateOfBirthControlProps = {
   defaultValue?: Date;
   onChange(value: Date): void;
   errorText?: string;
-}
+};
 
 export function DateOfBirthControl({ defaultValue, onChange, errorText }: DateOfBirthControlProps) {
   const [day, setDay] = useState(defaultValue?.getDate() ?? 1);

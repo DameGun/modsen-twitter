@@ -2,12 +2,12 @@ import { ReactNode } from 'react';
 
 import { ColorMode } from '@/constants/theme';
 
-interface ThemeState {
+type ThemeState = {
   mode: ColorMode;
-}
+};
 
-interface ThemeContextProviderProps {
+type ThemeContextProviderProps = {
   children: ReactNode;
-}
+};
 
 export type { ThemeContextProviderProps, ThemeState };

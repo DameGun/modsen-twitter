@@ -1,8 +1,13 @@
 import { CalendarIcon } from '@/assets/icons';
-import { UserBackgroundPhoto } from '@/components/containers/UserBackgroundPhoto';
-import { UserPhoto } from '@/components/containers/UserPhoto';
-import { FlexContainer, Heading3, Paragraph, StyledButton, StyledIcon } from '@/components/ui';
-import { Section } from '@/components/ui/Section';
+import { UserBackgroundPhoto, UserPhoto } from '@/components/containers';
+import {
+  FlexContainer,
+  Heading3,
+  Paragraph,
+  Section,
+  StyledButton,
+  StyledIcon,
+} from '@/components/ui';
 import { useAppSelector } from '@/hooks/store';
 import { selectCurrentUser } from '@/services/store/user';
 

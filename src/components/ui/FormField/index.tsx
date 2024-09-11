@@ -3,10 +3,10 @@ import { ReactNode } from 'react';
 import { FlexContainer } from '../FlexContainer';
 import { Paragraph } from '../Text';
 
-interface FormFieldProps {
+type FormFieldProps = {
   children: ReactNode;
   errorText?: string;
-}
+};
 
 export function FormField({ children, errorText }: FormFieldProps) {
   return (

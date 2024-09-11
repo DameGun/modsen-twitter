@@ -1,7 +1,7 @@
 import { ComponentType, useState } from 'react';
 
 import { Loader } from '@/components/common';
-import { ManualLoadingHandleProps } from '@/types/loader';
+import type { ManualLoadingHandleProps } from '@/types/loader';
 
 export function withLoader<TProps extends ManualLoadingHandleProps>(
   WrappedComponent: ComponentType<TProps>

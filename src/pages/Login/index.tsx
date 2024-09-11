@@ -17,7 +17,7 @@ import { AuthResponseErrors } from '@/constants/auth';
 import { Routes } from '@/constants/routes';
 import { useAsyncWithLoading } from '@/hooks/useAsyncWithLoading';
 import { AuthService } from '@/services/firestore/auth';
-import { ManualLoadingHandleProps } from '@/types/loader';
+import type { ManualLoadingHandleProps } from '@/types/loader';
 import type { UserLogin } from '@/types/user';
 import { withLoader } from '@/utils/withLoader';
 
@@ -34,7 +34,7 @@ function BaseLoginPage({ handleLoading }: ManualLoadingHandleProps) {
   const handleError = (err: unknown) => {
     const { code } = err as AuthError;
 
-    if (code === AuthResponseErrors.INVALID_CREDENTIALS) {
+    if (code === AuthResponseErrors.InvalidCredentials) {
       setError('email', { message: 'Invalid credentials provided' });
     } else {
       setError('email', { message: 'Error happened while trying to login with Google' });

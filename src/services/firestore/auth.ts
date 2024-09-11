@@ -4,7 +4,7 @@ import {
   signInWithPopup,
 } from 'firebase/auth';
 
-import { UserCreate, UserDoc, UserLogin } from '@/types/user';
+import type { UserCreate, UserDoc, UserLogin } from '@/types/user';
 
 import { UsersRepositoryService } from './users';
 

@@ -2,11 +2,11 @@ import styled from 'styled-components';
 
 import type { ColorsConstants, FontConstants } from '@/types/styles';
 
-interface TextProps {
-  color?: Exclude<keyof ColorsConstants, 'buttonHover'>;
+type TextProps = {
+  color?: keyof ColorsConstants;
   size?: keyof FontConstants['size'];
   weight?: keyof FontConstants['weight'];
-}
+};
 
 export const Heading1 = styled.h1<TextProps>`
   font-size: ${({ theme, size = 'xl3' }) => theme.font.size[size]};

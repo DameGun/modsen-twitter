@@ -1,3 +1,9 @@
+type ExtractPropNameFromStyled<T> = T extends `$${infer PropName}` ? PropName : never;
+
+type FormatStyledProps<T> = {
+  [Key in keyof T as ExtractPropNameFromStyled<Key>]: T[Key];
+};
+
 type BaseStylesOptions = {
   sm: string | number;
   md: string | number;
@@ -48,4 +54,10 @@ type VariablesConstants = {
   zIndex: StylesOptions;
 };
 
-export type { ColorsConstants, FontConstants, MediaConstants, VariablesConstants };
+export type {
+  ColorsConstants,
+  FontConstants,
+  FormatStyledProps,
+  MediaConstants,
+  VariablesConstants,
+};

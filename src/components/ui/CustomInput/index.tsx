@@ -1,7 +1,7 @@
 import { ChangeEvent, forwardRef, InputHTMLAttributes, useState } from 'react';
 
 import { VisibilityIcon, VisibilityOffIcon } from '@/assets/icons';
-import type { FormatStyledProps } from '@/types/misc';
+import type { FormatStyledProps } from '@/types/styles';
 
 import {
   ControlStylesProps,

@@ -4,9 +4,9 @@ import { commonControlWithLabelStyles, commonLabelStyles } from '@/styles/common
 
 import { StyledIcon } from '../StyledIcon';
 
-export interface ControlStylesProps {
+export type ControlStylesProps = {
   $isInvalid?: boolean;
-}
+};
 
 export const StyledInputWrapper = styled.span`
   position: relative;

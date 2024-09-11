@@ -4,16 +4,16 @@ import type { ManualLoadingHandleProps } from '@/types/loader';
 
 type AsyncLoadingFunction<TParams, TReturn> = (...args: TParams[]) => Promise<TReturn | undefined>;
 
-interface AsyncLoadingHookProps<TParams, TReturn> extends ManualLoadingHandleProps {
+type AsyncLoadingHookProps<TParams, TReturn> = ManualLoadingHandleProps & {
   call: AsyncLoadingFunction<TParams, TReturn>;
   errorHandler?(error: unknown): void;
-}
+};
 
-interface AsyncLoadingHookReturnValue<TParams, TReturn> {
+type AsyncLoadingHookReturnValue<TParams, TReturn> = {
   isLoading: boolean;
   isError: boolean;
   call: AsyncLoadingFunction<TParams, TReturn>;
-}
+};
 
 export function useAsyncWithLoading<TParams, TReturn>({
   call,

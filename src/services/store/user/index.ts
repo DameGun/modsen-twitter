@@ -10,17 +10,20 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setCurrentUser: (state, action: PayloadAction<UserDoc>) => {
-      const user = action.payload;
-      const parsedCreatedAt = new Date(user.createdAt).toLocaleDateString('en-US', {
-        month: 'long',
-        year: 'numeric',
-      });
-      state.currentUser = { ...user, createdAt: parsedCreatedAt };
+      state.currentUser = action.payload;
+    },
+    updateCurrentUser: (state, action: PayloadAction<Partial<UserDoc>>) => {
+      const updatedUser = action.payload;
+      const oldUserData = state.currentUser;
+
+      const newUser: UserDoc = Object.assign({}, oldUserData, updatedUser);
+
+      state.currentUser = newUser;
     },
   },
 });
 
-export const { setCurrentUser } = userSlice.actions;
+export const { setCurrentUser, updateCurrentUser } = userSlice.actions;
 
 export const selectCurrentUser = (state: RootState) => state.user.currentUser;
 

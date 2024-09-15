@@ -8,7 +8,9 @@ type StyledButtonProps = {
   variant?: keyof typeof ButtonVariants;
 };
 
-export const StyledButton = styled.button<StyledButtonProps>`
+export const StyledButton = styled.button.attrs((props) => ({
+  type: props.type ? props.type : 'button',
+}))<StyledButtonProps>`
   ${commonButtonStyles};
 
   ${({ variant = 'primary' }) => ButtonVariants[variant]}

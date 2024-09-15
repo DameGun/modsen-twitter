@@ -2,11 +2,7 @@ import styled from 'styled-components';
 
 import { FlexContainer } from '@/components/ui';
 
-export const AvatarAndEditWrapper = styled(FlexContainer)`
-  position: relative;
-
-  & > :first-child {
-    position: absolute;
-    left: 0;
-  }
+export const ProfileErrorWrapper = styled(FlexContainer)`
+  padding: ${(props) => props.theme.variables.spacing.lg}
+    ${(props) => props.theme.variables.spacing.lg};
 `;

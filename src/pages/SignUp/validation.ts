@@ -2,6 +2,7 @@ import * as yup from 'yup';
 
 import {
   FULLNAME_LENGTH_CONSTRAINT,
+  FULLNAME_VALIDATION_PATTERN,
   PASSWORD_LENGTH_CONSTRAINT,
   PasswordValidationChecks,
   PasswordValidationPatterns,
@@ -13,29 +14,33 @@ import {
 export const signUpValidationSchema = yup.object().shape({
   fullName: yup
     .string()
-    .max(FULLNAME_LENGTH_CONSTRAINT, ValidationErrorsText.Required)
-    .required(ValidationErrorsText.Required),
+    .required(ValidationErrorsText.Required)
+    .matches(FULLNAME_VALIDATION_PATTERN, ValidationErrorsText.OnlyLetters)
+    .max(
+      FULLNAME_LENGTH_CONSTRAINT,
+      ValidationErrorsText.LengthConstraint(FULLNAME_LENGTH_CONSTRAINT)
+    ),
   userName: yup
     .string()
+    .required(ValidationErrorsText.Required)
     .matches(USERNAME_VALIDATION_PATTERN, ValidationErrorsText.OnlyLettersAndDigits)
     .max(
       USERNAME_LENGTH_CONTSTRAINT,
       ValidationErrorsText.LengthConstraint(USERNAME_LENGTH_CONTSTRAINT)
-    )
-    .required(ValidationErrorsText.Required),
+    ),
   email: yup
     .string()
-    .email(ValidationErrorsText.EmailFormat)
-    .required(ValidationErrorsText.Required),
+    .required(ValidationErrorsText.Required)
+    .email(ValidationErrorsText.EmailFormat),
   password: yup
     .string()
+    .required(ValidationErrorsText.Required)
     .max(
       PASSWORD_LENGTH_CONSTRAINT,
       ValidationErrorsText.LengthConstraint(PASSWORD_LENGTH_CONSTRAINT)
     )
     .matches(PasswordValidationPatterns.ContainCapital, PasswordValidationChecks.Capital)
     .matches(PasswordValidationPatterns.ContainDigit, PasswordValidationChecks.Digit)
-    .matches(PasswordValidationPatterns.LengthConstraint, PasswordValidationChecks.Length)
-    .required(ValidationErrorsText.Required),
-  dateOfBirth: yup.date().required(ValidationErrorsText.Required),
+    .matches(PasswordValidationPatterns.LengthConstraint, PasswordValidationChecks.Length),
+  dateOfBirth: yup.number().required(ValidationErrorsText.Required),
 });

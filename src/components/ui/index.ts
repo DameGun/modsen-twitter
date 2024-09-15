@@ -4,6 +4,7 @@ export { CustomSelect } from './CustomSelect';
 export { FlexContainer } from './FlexContainer';
 export { FormField } from './FormField';
 export { StyledLink } from './Link';
+export { Modal, ModalBody, ModalButton, ModalContent, ModalHeader } from './Modal';
 export { Section } from './Section';
 export { StyledButton } from './StyledButton';
 export { StyledIcon } from './StyledIcon';

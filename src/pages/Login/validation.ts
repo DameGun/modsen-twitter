@@ -5,7 +5,7 @@ import { ValidationErrorsText } from '@/constants/validation';
 export const loginValidationSchema = yup.object().shape({
   email: yup
     .string()
-    .email(ValidationErrorsText.EmailFormat)
-    .required(ValidationErrorsText.Required),
+    .required(ValidationErrorsText.Required)
+    .email(ValidationErrorsText.EmailFormat),
   password: yup.string().required(ValidationErrorsText.Required),
 });

@@ -3,7 +3,7 @@ type UserCreate = {
   userName: string;
   email: string;
   password: string;
-  dateOfBirth: Date;
+  dateOfBirth: number;
 };
 
 type UserLogin = {
@@ -13,8 +13,10 @@ type UserLogin = {
 
 type UserDoc = {
   email: string;
+  bio?: string;
   fullName: string;
-  photoUrl?: string;
+  avatarUrl?: string;
+  backgroundImageUrl?: string;
   dateOfBirth?: number;
   uid: string;
   userName: string;
@@ -25,4 +27,14 @@ type UserState = {
   currentUser?: UserDoc;
 };
 
-export type { UserCreate, UserDoc, UserLogin, UserState };
+type EditUser = Pick<
+  UserDoc,
+  'avatarUrl' | 'bio' | 'backgroundImageUrl' | 'fullName' | 'dateOfBirth'
+>;
+
+type UpdateUserProps = {
+  uid: string;
+  userObj: Partial<EditUser>;
+};
+
+export type { EditUser, UpdateUserProps, UserCreate, UserDoc, UserLogin, UserState };

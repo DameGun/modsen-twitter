@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { AuthError } from 'firebase/auth';
+import { AuthError, AuthErrorCodes } from 'firebase/auth';
 
 import { AuthWrapper, DateOfBirthControl, Logo } from '@/components/containers';
 import {
@@ -13,8 +13,13 @@ import {
   StyledButton,
   StyledListItem,
 } from '@/components/ui';
-import { AuthResponseErrors } from '@/constants/auth';
-import { PasswordValidationChecks, ValidationErrorsText } from '@/constants/validation';
+import {
+  FULLNAME_LENGTH_CONSTRAINT,
+  PASSWORD_LENGTH_CONSTRAINT,
+  PasswordValidationChecks,
+  USERNAME_LENGTH_CONTSTRAINT,
+  ValidationErrorsText,
+} from '@/constants/validation';
 import { useAsyncWithLoading } from '@/hooks/useAsyncWithLoading';
 import { AuthService } from '@/services/firestore/auth';
 import type { ManualLoadingHandleProps } from '@/types/loader';
@@ -38,12 +43,10 @@ export function BaseSignUpPage({ handleLoading }: ManualLoadingHandleProps) {
   const handleError = (err: unknown) => {
     const { code } = err as AuthError;
 
-    if (code === AuthResponseErrors.EmailInUse) {
+    if (code === AuthErrorCodes.EMAIL_EXISTS) {
       setError('email', { message: 'Email is already in use' });
     }
   };
-
-  const handleDateOfBirth = (date: Date) => setValue('dateOfBirth', date);
 
   const { call } = useAsyncWithLoading({
     call: AuthService.signUpEmail,
@@ -64,7 +67,7 @@ export function BaseSignUpPage({ handleLoading }: ManualLoadingHandleProps) {
             placeholder='Full name'
             type='text'
             {...register('fullName')}
-            maxLength={50}
+            maxLength={FULLNAME_LENGTH_CONSTRAINT}
             isInvalid={!!errors.fullName}
           />
         </FormField>
@@ -74,7 +77,7 @@ export function BaseSignUpPage({ handleLoading }: ManualLoadingHandleProps) {
             placeholder='Username'
             type='text'
             {...register('userName')}
-            maxLength={20}
+            maxLength={USERNAME_LENGTH_CONTSTRAINT}
             isInvalid={!!errors.userName}
           />
         </FormField>
@@ -98,7 +101,7 @@ export function BaseSignUpPage({ handleLoading }: ManualLoadingHandleProps) {
             id='password'
             placeholder='Password'
             type='password'
-            maxLength={50}
+            maxLength={PASSWORD_LENGTH_CONSTRAINT}
             {...register('password')}
             isInvalid={!!errors.password}
           />
@@ -129,7 +132,7 @@ export function BaseSignUpPage({ handleLoading }: ManualLoadingHandleProps) {
             </StyledListItem>
           </ul>
         </div>
-        <DateOfBirthControl onChange={handleDateOfBirth} errorText={errors.dateOfBirth?.message} />
+        <DateOfBirthControl onChange={setValue} errorText={errors.dateOfBirth?.message} />
         <StyledButton type='submit' isDisabled={!isValid} variant='filled'>
           Next
         </StyledButton>

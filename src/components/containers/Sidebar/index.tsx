@@ -17,6 +17,7 @@ import { selectCurrentUser } from '@/services/store/user';
 import { SidebarWrapper } from './styled';
 
 import { NavButton } from '../NavButton';
+import { SidebarHeader } from '../SidebarHeader';
 import { UserButton } from '../UserButton';
 
 export function Sidebar() {
@@ -33,6 +34,7 @@ export function Sidebar() {
   return (
     <SidebarWrapper>
       <FlexContainer direction='column' gap='sm'>
+        <SidebarHeader />
         <NavButton
           IconComponent={<FeedIcon />}
           ActiveIconComponent={<FeedIconFilled />}

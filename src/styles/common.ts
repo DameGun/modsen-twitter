@@ -57,30 +57,25 @@ export const outlineButtonStyles = css`
   }
 `;
 
+export const iconButtonStyles = css`
+  ${commonButtonStyles};
+
+  &:hover {
+    background-color: ${(props) => props.theme.colors.focus};
+  }
+`;
+
 export const commonLabelStyles = css`
   position: absolute;
   pointer-events: none;
-  left: ${(props) => props.theme.variables.spacing.sm};
+  top: ${(props) => props.theme.variables.spacing.md};
   transition: ${(props) => props.theme.variables.transition.sm};
   font-size: ${(props) => props.theme.font.size.md};
+  color: ${(props) => props.theme.colors.secondary};
 `;
 
 export const commonControlWithLabelStyles = css`
-  padding: ${(props) => props.theme.variables.spacing.md}
-    ${(props) => props.theme.variables.spacing.sm};
-  padding-top: ${(props) => props.theme.variables.spacing.lg};
-
-  border: ${(props) => props.theme.variables.borderWidth.sm} solid;
-  width: 100%;
-  border-radius: ${(props) => props.theme.variables.borderRadius.sm};
-
-  border-color: ${(props) => props.theme.colors.secondary};
+  border: none;
   background-color: ${(props) => props.theme.colors.main};
-
   font-size: ${(props) => props.theme.font.size.md};
-
-  &:focus {
-    outline: none;
-    border-color: ${(props) => props.theme.colors.accent};
-  }
 `;

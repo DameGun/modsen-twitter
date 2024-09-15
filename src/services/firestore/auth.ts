@@ -24,7 +24,6 @@ export class AuthService {
       fullName: userData.fullName,
       userName: userData.userName,
       dateOfBirth: userData.dateOfBirth.valueOf(),
-      photoUrl: '',
     };
 
     await UsersRepositoryService.createUser(userToCreate);
@@ -33,18 +32,14 @@ export class AuthService {
   static async signInWithGoogle() {
     const { user } = await signInWithPopup(auth, provider);
 
-    const userDocSnap = await UsersRepositoryService.getUserById(user.uid);
+    const userData: Partial<UserDoc> = {
+      uid: user.uid,
+      email: user.email!,
+      fullName: user.displayName!,
+      userName: user.email!.split('@')[0],
+      avatarUrl: user.photoURL!,
+    };
 
-    if (!userDocSnap) {
-      const userData: Partial<UserDoc> = {
-        uid: user.uid,
-        email: user.email!,
-        fullName: user.displayName!,
-        userName: user.email!.split('@')[0],
-        photoUrl: user.photoURL!,
-      };
-
-      await UsersRepositoryService.createUser(userData);
-    }
+    await UsersRepositoryService.createUser(userData);
   }
 }

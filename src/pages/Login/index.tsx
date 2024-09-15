@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { AuthError } from 'firebase/auth';
+import { AuthError, AuthErrorCodes } from 'firebase/auth';
 
 import { AuthWrapper, GoogleAuthButton, Logo } from '@/components/containers';
 import {
@@ -13,7 +13,6 @@ import {
   StyledButton,
   StyledLink,
 } from '@/components/ui';
-import { AuthResponseErrors } from '@/constants/auth';
 import { Routes } from '@/constants/routes';
 import { useAsyncWithLoading } from '@/hooks/useAsyncWithLoading';
 import { AuthService } from '@/services/firestore/auth';
@@ -34,10 +33,8 @@ function BaseLoginPage({ handleLoading }: ManualLoadingHandleProps) {
   const handleError = (err: unknown) => {
     const { code } = err as AuthError;
 
-    if (code === AuthResponseErrors.InvalidCredentials) {
+    if (code === AuthErrorCodes.INVALID_LOGIN_CREDENTIALS) {
       setError('email', { message: 'Invalid credentials provided' });
-    } else {
-      setError('email', { message: 'Error happened while trying to login with Google' });
     }
   };
 
@@ -71,8 +68,8 @@ function BaseLoginPage({ handleLoading }: ManualLoadingHandleProps) {
             isInvalid={!!errors.password}
           />
         </FormField>
-        <GoogleAuthButton type='signIn' errorHandler={handleError} isLoaderFullScreen />
-        <StyledButton isDisabled={!isValid} variant='filled'>
+        <GoogleAuthButton type='signIn' isLoaderFullScreen />
+        <StyledButton type='submit' isDisabled={!isValid} variant='filled'>
           Log in
         </StyledButton>
         <Paragraph>

@@ -1,8 +1,10 @@
-import { getDoc, getDocs, query, setDoc, where } from 'firebase/firestore';
+import { getDoc, getDocs, query, setDoc, updateDoc, where } from 'firebase/firestore';
 
-import { FirestoreCollections } from '@/constants/firebase';
-import type { UserDoc } from '@/types/user';
+import { FirestoreCollections, StoragePaths } from '@/constants/firebase';
+import type { UpdateUserProps, UserDoc } from '@/types/user';
 import { getCollectionRef, getDocRef } from '@/utils/firestore';
+
+import { ImageRepositoryService } from './image';
 
 export class UsersRepositoryService {
   static async getUserById(id: string) {
@@ -11,9 +13,9 @@ export class UsersRepositoryService {
 
     if (docSnap.exists()) {
       return docSnap.data();
-    } else {
-      throw new Error(`User with id: ${id} not exist`);
     }
+
+    return undefined;
   }
 
   static async getUserByUserName(userName: string) {
@@ -24,9 +26,9 @@ export class UsersRepositoryService {
 
     if (!querySnap.empty) {
       return querySnap.docs[0].data();
-    } else {
-      throw new Error(`User with userName: ${userName} not exist`);
     }
+
+    return undefined;
   }
 
   static async createUser(userObj: Partial<UserDoc>) {
@@ -35,5 +37,28 @@ export class UsersRepositoryService {
     const docRef = getDocRef<UserDoc>(FirestoreCollections.Users, userObj.uid!);
 
     await setDoc(docRef, userObj);
+  }
+
+  static async updateUser({ uid, userObj }: UpdateUserProps) {
+    const userDocRef = getDocRef<UserDoc>(FirestoreCollections.Users, uid);
+
+    const updatedUser: Partial<UserDoc> = userObj;
+
+    if (userObj.avatarUrl) {
+      updatedUser.avatarUrl = await ImageRepositoryService.uploadImageByPath(
+        userObj.avatarUrl,
+        StoragePaths.usersAvatars(uid)
+      );
+    }
+    if (userObj.backgroundImageUrl) {
+      updatedUser.backgroundImageUrl = await ImageRepositoryService.uploadImageByPath(
+        userObj.backgroundImageUrl,
+        StoragePaths.usersBackgrounds(uid)
+      );
+    }
+
+    await updateDoc(userDocRef, updatedUser);
+
+    return updatedUser;
   }
 }

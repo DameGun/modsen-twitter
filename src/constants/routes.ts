@@ -1,4 +1,4 @@
-const Routes = {
+export const Routes = {
   Index: '/',
   SignIn: '/signin',
   SignUp: '/signup',
@@ -6,5 +6,3 @@ const Routes = {
   Bookmarks: '/bookmarks',
   Profile: (userName: string) => `/${userName}`,
 } as const;
-
-export { Routes };

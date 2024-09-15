@@ -39,7 +39,9 @@ export function useAuthPersist() {
       }
     });
 
-    return () => unsubscribe();
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return { isLoading, isAuthenticated };

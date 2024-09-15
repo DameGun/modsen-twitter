@@ -1,15 +1,27 @@
-import { filledButtonStyles, outlineButtonStyles, primaryButtonStyles } from '@/styles/common';
+import {
+  filledButtonStyles,
+  iconButtonStyles,
+  outlineButtonStyles,
+  primaryButtonStyles,
+} from '@/styles/common';
 
-enum ColorMode {
+export enum ColorMode {
   Light = 'Light',
   Dark = 'Dark',
 }
-const THEME_KEY_LOCALSTORAGE = 'colorMode';
+export const THEME_KEY_LOCALSTORAGE = 'colorMode';
 
-const ButtonVariants = {
+export const ButtonVariants = {
   primary: primaryButtonStyles,
   filled: filledButtonStyles,
   outline: outlineButtonStyles,
+  icon: iconButtonStyles,
 } as const;
 
-export { ButtonVariants, ColorMode, THEME_KEY_LOCALSTORAGE };
+export const DISABLE_TRANSITION_STYLES = `* {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  -ms-transition: none !important;
+  transition: none !important;
+}`;

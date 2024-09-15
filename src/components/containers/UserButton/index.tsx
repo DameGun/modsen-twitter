@@ -1,22 +1,21 @@
-import { Heading3, Paragraph, StyledButton } from '@/components/ui';
+import { Heading3, StyledButton } from '@/components/ui';
 import { useAppSelector } from '@/hooks/store';
 import { selectCurrentUser } from '@/services/store/user';
 
 import { UserButtonInfoWrapper } from './styled';
 
-import { UserPhoto } from '../UserPhoto';
+import { UserAvatar } from '../UserAvatar';
+import { UserName } from '../UserName';
 
 export function UserButton() {
-  const currentUser = useAppSelector(selectCurrentUser)!;
+  const { avatarUrl, fullName, userName } = useAppSelector(selectCurrentUser)!;
 
   return (
     <StyledButton>
-      <UserPhoto photoUrl={currentUser.photoUrl} />
+      <UserAvatar url={avatarUrl} />
       <UserButtonInfoWrapper>
-        <Heading3>{currentUser.fullName}</Heading3>
-        <Paragraph color='textSecondary' weight='semibold'>
-          @{currentUser.userName}
-        </Paragraph>
+        <Heading3>{fullName}</Heading3>
+        <UserName userName={userName} />
       </UserButtonInfoWrapper>
     </StyledButton>
   );

@@ -1,41 +1,26 @@
+import { SyntheticEvent } from 'react';
+
 import { avatarFallbackImg } from '@/assets/images';
-import { useAsyncWithLoading } from '@/hooks/useAsyncWithLoading';
-import { useUploadImg } from '@/hooks/useUploadImg';
 import type { ImageProps } from '@/types/image';
-import type { ManualLoadingHandleProps } from '@/types/loader';
-import { withLoader } from '@/utils/withLoader';
 
 import { StyledUserPhoto, UserPhotoWrapper, UserPhotoWrapperProps } from './styled';
 
-import { ImageEditButton } from '../ImageEditButton';
+type UserPhotoProps = UserPhotoWrapperProps & ImageProps;
 
-type UserPhotoProps = UserPhotoWrapperProps & ImageProps & ManualLoadingHandleProps;
-
-function BaseUserAvatar({
-  url,
-  size,
-  isEditable,
-  handleLoading,
-  handleError,
-  handleChange,
-}: UserPhotoProps) {
-  const { handleImageChange, selectedFile } = useUploadImg();
-  const { call } = useAsyncWithLoading({
-    call: handleImageChange,
-    handleLoading,
-    errorHandler: handleError,
-    handleResult: handleChange,
-  });
+export function UserAvatar({ url, size, children }: UserPhotoProps) {
+  const handleImageError = ({ currentTarget }: SyntheticEvent<HTMLImageElement, Event>) => {
+    currentTarget.onerror = null;
+    currentTarget.src = avatarFallbackImg;
+  };
 
   return (
     <UserPhotoWrapper size={size}>
-      {isEditable && <ImageEditButton handleImageChange={call} />}
+      {children}
       <StyledUserPhoto
-        src={selectedFile || url || avatarFallbackImg}
+        src={url || avatarFallbackImg}
+        onError={handleImageError}
         referrerPolicy='no-referrer'
       />
     </UserPhotoWrapper>
   );
 }
-
-export const UserAvatar = withLoader(BaseUserAvatar);

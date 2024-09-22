@@ -29,7 +29,7 @@ export function Loader({ isLoaderFullScreen, isLoading, children }: LoaderProps)
 
   return (
     <>
-      {isLoaderFullScreen ? children : !isLoaderFullScreen && !isVisible && children}
+      {children}
       {isVisible && (
         <StyledLoader $isLoaderFullScreen={isLoaderFullScreen}>
           <Spinner />

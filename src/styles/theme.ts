@@ -28,6 +28,7 @@ const media: MediaConstants = {
 
 const variables: VariablesConstants = {
   iconSize: {
+    xs: '20px',
     sm: '24px',
     md: '28px',
     lg: '40px',
@@ -35,12 +36,14 @@ const variables: VariablesConstants = {
     xl2: '100px',
   },
   spacing: {
+    xs: '5px',
     sm: '10px',
     md: '20px',
     lg: '30px',
     xl: '40px',
   },
   containerSize: {
+    xs: '300px',
     sm: '500px',
     md: '700px',
     lg: '1000px;',
@@ -61,10 +64,13 @@ const variables: VariablesConstants = {
     lg: '0.8s',
   },
   zIndex: {
-    sm: 200,
-    md: 500,
-    lg: 900,
+    xs: 50,
+    sm: 100,
+    md: 200,
+    lg: 400,
+    xl: 600,
   },
+  imageHeight: '150px',
 };
 
 export const darkTheme: DefaultTheme = {
@@ -74,13 +80,14 @@ export const darkTheme: DefaultTheme = {
   variables,
   colors: {
     main: '#000000',
+    white: '#ffffff',
     secondary: '#2b2f31',
     secondaryAlpha: '#70828563',
     textMain: '#e2e2e2',
     textSecondary: '#525355',
     accent: '#1d9bf0',
     accentAlpha: '#72b8eb',
-    focus: '#222324',
+    focus: '#22232480',
     error: '#b6151f',
   },
 };
@@ -92,13 +99,14 @@ export const lightTheme: DefaultTheme = {
   variables,
   colors: {
     main: '#ffffff',
+    white: '#ffffff',
     secondary: '#d8d8d8',
     secondaryAlpha: '#70828563',
     textMain: '#161b1f',
     textSecondary: '#90979e',
     accent: '#1d9bf0',
     accentAlpha: '#72b8eb',
-    focus: '#e5e5e5',
+    focus: '#e5e5e580',
     error: '#b6151f',
   },
 };

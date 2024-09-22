@@ -30,6 +30,7 @@ type FontConstants = {
 type ColorsConstants = {
   main: string;
   secondary: string;
+  white: string;
   accent: string;
   secondaryAlpha: string;
   textMain: string;
@@ -45,13 +46,14 @@ type MediaConstants = {
 };
 
 type VariablesConstants = {
-  iconSize: StylesOptions<'xl' | 'xl2'>;
-  spacing: StylesOptions<'xl'>;
-  containerSize: StylesOptions;
+  iconSize: StylesOptions<'xs' | 'xl' | 'xl2'>;
+  spacing: StylesOptions<'xs' | 'xl'>;
+  containerSize: StylesOptions<'xs'>;
   borderWidth: StylesOptions;
   borderRadius: StylesOptions;
   transition: StylesOptions;
-  zIndex: StylesOptions;
+  zIndex: StylesOptions<'xs' | 'xl'>;
+  imageHeight: string;
 };
 
 export type {

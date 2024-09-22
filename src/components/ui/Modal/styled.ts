@@ -8,11 +8,13 @@ export const StyledModal = styled(FlexContainer)`
   width: 100%;
   left: 0;
   top: 0;
+  z-index: ${(props) => props.theme.variables.zIndex.lg};
 `;
 
 export const StyledModalContainer = styled.div`
   background-color: ${(props) => props.theme.colors.main};
   overflow-y: auto;
+  scrollbar-gutter: unset;
   overflow-x: hidden;
   height: 100%;
 `;
@@ -23,12 +25,11 @@ export const StyledModalOverlay = styled.div`
   height: 100%;
   overflow: hidden;
   background-color: ${(props) => props.theme.colors.secondaryAlpha};
-  z-index: ${(props) => props.theme.variables.zIndex.md};
+  z-index: ${(props) => props.theme.variables.zIndex.lg};
 `;
 
 export const StyledModalBody = styled.div`
-  margin-top: ${(props) => props.theme.variables.spacing.md};
-  padding: ${(props) => props.theme.variables.spacing.sm};
+  padding: ${(props) => props.theme.variables.spacing.md};
 `;
 
 export const StyledModalHeader = styled(FlexContainer)`
@@ -38,12 +39,11 @@ export const StyledModalHeader = styled(FlexContainer)`
   top: 0;
 
   z-index: ${(props) => props.theme.variables.zIndex.lg};
+  white-space: pre-wrap;
+  text-align: left;
 `;
 
 export const StyledModalContainerWrapper = styled.div`
-  min-width: 20%;
-  max-width: 80%;
-
   min-height: 20%;
   max-height: 70%;
 
@@ -52,5 +52,5 @@ export const StyledModalContainerWrapper = styled.div`
   overflow: hidden;
   scrollbar-gutter: unset;
 
-  z-index: ${(props) => props.theme.variables.zIndex.lg};
+  z-index: ${(props) => props.theme.variables.zIndex.xl};
 `;

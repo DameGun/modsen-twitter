@@ -6,6 +6,7 @@ import { StyledIcon } from '../StyledIcon';
 
 export type ControlStylesProps = {
   $isInvalid?: boolean;
+  $variant?: 'primary' | 'unstyled';
 };
 
 export const StyledInputWrapper = styled.span<ControlStylesProps>`
@@ -15,10 +16,14 @@ export const StyledInputWrapper = styled.span<ControlStylesProps>`
 
   padding: ${(props) => props.theme.variables.spacing.sm};
 
-  border: ${(props) => props.theme.variables.borderWidth.sm} solid;
-  border-radius: ${(props) => props.theme.variables.borderRadius.sm};
+  ${({ $variant = 'primary' }) =>
+    $variant === 'primary' &&
+    css`
+      border: ${(props) => props.theme.variables.borderWidth.sm} solid;
+      border-radius: ${(props) => props.theme.variables.borderRadius.sm};
 
-  border-color: ${(props) => props.theme.colors.secondary};
+      border-color: ${(props) => props.theme.colors.secondary};
+    `};
 
   &:focus-within {
     border-color: ${({ theme, $isInvalid }) =>
@@ -61,13 +66,23 @@ export const StyledInput = styled.input`
   }
 `;
 
-export const StyledInputLabel = styled.label`
+export const StyledInputLabel = styled.label<ControlStylesProps>`
   ${commonLabelStyles};
 
-  ${StyledInput}:not(:placeholder-shown) + &, ${StyledInput}:focus + & {
-    transform: translateY(-${(props) => props.theme.variables.spacing.sm});
-    font-size: ${(props) => props.theme.font.size.sm};
-  }
+  ${({ $variant = 'primary' }) =>
+    $variant === 'primary' &&
+    css`
+      ${StyledInput}:not(:placeholder-shown) + &, ${StyledInput}:focus + & {
+        transform: translateY(-${(props) => props.theme.variables.spacing.sm});
+        font-size: ${(props) => props.theme.font.size.sm};
+      }
+    `}
+
+  ${({ $variant = 'primary' }) =>
+    $variant === 'unstyled' &&
+    css`
+      transform: translateY(-${(props) => props.theme.variables.spacing.sm});
+    `}
 `;
 
 export const VisibilityOption = styled(StyledIcon)<ControlStylesProps>`

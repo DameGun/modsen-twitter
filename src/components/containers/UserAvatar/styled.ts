@@ -13,6 +13,7 @@ export const UserPhotoWrapper = styled.span<UserPhotoWrapperProps>`
 `;
 
 export const StyledUserPhoto = styled.img`
+  object-fit: cover;
   height: 100%;
   width: 100%;
   border: ${(props) => props.theme.variables.borderWidth.lg} solid;

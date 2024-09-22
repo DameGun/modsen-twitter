@@ -1,5 +1,3 @@
-import { signOut } from 'firebase/auth';
-
 import {
   BookmarkIcon,
   BookmarkIconFilled,
@@ -8,28 +6,20 @@ import {
   ProfileIcon,
   ProfileIconFilled,
 } from '@/assets/icons';
-import { FlexContainer, StyledButton } from '@/components/ui';
+import { FlexContainer } from '@/components/ui';
 import { Routes } from '@/constants/routes';
 import { useAppSelector } from '@/hooks/store';
-import { auth } from '@/services/firebase';
 import { selectCurrentUser } from '@/services/store/user';
 
 import { SidebarWrapper } from './styled';
 
+import { CreateTweetModal } from '../CreateTweetModal';
 import { NavButton } from '../NavButton';
 import { SidebarHeader } from '../SidebarHeader';
 import { UserButton } from '../UserButton';
 
 export function Sidebar() {
-  const currentUser = useAppSelector(selectCurrentUser)!;
-
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  const currentUser = useAppSelector(selectCurrentUser);
 
   return (
     <SidebarWrapper>
@@ -53,13 +43,12 @@ export function Sidebar() {
           IconComponent={<ProfileIcon />}
           ActiveIconComponent={<ProfileIconFilled />}
           to={Routes.Profile(currentUser.userName)}
+          state={currentUser}
         >
           Profile
         </NavButton>
       </FlexContainer>
-      <StyledButton onClick={handleLogout} variant='filled'>
-        Logout
-      </StyledButton>
+      <CreateTweetModal />
       <UserButton />
     </SidebarWrapper>
   );

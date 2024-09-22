@@ -17,7 +17,7 @@ export function ModalHeader({ children, showSubmitButton, handleSubmit }: ModalH
   return (
     <StyledModalHeader align='center' justify='space-between'>
       <FlexContainer align='center' gap='sm'>
-        <StyledButton onClick={handleClose} variant='icon'>
+        <StyledButton onClick={handleClose()} variant='icon'>
           <StyledIcon $size='sm'>
             <CloseIcon />
           </StyledIcon>

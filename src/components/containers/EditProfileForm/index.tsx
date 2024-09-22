@@ -1,4 +1,4 @@
-import { forwardRef, useCallback, useContext, useEffect } from 'react';
+import { forwardRef, useCallback, useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -22,6 +22,7 @@ import { withLoader } from '@/utils/withLoader';
 import { editProfileValidationSchema } from './validation';
 
 import { DateOfBirthControl } from '../DateOfBirthControl';
+import { ImageEditButton } from '../ImageEditButton';
 import { UserAvatar } from '../UserAvatar';
 import { UserAvatarWrapper } from '../UserAvatarWrapper';
 import { UserBackgroundImage } from '../UserBackgroundImage';
@@ -30,8 +31,10 @@ const BaseEditProfileForm = forwardRef<HTMLFormElement, ManualLoadingHandleProps
   function EditProfileForm({ handleLoading }, ref) {
     const dispatch = useAppDispatch();
     const { uid, fullName, bio, dateOfBirth, backgroundImageUrl, avatarUrl } =
-      useAppSelector(selectCurrentUser)!;
+      useAppSelector(selectCurrentUser);
     const { handleClose, handleFormValidation } = useContext(ModalContext);
+    const [uploadedAvatarUrl, setUploadedAvatarUrl] = useState('');
+    const [uploadedBackgroundImageUrl, setUploadedBackgroundImageUrl] = useState('');
 
     const {
       setError,
@@ -51,14 +54,23 @@ const BaseEditProfileForm = forwardRef<HTMLFormElement, ManualLoadingHandleProps
     });
 
     const handleSetValueManually = useCallback(registerManualSetValue(setValue), []);
+
     const handleErrorManually = useCallback(registerManualSetError(setError), []);
+
+    const handleAvatarUrlChange = (value: string) => {
+      handleSetValueManually('avatarUrl')(value);
+      setUploadedAvatarUrl(value);
+    };
+
+    const handleBackgroundImageUrlChange = (value: string) => {
+      handleSetValueManually('backgroundImageUrl')(value);
+      setUploadedBackgroundImageUrl(value);
+    };
+
     const handleFormSubmit = async (userObj: Partial<EditUser>) => {
       const updatedUser = await call({ uid, userObj });
 
-      if (updatedUser) {
-        dispatch(updateCurrentUser(updatedUser));
-        handleClose();
-      }
+      if (updatedUser) dispatch(updateCurrentUser(updatedUser));
     };
 
     useEffect(() => {
@@ -76,26 +88,27 @@ const BaseEditProfileForm = forwardRef<HTMLFormElement, ManualLoadingHandleProps
         direction='column'
         gap='md'
         as={'form'}
-        onSubmit={handleSubmit(handleFormSubmit)}
+        onSubmit={handleClose(handleSubmit(handleFormSubmit))}
         ref={ref}
       >
         <FormField errorText={errors.backgroundImageUrl?.message}>
-          <UserBackgroundImage
-            url={backgroundImageUrl}
-            isEditable
-            handleError={handleErrorManually('backgroundImageUrl')}
-            handleChange={handleSetValueManually('backgroundImageUrl')}
-          />
+          <UserBackgroundImage url={uploadedBackgroundImageUrl || backgroundImageUrl}>
+            <ImageEditButton
+              handleError={handleErrorManually('backgroundImageUrl')}
+              handleChange={handleBackgroundImageUrlChange}
+              absolute
+            />
+          </UserBackgroundImage>
         </FormField>
         <UserAvatarWrapper align='end' justify='flex-end'>
           <FormField errorText={errors.avatarUrl?.message}>
-            <UserAvatar
-              url={avatarUrl}
-              size='xl2'
-              isEditable
-              handleError={handleErrorManually('avatarUrl')}
-              handleChange={handleSetValueManually('avatarUrl')}
-            />
+            <UserAvatar url={uploadedAvatarUrl || avatarUrl} size='xl2'>
+              <ImageEditButton
+                handleError={handleErrorManually('avatarUrl')}
+                handleChange={handleAvatarUrlChange}
+                absolute
+              />
+            </UserAvatar>
           </FormField>
         </UserAvatarWrapper>
         <FormField errorText={errors.fullName?.message}>

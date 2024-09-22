@@ -1,3 +1,5 @@
+import { ConnectionType } from '@/constants/user';
+
 type UserCreate = {
   fullName: string;
   userName: string;
@@ -21,6 +23,8 @@ type UserDoc = {
   uid: string;
   userName: string;
   createdAt: number | string;
+  followers: string[];
+  following: string[];
 };
 
 type UserState = {
@@ -37,4 +41,24 @@ type UpdateUserProps = {
   userObj: Partial<EditUser>;
 };
 
-export type { EditUser, UpdateUserProps, UserCreate, UserDoc, UserLogin, UserState };
+type UserConnectionsProps = {
+  userName: string;
+  connectionType: ConnectionType;
+};
+
+type UserSubcriptionProps = {
+  targetUid: string;
+  uid: string;
+  previousFollowing: string[];
+};
+
+export type {
+  EditUser,
+  UpdateUserProps,
+  UserConnectionsProps,
+  UserCreate,
+  UserDoc,
+  UserLogin,
+  UserState,
+  UserSubcriptionProps,
+};

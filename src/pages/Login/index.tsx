@@ -7,6 +7,7 @@ import { AuthWrapper, GoogleAuthButton, Logo } from '@/components/containers';
 import {
   Container,
   CustomInput,
+  FlexContainer,
   FormField,
   Heading2,
   Paragraph,
@@ -72,9 +73,12 @@ function BaseLoginPage({ handleLoading }: ManualLoadingHandleProps) {
         <StyledButton type='submit' isDisabled={!isValid} variant='filled'>
           Log in
         </StyledButton>
-        <Paragraph>
-          Dont have an account yet? <StyledLink to={Routes.SignUp}>Sign up to twitter</StyledLink>
-        </Paragraph>
+        <FlexContainer gap='sm'>
+          <Paragraph>Dont have an account yet?</Paragraph>
+          <Paragraph>
+            <StyledLink to={Routes.SignUp}>Sign up to twitter</StyledLink>
+          </Paragraph>
+        </FlexContainer>
       </AuthWrapper>
     </Container>
   );

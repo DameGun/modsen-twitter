@@ -10,11 +10,18 @@ type NavButtonProps = {
   ActiveIconComponent: ReactNode;
   children: ReactNode;
   to: string;
+  state?: unknown;
 };
 
-export function NavButton({ IconComponent, ActiveIconComponent, children, to }: NavButtonProps) {
+export function NavButton({
+  IconComponent,
+  ActiveIconComponent,
+  children,
+  to,
+  state,
+}: NavButtonProps) {
   return (
-    <NavLink to={to}>
+    <NavLink to={to} state={state} preventScrollReset>
       {({ isActive }) => (
         <StyledNavButton $isActive={isActive}>
           <StyledIcon>{isActive ? ActiveIconComponent : IconComponent}</StyledIcon>

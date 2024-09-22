@@ -1,7 +1,13 @@
+import type { ReactNode } from 'react';
+
 type ImageProps = {
   url?: string;
-  isEditable?: boolean;
-  handleChange?(imageUrl: string): void;
+  children?: ReactNode;
 };
 
-export type { ImageProps };
+type ImageWithKey = {
+  id: number;
+  url: string;
+};
+
+export type { ImageProps, ImageWithKey };

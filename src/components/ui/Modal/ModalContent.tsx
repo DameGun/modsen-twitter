@@ -19,9 +19,11 @@ export function ModalContent({ children }: ModalContentProps) {
     createPortal(
       <StyledModal direction='column' justify='center' align='center' className='modal-open'>
         <StyledModalContainerWrapper>
-          <StyledModalContainer>{children.map((child) => child)}</StyledModalContainer>
+          <StyledModalContainer>
+            {Array.isArray(children) ? children.map((child) => child) : children}
+          </StyledModalContainer>
         </StyledModalContainerWrapper>
-        <StyledModalOverlay onClick={handleClose} />
+        <StyledModalOverlay onClick={handleClose()} />
       </StyledModal>,
       document.body
     )

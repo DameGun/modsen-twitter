@@ -5,8 +5,9 @@ export const SidebarWrapper = styled.nav`
   display: flex;
   flex-direction: column;
   gap: ${(props) => props.theme.variables.spacing.lg};
-  width: 200px;
-
+  position: sticky;
+  top: 0;
+  box-sizing: border-box;
   padding: ${(props) => props.theme.variables.spacing.sm}
     ${(props) => props.theme.variables.spacing.lg};
   border-right: ${(props) => props.theme.variables.borderWidth.sm} solid;

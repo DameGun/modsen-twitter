@@ -1,11 +1,17 @@
-import { ReactElement, ReactNode } from 'react';
+import type { ReactElement, ReactNode, SyntheticEvent } from 'react';
+
+type ChildrenWithContext = ((context: ModalContextType) => ReactNode) | ReactNode;
 
 type ModalContextType = {
   isOpen: boolean;
   isFormValid: boolean;
   handleFormValidation(isValid: boolean): void;
-  handleOpen: VoidFunction;
-  handleClose(): void;
+  handleOpen(
+    callback?: (e: SyntheticEvent) => Promise<void>
+  ): (e: SyntheticEvent) => Promise<SyntheticEvent>;
+  handleClose(
+    callback?: (e: SyntheticEvent) => Promise<void>
+  ): (e: SyntheticEvent) => Promise<SyntheticEvent>;
 };
 
 type ModalProps = {
@@ -13,11 +19,11 @@ type ModalProps = {
 };
 
 type ModalBodyProps = {
-  children: ReactNode;
+  children: ChildrenWithContext;
 };
 
 type ModalButtonProps = {
-  children(context: ModalContextType): ReactNode;
+  children: ChildrenWithContext;
 };
 
 type ModalContentProps = {
@@ -32,7 +38,9 @@ type ModalHeaderProps = {
 
 type ModalChildren = [ReactElement<ModalButtonProps>, ReactElement<ModalContentProps>];
 
-type ModalContentChildren = [ReactElement<ModalHeaderProps>, ReactElement<ModalBodyProps>];
+type ModalContentChildren =
+  | [ReactElement<ModalHeaderProps>, ReactElement<ModalBodyProps>]
+  | ReactElement<ModalBodyProps>;
 
 export type {
   ModalBodyProps,

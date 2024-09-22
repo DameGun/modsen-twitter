@@ -7,6 +7,8 @@ type FlexContainerProps = {
   justify?: React.CSSProperties['justifyContent'];
   align?: React.CSSProperties['alignItems'];
   direction?: React.CSSProperties['flexDirection'];
+  fullWidth?: boolean;
+  noShrink?: boolean;
 };
 
 export const FlexContainer = styled.div<FlexContainerProps>`
@@ -15,4 +17,7 @@ export const FlexContainer = styled.div<FlexContainerProps>`
   gap: ${({ gap, theme }) => gap && theme.variables.spacing[gap]};
   align-items: ${({ align }) => align};
   justify-content: ${({ justify }) => justify};
+  flex-grow: ${({ fullWidth }) => (fullWidth ? 1 : 0)};
+  min-width: 0;
+  flex-shrink: ${({ noShrink }) => (noShrink ? 0 : 1)};
 `;

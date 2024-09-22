@@ -4,7 +4,9 @@ import {
   signInWithPopup,
 } from 'firebase/auth';
 
+import { FirestoreCollections } from '@/constants/firebase';
 import type { UserCreate, UserDoc, UserLogin } from '@/types/user';
+import { getDataById } from '@/utils/firestore';
 
 import { UsersRepositoryService } from './users';
 
@@ -32,14 +34,19 @@ export class AuthService {
   static async signInWithGoogle() {
     const { user } = await signInWithPopup(auth, provider);
 
-    const userData: Partial<UserDoc> = {
-      uid: user.uid,
-      email: user.email!,
-      fullName: user.displayName!,
-      userName: user.email!.split('@')[0],
-      avatarUrl: user.photoURL!,
-    };
+    const dbUser = await getDataById<UserDoc>(FirestoreCollections.Users, user.uid);
 
-    await UsersRepositoryService.createUser(userData);
+    if (!dbUser) {
+      const userData: Partial<UserDoc> = {
+        uid: user.uid,
+        email: user.email!,
+        fullName: user.displayName!,
+        userName: user.email!.split('@')[0],
+        avatarUrl: user.photoURL!,
+        followers: [],
+        following: [],
+      };
+      await UsersRepositoryService.createUser(userData);
+    }
   }
 }

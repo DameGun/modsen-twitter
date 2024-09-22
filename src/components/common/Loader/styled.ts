@@ -12,17 +12,20 @@ export const StyledLoader = styled.div<StyledLoaderProps>`
   justify-content: center;
 
   ${({ $isLoaderFullScreen }) =>
-    $isLoaderFullScreen &&
-    css`
-      position: fixed;
-      background-color: ${(props) => props.theme.colors.secondaryAlpha};
-      height: 100%;
-    `}
+    $isLoaderFullScreen
+      ? css`
+          position: fixed;
+          top: 0;
+          left: 0;
+          background-color: ${(props) => props.theme.colors.secondaryAlpha};
+          height: 100%;
+          width: 100%;
+        `
+      : css`
+          transform: translateY(50%);
+        `}
 
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: ${(props) => props.theme.variables.zIndex.lg};
+  z-index: ${(props) => props.theme.variables.zIndex.xl};
 `;
 
 const SpinnerAnimation = keyframes`

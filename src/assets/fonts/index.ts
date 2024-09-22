@@ -1,1 +1,1 @@
-export { default as publicSans } from './PublicSans-VariableFont.ttf';
+export { default as openSans } from './OpenSans-VariableFont.ttf';

@@ -1,8 +1,9 @@
 import { css } from 'styled-components';
 
 export const commonButtonStyles = css`
-  padding: ${(props) => props.theme.variables.spacing.sm}
-    ${(props) => props.theme.variables.spacing.sm};
+  padding: ${(props) => props.theme.variables.spacing.sm};
+
+  min-width: 80px;
 
   cursor: pointer;
 
@@ -38,7 +39,12 @@ export const filledButtonStyles = css`
   ${commonButtonStyles};
 
   background-color: ${(props) => props.theme.colors.accent};
-  color: white;
+
+  &,
+  & > * {
+    color: ${(props) => props.theme.colors.white};
+  }
+
   font-weight: ${(props) => props.theme.font.weight.semibold};
 
   &:hover {
@@ -59,7 +65,7 @@ export const outlineButtonStyles = css`
 
 export const iconButtonStyles = css`
   ${commonButtonStyles};
-
+  min-width: 0;
   &:hover {
     background-color: ${(props) => props.theme.colors.focus};
   }

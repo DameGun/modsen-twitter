@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { SyntheticEvent, useCallback, useMemo, useState } from 'react';
 
 import type { ModalProps } from '@/types/modal';
 
@@ -8,9 +8,25 @@ export function Modal({ children }: ModalProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
 
-  const handleOpen = useCallback(() => setIsOpen(true), []);
+  const handleOpen = useCallback((callback?: (e: SyntheticEvent) => Promise<void>) => {
+    return async (e: SyntheticEvent) => {
+      e.stopPropagation();
+      e.preventDefault();
+      await callback?.(e);
+      setIsOpen(true);
+      return e;
+    };
+  }, []);
 
-  const handleClose = useCallback(() => setIsOpen(false), []);
+  const handleClose = useCallback((callback?: (e: SyntheticEvent) => Promise<void>) => {
+    return async (e: SyntheticEvent) => {
+      e.stopPropagation();
+      e.preventDefault();
+      await callback?.(e);
+      setIsOpen(false);
+      return e;
+    };
+  }, []);
 
   const handleFormValidation = useCallback((isValid: boolean) => setIsFormValid(isValid), []);
 

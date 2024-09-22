@@ -1,9 +1,14 @@
 import styled from 'styled-components';
 
 export const LayoutWrapper = styled.div`
-  display: grid;
   align-self: center;
-  grid-template-columns: 1fr 3fr 1fr;
+  display: grid;
+  grid-template-columns: 2fr 4fr 1fr;
+
+  & > * {
+    min-width: 0;
+    max-width: 100%;
+  }
 
   max-width: ${(props) => props.theme.variables.containerSize.lg};
 `;

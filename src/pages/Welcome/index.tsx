@@ -40,9 +40,12 @@ export function WelcomePage() {
         <Paragraph>
           By singing up you agree to the Terms of Service and Privacy Policy, including Cookie Use.
         </Paragraph>
-        <Paragraph>
-          Already have an account? <StyledLink to={Routes.SignIn}>Log in</StyledLink>
-        </Paragraph>
+        <FlexContainer gap='sm'>
+          <Paragraph>Already have an account?</Paragraph>
+          <Paragraph>
+            <StyledLink to={Routes.SignIn}>Log in</StyledLink>
+          </Paragraph>
+        </FlexContainer>
       </FlexContainer>
     </WelcomePageWrapper>
   );

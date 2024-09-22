@@ -2,6 +2,7 @@ import {
   ChangeEvent,
   forwardRef,
   InputHTMLAttributes,
+  useEffect,
   useImperativeHandle,
   useRef,
   useState,
@@ -22,6 +23,7 @@ import {
 type CustomInputProps = FormatStyledProps<ControlStylesProps> &
   InputHTMLAttributes<HTMLInputElement> & {
     asTextArea?: boolean;
+    autoResize?: boolean;
   };
 
 export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(function CustomInput(
@@ -33,6 +35,8 @@ export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(functi
     type,
     defaultValue,
     asTextArea,
+    autoResize,
+    variant,
     ...rest
   }: CustomInputProps,
   ref
@@ -41,8 +45,6 @@ export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(functi
   const [inputType, setInputType] = useState(type);
   const [showPassword, setShowPassword] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  useImperativeHandle(ref, () => inputRef.current as HTMLInputElement, []);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCurrentLength(e.target.value.length);
@@ -61,8 +63,17 @@ export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(functi
     }
   };
 
+  useImperativeHandle(ref, () => inputRef.current as HTMLInputElement, []);
+
+  useEffect(() => {
+    if (autoResize && inputRef.current) {
+      inputRef.current.style.height = 'auto';
+      inputRef.current.style.height = inputRef.current.scrollHeight + 'px';
+    }
+  }, [inputRef, currentLength]);
+
   return (
-    <StyledInputWrapper $isInvalid={isInvalid} onClick={handleFocus}>
+    <StyledInputWrapper $isInvalid={isInvalid} $variant={variant} onClick={handleFocus}>
       <LengthConstraint>{maxLength && `${currentLength} / ${maxLength}`}</LengthConstraint>
       <StyledInput
         as={asTextArea ? 'textarea' : 'input'}
@@ -74,7 +85,9 @@ export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(functi
         {...rest}
         onChange={handleChange}
       />
-      <StyledInputLabel htmlFor={rest.name}>{placeholder}</StyledInputLabel>
+      <StyledInputLabel $variant={variant} htmlFor={rest.name}>
+        {placeholder}
+      </StyledInputLabel>
       {type === 'password' && (
         <VisibilityOption
           $size='sm'

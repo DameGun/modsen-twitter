@@ -3,5 +3,9 @@ import type { ModalButtonProps } from '@/types/modal';
 import { ModalContext } from './context';
 
 export function ModalButton({ children }: ModalButtonProps) {
-  return <ModalContext.Consumer>{(context) => children(context)}</ModalContext.Consumer>;
+  return (
+    <ModalContext.Consumer>
+      {(context) => (typeof children === 'function' ? children(context) : children)}
+    </ModalContext.Consumer>
+  );
 }

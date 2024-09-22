@@ -2,11 +2,22 @@ import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 
-export const StyledLink = styled(Link)`
-  color: ${(props) => props.theme.colors.accent};
-  transition: ${(props) => props.theme.variables.transition.sm};
+import { ColorsConstants } from '@/types/styles';
+
+type StyledLinkProps = {
+  $color?: keyof ColorsConstants;
+};
+
+export const StyledLink = styled(Link)<StyledLinkProps>`
+  display: flex;
+  gap: ${(props) => props.theme.variables.spacing.xs};
+
+  color: ${({ $color = 'accent', theme }) => theme.colors[$color]};
+
+  border-bottom: ${(props) => props.theme.variables.borderWidth.sm} solid;
+  border-color: transparent;
 
   &:hover {
-    border-bottom: ${(props) => props.theme.variables.borderWidth.sm} solid;
+    border-color: ${({ $color = 'accent', theme }) => theme.colors[$color]};
   }
 `;

@@ -26,7 +26,7 @@ export function EditProfile() {
     <Modal>
       <ModalButton>
         {({ handleOpen }) => (
-          <StyledButton variant='outline' onClick={handleOpen}>
+          <StyledButton variant='outline' onClick={handleOpen()}>
             <Paragraph weight='semibold'>Edit profile</Paragraph>
           </StyledButton>
         )}

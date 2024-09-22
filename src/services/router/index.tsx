@@ -1,9 +1,17 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import { AuthGate } from '@/components/common';
+import { AuthGate, NotFoundFallback } from '@/components/common';
 import { Layout } from '@/components/common/Layout';
 import { Routes } from '@/constants/routes';
-import { FeedPage, LoginPage, ProfilePage, SignUpPage, WelcomePage } from '@/pages';
+import {
+  FeedPage,
+  LoginPage,
+  ProfilePage,
+  SignUpPage,
+  SubscriptionsPage,
+  TweetPage,
+  WelcomePage,
+} from '@/pages';
 
 export const router = createBrowserRouter([
   {
@@ -35,8 +43,25 @@ export const router = createBrowserRouter([
             element: <FeedPage />,
           },
           {
+            path: Routes.Tweet(':userName', ':tweetId'),
+            element: <TweetPage />,
+          },
+          {
+            path: Routes.Subscriptions(':userName', ':connectionType'),
+            element: <SubscriptionsPage />,
+          },
+          {
             path: Routes.Profile(':userName'),
             element: <ProfilePage />,
+          },
+          {
+            path: '*',
+            element: (
+              <NotFoundFallback
+                mainText='This page doesnt exists.'
+                secondaryText='Try search for something else.'
+              />
+            ),
           },
         ],
       },

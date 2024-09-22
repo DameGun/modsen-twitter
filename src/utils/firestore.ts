@@ -1,7 +1,8 @@
-import { collection, doc, QueryDocumentSnapshot } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, Query, QueryDocumentSnapshot } from 'firebase/firestore';
 
 import { FirestoreCollections } from '@/constants/firebase';
 import { firestore } from '@/services/firebase';
+import type { FirestoreObj, GetOperationReturnType, GetOperationType } from '@/types/firestore';
 
 export const converter = <T>() => ({
   toFirestore: (data: T) => data,
@@ -17,4 +18,33 @@ export const getDocRef = <TDoc extends object>(
 
 export const getCollectionRef = <TDoc extends object>(path: FirestoreCollections) => {
   return collection(firestore, path).withConverter(converter<TDoc>());
+};
+
+export const getDataById = async <TDoc extends FirestoreObj>(
+  path: FirestoreCollections,
+  id: string
+): GetOperationReturnType<GetOperationType<TDoc>> => {
+  const docRef = getDocRef<TDoc>(path, id);
+  const doc = await getDoc(docRef);
+
+  if (doc.exists()) return { data: { ...doc.data(), uid: doc.id }, ref: docRef };
+
+  return undefined;
+};
+
+export const getDocSnap = async <TDoc extends object>(path: FirestoreCollections, id: string) => {
+  const docRef = getDocRef<TDoc>(path, id);
+  return await getDoc(docRef);
+};
+
+export const getData = async <TDoc extends FirestoreObj>(
+  query: Query<TDoc, TDoc>
+): GetOperationReturnType<TDoc[]> => {
+  const querySnap = await getDocs(query);
+
+  if (!querySnap.empty) {
+    return querySnap.docs.map((doc) => ({ ...doc.data(), uid: doc.id }));
+  }
+
+  return undefined;
 };

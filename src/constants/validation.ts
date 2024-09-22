@@ -9,6 +9,7 @@ export const ValidationErrorsText = {
   EmailFormat: 'Incorrect email format',
   OnlyLettersAndDigits: 'Must contain only letters and digits',
   OnlyLetters: 'Must container only letters',
+  ItemsConstraint: (count: number) => `You can only provide up to ${count} items`,
 } as const;
 
 export enum PasswordValidationChecks {

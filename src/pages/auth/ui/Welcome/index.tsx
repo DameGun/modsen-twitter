@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import { GoogleAuthButton } from '@/features/auth';
 import { MailIcon } from '@/shared/assets/icons';
 import { backTwitterImg } from '@/shared/assets/images';
+import { DocumentTitle } from '@/shared/constants/documentTitle';
 import { Routes } from '@/shared/constants/routes';
+import { useModifyDocumentTitle } from '@/shared/lib/useModifyDocumentTitle';
 import {
   FlexContainer,
   Heading1,
@@ -18,6 +20,8 @@ import {
 import { ButtonsGroupWrapper, WelcomePageImageWrapper, WelcomePageWrapper } from './styled';
 
 export function WelcomePage() {
+  useModifyDocumentTitle(DocumentTitle.SignIn);
+
   return (
     <WelcomePageWrapper>
       <WelcomePageImageWrapper>

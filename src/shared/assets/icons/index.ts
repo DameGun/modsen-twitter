@@ -15,6 +15,7 @@ export { default as LogoIcon } from './logo-icon.svg?react';
 export { default as LogoutIcon } from './logout-icon.svg?react';
 export { default as MailIcon } from './mail-icon.svg?react';
 export { default as PhotoIcon } from './photo-icon.svg?react';
+export { default as PostIcon } from './post-icon.svg?react';
 export { default as ProfileIcon } from './profile-icon.svg?react';
 export { default as ProfileIconFilled } from './profile-icon-filled.svg?react';
 export { default as SearchIcon } from './search-icon.svg?react';

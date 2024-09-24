@@ -29,8 +29,8 @@ const deleteTweetApiSlice = apiSlice.injectEndpoints({
           await queryFulfilled;
 
           updateBothTweetsCache((draft) => {
-            const tweetIndex = draft.tweets.findIndex(({ uid }) => uid === tweetId);
-            draft.tweets.splice(tweetIndex, 1);
+            const tweetIndex = draft.collection.findIndex(({ uid }) => uid === tweetId);
+            draft.collection.splice(tweetIndex, 1);
           });
         } catch (err) {
           console.log(err);

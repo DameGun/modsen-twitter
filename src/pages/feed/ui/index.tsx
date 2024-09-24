@@ -1,13 +1,17 @@
 import { CreateTweetForm } from '@/features/tweet';
-import { Section } from '@/shared/ui';
+import { useModifyDocumentTitle } from '@/shared/lib/useModifyDocumentTitle';
 import { TweetsList } from '@/widgets/tweet';
 
+import { CreateTweetFormWrapper } from './styled';
+
 export function FeedPage() {
+  useModifyDocumentTitle('Feed');
+
   return (
     <>
-      <Section>
+      <CreateTweetFormWrapper>
         <CreateTweetForm isLoaderFullScreen />
-      </Section>
+      </CreateTweetFormWrapper>
       <TweetsList />
     </>
   );

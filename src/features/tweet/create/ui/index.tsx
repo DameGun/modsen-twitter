@@ -113,7 +113,7 @@ function BaseCreateTweetForm({ handleLoading }: ManualLoadingHandleProps) {
       <FlexContainer>
         <Avatar url={currentUser.avatarUrl} />
       </FlexContainer>
-      <FlexContainer $direction='column' $fullWidth>
+      <FlexContainer $fullWidth $direction='column'>
         <CustomInput
           asTextArea
           maxLength={TWEET_CONTENT_LENGTH_CONSTRAINT}

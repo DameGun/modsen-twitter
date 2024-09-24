@@ -45,7 +45,7 @@ const createTweetApiSlice = apiSlice.injectEndpoints({
           const { data: createdTweet } = await queryFulfilled;
 
           updateBothTweetsCache((draft) => {
-            draft.tweets.unshift(createdTweet);
+            draft.collection.unshift(createdTweet);
           });
         } catch (err) {
           console.log(err);

@@ -9,9 +9,11 @@ import {
 } from '@/shared/assets/icons';
 import { Routes } from '@/shared/constants/routes';
 import { useAppSelector } from '@/shared/lib/store';
-import { FlexContainer, NavButton } from '@/shared/ui';
+import { NavButton } from '@/shared/ui';
 import { CreateTweetModal } from '@/widgets/tweet/create/ui';
 import { UserButton } from '@/widgets/user/logout/ui';
+
+import { SidebarButtonsWrapper } from './styled';
 
 import { SidebarHeader } from '../SidebarHeader';
 
@@ -20,7 +22,7 @@ export function Sidebar() {
 
   return (
     <>
-      <FlexContainer $direction='column' $gap='sm'>
+      <SidebarButtonsWrapper $direction='column' $gap='sm'>
         <SidebarHeader />
         <NavButton
           IconComponent={<FeedIcon />}
@@ -44,7 +46,7 @@ export function Sidebar() {
         >
           Profile
         </NavButton>
-      </FlexContainer>
+      </SidebarButtonsWrapper>
       <CreateTweetModal />
       <UserButton />
     </>

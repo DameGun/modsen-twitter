@@ -1,9 +1,8 @@
 import { Outlet } from 'react-router-dom';
 
-import { FlexContainer } from '@/shared/ui';
 import { Search } from '@/widgets/search';
 
-import { LayoutWrapper, LeftColumnWrapper, RightColumnWrapper } from './styled';
+import { LayoutWrapper, LeftColumnWrapper, MiddleColumn, RightColumnWrapper } from './styled';
 
 import { Sidebar } from '../Sidebar';
 
@@ -13,9 +12,9 @@ export function Layout() {
       <LeftColumnWrapper $direction='column' $gap='lg'>
         <Sidebar />
       </LeftColumnWrapper>
-      <FlexContainer $direction='column'>
+      <MiddleColumn $direction='column'>
         <Outlet />
-      </FlexContainer>
+      </MiddleColumn>
       <RightColumnWrapper>
         <Search />
       </RightColumnWrapper>

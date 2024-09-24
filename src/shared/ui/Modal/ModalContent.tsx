@@ -11,14 +11,14 @@ import {
   StyledModalOverlay,
 } from './styled';
 
-export function ModalContent({ children }: ModalContentProps) {
+export function ModalContent({ children, isMobileFullscreen }: ModalContentProps) {
   const { isOpen, handleClose } = useContext(ModalContext);
 
   return (
     isOpen &&
     createPortal(
       <StyledModal $direction='column' $justify='center' $align='center' className='modal-open'>
-        <StyledModalContainerWrapper>
+        <StyledModalContainerWrapper $isMobileFullscreen={isMobileFullscreen}>
           <StyledModalContainer>
             {Array.isArray(children) ? children.map((child) => child) : children}
           </StyledModalContainer>

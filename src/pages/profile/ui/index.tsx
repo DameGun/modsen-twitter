@@ -5,6 +5,7 @@ import { getUserByUserName, NotFound, selectCurrentUser } from '@/entities/user'
 import type { UserDoc } from '@/entities/user/types';
 import { useAppSelector } from '@/shared/lib/store';
 import { useAsyncWithLoading } from '@/shared/lib/useAsyncWithLoading';
+import { useModifyDocumentTitle } from '@/shared/lib/useModifyDocumentTitle';
 import { withLoader } from '@/shared/lib/withLoader';
 import type { ManualLoadingHandleProps } from '@/shared/types/loader';
 import { UserProfile } from '@/widgets/user';
@@ -19,6 +20,7 @@ function BaseProfilePage({ handleLoading }: ManualLoadingHandleProps) {
   const [displayedUser, setDisplayedUser] = useState<UserDoc | undefined>(
     isCurrentUser ? currentAuthenticatedUser : undefined
   );
+  useModifyDocumentTitle(userName!);
 
   const { isLoading } = useAsyncWithLoading({
     call: getUserByUserName,

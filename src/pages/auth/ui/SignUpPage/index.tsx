@@ -6,6 +6,7 @@ import { AuthError, AuthErrorCodes } from 'firebase/auth';
 import type { UserCreate } from '@/entities/user/types';
 import { signUpEmail } from '@/features/auth';
 import { DateOfBirthControl } from '@/features/user';
+import { DocumentTitle } from '@/shared/constants/documentTitle';
 import {
   FULLNAME_LENGTH_CONSTRAINT,
   PASSWORD_LENGTH_CONSTRAINT,
@@ -14,6 +15,7 @@ import {
   ValidationErrorsText,
 } from '@/shared/constants/validation';
 import { useAsyncWithLoading } from '@/shared/lib/useAsyncWithLoading';
+import { useModifyDocumentTitle } from '@/shared/lib/useModifyDocumentTitle';
 import { withLoader } from '@/shared/lib/withLoader';
 import type { ManualLoadingHandleProps } from '@/shared/types/loader';
 import {
@@ -31,6 +33,7 @@ import { signUpValidationSchema } from '../../model/signup-schema';
 import { AuthWrapper } from '../AuthWrapper';
 
 export function BaseSignUpPage({ handleLoading }: ManualLoadingHandleProps) {
+  useModifyDocumentTitle(DocumentTitle.SignUp);
   const {
     setValue,
     setError,

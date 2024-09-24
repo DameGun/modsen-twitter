@@ -5,8 +5,10 @@ import { AuthError, AuthErrorCodes } from 'firebase/auth';
 
 import { UserLogin } from '@/entities/user/types';
 import { GoogleAuthButton, signInEmail } from '@/features/auth';
+import { DocumentTitle } from '@/shared/constants/documentTitle';
 import { Routes } from '@/shared/constants/routes';
 import { useAsyncWithLoading } from '@/shared/lib/useAsyncWithLoading';
+import { useModifyDocumentTitle } from '@/shared/lib/useModifyDocumentTitle';
 import { withLoader } from '@/shared/lib/withLoader';
 import type { ManualLoadingHandleProps } from '@/shared/types/loader';
 import {
@@ -25,6 +27,7 @@ import { signInValidationSchema } from '../../model/signin-schema';
 import { AuthWrapper } from '../AuthWrapper';
 
 function BaseSignInPage({ handleLoading }: ManualLoadingHandleProps) {
+  useModifyDocumentTitle(DocumentTitle.SignIn);
   const {
     register,
     handleSubmit,

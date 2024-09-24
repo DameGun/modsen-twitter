@@ -29,8 +29,8 @@ function BaseConnectionsList({ connectionType, userName, handleLoading }: Connec
   if (data && !isLoading) {
     return (
       <Fallback
-        mainText={reverseMapType<typeof FallbackTextMain>(connectionType)}
-        secondaryText={reverseMapType<typeof FallbackTextMain>(connectionType)}
+        mainText={reverseMapType(connectionType, FallbackTextMain)}
+        secondaryText={reverseMapType(connectionType, FallbackTextSecondary)}
       />
     );
   }

@@ -10,4 +10,8 @@ export const AuthWrapper = styled.form`
   & > :first-child {
     align-self: center;
   }
+
+  @media ${(props) => props.theme.media.mobile} {
+    padding: ${(props) => props.theme.variables.spacing.xl};
+  }
 `;

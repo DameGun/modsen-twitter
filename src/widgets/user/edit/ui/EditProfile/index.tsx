@@ -31,7 +31,7 @@ export function EditProfile() {
           </StyledButton>
         )}
       </ModalButton>
-      <ModalContent>
+      <ModalContent isMobileFullscreen>
         <ModalHeader showSubmitButton handleSubmit={handleSubmit}>
           <Heading3>Edit profile</Heading3>
         </ModalHeader>

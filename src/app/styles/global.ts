@@ -49,10 +49,5 @@ export default createGlobalStyle`
     #root {
         display: flex;
         flex-direction: column;
-        height: 100vh;
-
-        @media ${(props) => props.theme.media.mobile} {
-            padding: 0 ${(props) => props.theme.variables.spacing.sm};
-        }
     }
 `;

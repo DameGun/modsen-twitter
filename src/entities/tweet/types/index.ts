@@ -21,16 +21,4 @@ type CreateTweetFormType = {
   media?: ImageWithKey[];
 };
 
-type TweetPaginateMeta = {
-  startAfterDocId?: string;
-  targetUser?: UserDoc;
-  page?: number;
-};
-
-type TweetPaginate = {
-  tweets: TweetType[];
-  hasMore: boolean;
-  lastDocId?: string;
-};
-
-export type { CreateTweetFormType, TweetDoc, TweetPaginate, TweetPaginateMeta, TweetType };
+export type { CreateTweetFormType, TweetDoc, TweetType };

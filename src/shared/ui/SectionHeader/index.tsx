@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import { ArrowBackIcon } from '@/shared/assets/icons';
+import { PropsWithChildren } from '@/shared/types/common';
 
 import { StyledSectionHeader } from './styled';
 
@@ -8,12 +9,12 @@ import { StyledButton } from '../StyledButton';
 import { StyledIcon } from '../StyledIcon';
 import { Heading3 } from '../Text';
 
-type SectionHeaderProps = {
+type SectionHeaderProps = PropsWithChildren & {
   isNavigatable?: boolean;
-  headerText: string;
+  headerText?: string;
 };
 
-export function SectionHeader({ isNavigatable, headerText }: SectionHeaderProps) {
+export function SectionHeader({ isNavigatable, headerText, children }: SectionHeaderProps) {
   const navigate = useNavigate();
 
   const handlePreviousPageClick = () => navigate(-1);
@@ -27,7 +28,8 @@ export function SectionHeader({ isNavigatable, headerText }: SectionHeaderProps)
           </StyledIcon>
         </StyledButton>
       )}
-      <Heading3>{headerText}</Heading3>
+      {headerText && <Heading3>{headerText}</Heading3>}
+      {children}
     </StyledSectionHeader>
   );
 }

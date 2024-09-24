@@ -1,4 +1,4 @@
-import type { DocumentReference } from 'firebase/firestore';
+import type { DocumentData, DocumentReference, Query } from 'firebase/firestore';
 
 import { FirestoreCollections } from '../constants/firebase';
 
@@ -15,4 +15,15 @@ type GetByIdProps = {
   id: string;
 };
 
-export type { FirestoreObj, GetByIdProps, GetOperationReturnType, GetOperationType };
+type PaginatedQueryResult<T> = Promise<[T[] | undefined, string | undefined]>;
+
+type QueryExtendFunction<T extends DocumentData> = (baseQuery: Query<T, T>) => Query<T, T>;
+
+export type {
+  FirestoreObj,
+  GetByIdProps,
+  GetOperationReturnType,
+  GetOperationType,
+  PaginatedQueryResult,
+  QueryExtendFunction,
+};

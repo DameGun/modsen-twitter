@@ -9,9 +9,6 @@ type TabProps = {
 export const Tabs = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  position: sticky;
-  top: 0;
-  z-index: ${(props) => props.theme.variables.zIndex.xs};
 `;
 
 export const Tab = styled(Section)<TabProps>`

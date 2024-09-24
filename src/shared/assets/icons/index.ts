@@ -17,5 +17,6 @@ export { default as MailIcon } from './mail-icon.svg?react';
 export { default as PhotoIcon } from './photo-icon.svg?react';
 export { default as ProfileIcon } from './profile-icon.svg?react';
 export { default as ProfileIconFilled } from './profile-icon-filled.svg?react';
+export { default as SearchIcon } from './search-icon.svg?react';
 export { default as VisibilityIcon } from './visibility-icon.svg?react';
 export { default as VisibilityOffIcon } from './visibility-off-icon.svg?react';

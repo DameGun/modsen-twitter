@@ -1,59 +1,52 @@
-import { limit, orderBy, query, startAfter, where } from 'firebase/firestore';
+import { query, where } from 'firebase/firestore';
 
 import { apiSlice } from '@/shared/api';
 import { FirestoreCollections } from '@/shared/constants/firebase';
-import { getCollectionRef, getData, getDocSnap } from '@/shared/lib/firestore';
+import { getPaginatedQuery } from '@/shared/lib/firestore';
+import { PaginateMeta, PaginateResult } from '@/shared/types/observer';
 
-import { TWEET_LOAD_LIMIT } from '../constants';
 import { mapTweetDoc } from '../lib';
-import type { TweetDoc, TweetPaginate, TweetPaginateMeta, TweetType } from '../types';
+import type { TweetDoc, TweetType } from '../types';
 
 export const getTweetsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getTweets: builder.query<TweetPaginate, TweetPaginateMeta>({
+    getTweets: builder.query<PaginateResult<TweetType>, PaginateMeta>({
       queryFn: async ({ startAfterDocId, targetUser }) => {
         try {
-          const tweetsRef = getCollectionRef<TweetDoc>(FirestoreCollections.Tweets);
+          const [result, lastDocId] = await getPaginatedQuery<TweetDoc>(
+            FirestoreCollections.Tweets,
+            true,
+            startAfterDocId,
+            (baseQuery) => {
+              if (targetUser) {
+                return query(baseQuery, where('author', '==', targetUser.uid));
+              }
 
-          let baseTweetsQuery = query(
-            tweetsRef,
-            orderBy('createdAt', 'desc'),
-            limit(TWEET_LOAD_LIMIT)
+              return baseQuery;
+            }
           );
 
-          if (targetUser) {
-            baseTweetsQuery = query(baseTweetsQuery, where('author', '==', targetUser.uid));
-          }
+          const collection: TweetType[] = [];
 
-          if (startAfterDocId) {
-            const startAfterDoc = await getDocSnap(FirestoreCollections.Tweets, startAfterDocId);
-            baseTweetsQuery = query(baseTweetsQuery, startAfter(startAfterDoc));
-          }
-
-          const tweetsCollection = await getData(baseTweetsQuery);
-          const tweets: TweetType[] = [];
-
-          if (tweetsCollection) {
-            for (const tweet of tweetsCollection) {
+          if (result) {
+            for (const tweet of result) {
               const mappedTweet = await mapTweetDoc(tweet, targetUser);
 
-              if (mappedTweet) tweets.push(mappedTweet);
+              if (mappedTweet) collection.push(mappedTweet);
             }
-
-            const lastDoc = tweetsCollection[tweetsCollection.length - 1];
 
             return {
               data: {
-                tweets,
+                collection,
                 hasMore: true,
-                lastDocId: lastDoc.uid,
+                lastDocId,
               },
             };
           }
 
           return {
             data: {
-              tweets,
+              collection,
               hasMore: false,
             },
           };
@@ -64,17 +57,18 @@ export const getTweetsApiSlice = apiSlice.injectEndpoints({
       serializeQueryArgs: ({ endpointName, queryArgs: { targetUser } }) => {
         return endpointName + (targetUser ? targetUser.uid : '');
       },
-      merge: (currentCache, { tweets, lastDocId, hasMore }) => {
+      merge: (currentCache, { collection, lastDocId, hasMore }) => {
         currentCache.lastDocId = lastDocId;
         currentCache.hasMore = hasMore;
-        currentCache.tweets.push(...tweets);
+        currentCache.collection.push(...collection);
       },
       forceRefetch: ({ currentArg, previousArg, endpointState }) => {
-        const hasMore = (endpointState && (endpointState.data as TweetPaginate))?.hasMore;
+        const hasMore = (endpointState && (endpointState.data as PaginateResult<TweetType>))
+          ?.hasMore;
 
         if (hasMore) {
           return (
-            currentArg?.page != previousArg?.page ||
+            currentArg?.startAfterDocId != previousArg?.startAfterDocId ||
             currentArg?.targetUser != currentArg?.targetUser
           );
         }

@@ -6,7 +6,7 @@ export {
   unfollowUser,
   updateUser,
 } from './api';
-export { parseUserName, parseUserRegisterDate, reverseMapConnectionType } from './lib';
+export { parseUserName, parseUserRegisterDate } from './lib';
 export {
   selectCurrentUser,
   setCurrentUser,

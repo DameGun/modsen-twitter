@@ -1,6 +1,7 @@
-import { getUserConnections, reverseMapConnectionType, UserCell } from '@/entities/user';
+import { getUserConnections, UserCell } from '@/entities/user';
 import { FallbackTextMain, FallbackTextSecondary } from '@/shared/constants/fallback';
 import { ConnectionType } from '@/shared/constants/user';
+import { reverseMapType } from '@/shared/lib/mappings';
 import { useAsyncWithLoading } from '@/shared/lib/useAsyncWithLoading';
 import { withLoader } from '@/shared/lib/withLoader';
 import type { ManualLoadingHandleProps } from '@/shared/types/loader';
@@ -28,8 +29,8 @@ function BaseConnectionsList({ connectionType, userName, handleLoading }: Connec
   if (data && !isLoading) {
     return (
       <Fallback
-        mainText={FallbackTextMain[reverseMapConnectionType(connectionType)]}
-        secondaryText={FallbackTextSecondary[reverseMapConnectionType(connectionType)]}
+        mainText={reverseMapType<typeof FallbackTextMain>(connectionType)}
+        secondaryText={reverseMapType<typeof FallbackTextMain>(connectionType)}
       />
     );
   }

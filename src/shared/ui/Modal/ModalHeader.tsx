@@ -28,7 +28,7 @@ export function ModalHeader({ children, showSubmitButton, handleSubmit }: ModalH
         <StyledButton
           variant='filled'
           type='submit'
-          isDisabled={!isFormValid}
+          $isDisabled={!isFormValid}
           onClick={handleSubmit}
         >
           <Paragraph>Save</Paragraph>

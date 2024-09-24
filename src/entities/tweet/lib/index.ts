@@ -2,9 +2,10 @@ import type { UserDoc } from '@/entities/user/types';
 import { FirestoreCollections } from '@/shared/constants/firebase';
 import { getDataById } from '@/shared/lib/firestore';
 import { store } from '@/shared/store';
+import type { PaginateResult } from '@/shared/types/observer';
 
 import { getTweetsApiSlice } from '../api';
-import type { TweetDoc, TweetPaginate, TweetType } from '../types';
+import type { TweetDoc, TweetType } from '../types';
 
 export function formatTweetLikesCount(likesCount: number) {
   if (likesCount === 0) return undefined;
@@ -75,13 +76,13 @@ export async function mapTweetDoc(
 }
 
 export function updateMainTweetsCache(
-  updateRecipe: (draft: TweetPaginate) => void | TweetPaginate
+  updateRecipe: (draft: PaginateResult<TweetType>) => void | PaginateResult<TweetType>
 ) {
   store.dispatch(getTweetsApiSlice.util.updateQueryData('getTweets', {}, updateRecipe));
 }
 
 export function updateBothTweetsCache(
-  updateRecipe: (draft: TweetPaginate) => void | TweetPaginate
+  updateRecipe: (draft: PaginateResult<TweetType>) => void | PaginateResult<TweetType>
 ) {
   const targetUser = store.getState().user.currentUser!;
 

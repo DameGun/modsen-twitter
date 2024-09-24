@@ -12,9 +12,13 @@ import { UserName } from '../UserName';
 
 type UserCellProps = {
   user: UserDoc;
+  variant?: 'full' | 'short';
 };
 
-export function UserCell({ user: { uid, avatarUrl, fullName, userName, bio } }: UserCellProps) {
+export function UserCell({
+  user: { uid, avatarUrl, fullName, userName, bio },
+  variant = 'full',
+}: UserCellProps) {
   const navigate = useNavigate();
 
   const handleNavigate = () => navigate(Routes.Profile(userName));
@@ -30,9 +34,11 @@ export function UserCell({ user: { uid, avatarUrl, fullName, userName, bio } }: 
             <Heading4>{fullName}</Heading4>
             <UserName userName={userName} />
           </FlexContainer>
-          <FollowButton isLoaderFullScreen targetUid={uid} targetUserName={userName} />
+          {variant === 'full' && (
+            <FollowButton isLoaderFullScreen targetUid={uid} targetUserName={userName} />
+          )}
         </FlexContainer>
-        <Paragraph>{bio}</Paragraph>
+        {variant === 'full' && <Paragraph>{bio}</Paragraph>}
       </FlexContainer>
     </UserCellWrapper>
   );

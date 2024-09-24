@@ -135,7 +135,7 @@ export function BaseSignUpPage({ handleLoading }: ManualLoadingHandleProps) {
           </ul>
         </div>
         <DateOfBirthControl onChange={setValue} errorText={errors.dateOfBirth?.message} />
-        <StyledButton type='submit' isDisabled={!isValid} variant='filled'>
+        <StyledButton type='submit' $isDisabled={!isValid} variant='filled'>
           Next
         </StyledButton>
       </AuthWrapper>

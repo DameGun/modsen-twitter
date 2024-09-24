@@ -1,4 +1,15 @@
-import { collection, doc, getDoc, getDocs, Query, QueryDocumentSnapshot } from 'firebase/firestore';
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  limit,
+  orderBy,
+  Query,
+  query,
+  QueryDocumentSnapshot,
+  startAfter,
+} from 'firebase/firestore';
 
 import { FirestoreCollections } from '@/shared/constants/firebase';
 import type {
@@ -6,16 +17,19 @@ import type {
   GetByIdProps,
   GetOperationReturnType,
   GetOperationType,
+  PaginatedQueryResult,
+  QueryExtendFunction,
 } from '@/shared/types/firestore';
 
 import { firestore } from '../api/firebase';
+import { SCROLL_MAX_VISIBLE_ITEMS } from '../constants/observer';
 
 export const converter = <T>() => ({
   toFirestore: (data: T) => data,
   fromFirestore: (snapshot: QueryDocumentSnapshot) => snapshot.data() as T,
 });
 
-export const getDocRef = <TDoc extends object>(
+export const getDocRef = <TDoc extends FirestoreObj>(
   path: FirestoreCollections,
   ...additionalParams: string[]
 ) => {
@@ -38,7 +52,10 @@ export const getDataById = async <TDoc extends FirestoreObj>({
   return undefined;
 };
 
-export const getDocSnap = async <TDoc extends object>(path: FirestoreCollections, id: string) => {
+export const getDocSnap = async <TDoc extends FirestoreObj>(
+  path: FirestoreCollections,
+  id: string
+) => {
   const docRef = getDocRef<TDoc>(path, id);
   return await getDoc(docRef);
 };
@@ -53,4 +70,36 @@ export const getData = async <TDoc extends FirestoreObj>(
   }
 
   return undefined;
+};
+
+export const getPaginatedQuery = async <T extends FirestoreObj>(
+  path: FirestoreCollections,
+  sort?: boolean,
+  startAfterDocId?: string,
+  extendQuery?: QueryExtendFunction<T>
+): PaginatedQueryResult<T> => {
+  const collectionRef = getCollectionRef<T>(path);
+
+  let baseQuery = query(collectionRef, limit(SCROLL_MAX_VISIBLE_ITEMS));
+
+  if (sort) {
+    baseQuery = query(baseQuery, orderBy('createdAt', 'desc'));
+  }
+
+  if (startAfterDocId) {
+    const startAfterDoc = await getDocSnap(path, startAfterDocId);
+    baseQuery = query(baseQuery, startAfter(startAfterDoc));
+  }
+
+  baseQuery = extendQuery?.(baseQuery) ?? baseQuery;
+
+  const collection = await getData(baseQuery);
+
+  let lastDocId = '';
+
+  if (collection) {
+    lastDocId = collection[collection.length - 1].uid;
+  }
+
+  return [collection, lastDocId];
 };

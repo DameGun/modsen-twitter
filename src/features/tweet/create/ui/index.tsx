@@ -139,7 +139,7 @@ function BaseCreateTweetForm({ handleLoading }: ManualLoadingHandleProps) {
             handleError={handleImageError}
             size='sm'
           />
-          <StyledButton type='submit' isDisabled={!isValid} variant='filled'>
+          <StyledButton type='submit' $isDisabled={!isValid} variant='filled'>
             <Heading4>Post</Heading4>
           </StyledButton>
         </FlexContainer>

@@ -4,7 +4,7 @@ import { ButtonVariants } from '@/shared/constants/theme';
 import { commonButtonStyles } from '@/shared/styles/common';
 
 type StyledButtonProps = {
-  isDisabled?: boolean;
+  $isDisabled?: boolean;
   variant?: keyof typeof ButtonVariants;
 };
 
@@ -15,8 +15,8 @@ export const StyledButton = styled.button.attrs((props) => ({
 
   ${({ variant = 'primary' }) => ButtonVariants[variant]}
 
-  ${({ isDisabled, theme }) =>
-    isDisabled &&
+  ${({ $isDisabled, theme }) =>
+    $isDisabled &&
     `
         background-color: ${theme.colors.secondary};
         color: ${theme.colors.textSecondary};

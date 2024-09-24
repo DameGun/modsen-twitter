@@ -13,15 +13,13 @@ import { FlexContainer, NavButton } from '@/shared/ui';
 import { CreateTweetModal } from '@/widgets/tweet/create/ui';
 import { UserButton } from '@/widgets/user/logout/ui';
 
-import { SidebarWrapper } from './styled';
-
 import { SidebarHeader } from '../SidebarHeader';
 
 export function Sidebar() {
   const currentUser = useAppSelector(selectCurrentUser);
 
   return (
-    <SidebarWrapper>
+    <>
       <FlexContainer $direction='column' $gap='sm'>
         <SidebarHeader />
         <NavButton
@@ -49,6 +47,6 @@ export function Sidebar() {
       </FlexContainer>
       <CreateTweetModal />
       <UserButton />
-    </SidebarWrapper>
+    </>
   );
 }

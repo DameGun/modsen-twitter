@@ -46,7 +46,7 @@ const variables: VariablesConstants = {
     xs: '300px',
     sm: '500px',
     md: '700px',
-    lg: '1000px;',
+    lg: '1300px;',
   },
   borderWidth: {
     sm: '1px',

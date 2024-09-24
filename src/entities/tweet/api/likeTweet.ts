@@ -45,7 +45,7 @@ const likeTweetApiSlice = apiSlice.injectEndpoints({
           const { user } = getState() as RootState;
 
           updateBothTweetsCache((draft) => {
-            const tweet = draft.tweets.find(({ uid }) => uid === updatedTweet.uid);
+            const tweet = draft.collection.find(({ uid }) => uid === updatedTweet.uid);
 
             if (tweet) {
               tweet.isLiked = updatedTweet.likes.includes(user.currentUser!.uid);

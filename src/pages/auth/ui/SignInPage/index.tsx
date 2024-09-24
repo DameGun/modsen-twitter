@@ -71,7 +71,7 @@ function BaseSignInPage({ handleLoading }: ManualLoadingHandleProps) {
           />
         </FormField>
         <GoogleAuthButton type='signIn' isLoaderFullScreen />
-        <StyledButton type='submit' isDisabled={!isValid} variant='filled'>
+        <StyledButton type='submit' $isDisabled={!isValid} variant='filled'>
           Log in
         </StyledButton>
         <FlexContainer $gap='sm'>

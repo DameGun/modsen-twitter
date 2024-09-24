@@ -5,7 +5,7 @@ import { FirestoreCollections } from '@/shared/constants/firebase';
 import { getPaginatedQuery } from '@/shared/lib/firestore';
 import { PaginateMeta, PaginateResult } from '@/shared/types/observer';
 
-import { mapTweetDoc } from '../lib';
+import { mapTweetDoc } from '../lib/mappings';
 import type { TweetDoc, TweetType } from '../types';
 
 export const getTweetsApiSlice = apiSlice.injectEndpoints({

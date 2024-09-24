@@ -5,12 +5,11 @@ import useDebounce from '@/shared/lib/useDebounce';
 import { SearchWrapper } from './styled';
 
 import { SEARCH_WINDOW_CLOSE_DELAY } from '../../constants';
-import type { SearchProps } from '../../types';
 import { SearchInput } from '../SearchInput';
 import { SearchList } from '../SearchList';
 
-export function Search({ defaultValue }: SearchProps) {
-  const [value, setValue] = useState(defaultValue ?? '');
+export function Search() {
+  const [value, setValue] = useState('');
   const debounced = useDebounce({ value });
   const [isFocused, setIsFocused] = useState(false);
   const timeoutId = useRef<NodeJS.Timeout>();
@@ -27,14 +26,12 @@ export function Search({ defaultValue }: SearchProps) {
     }
   }, []);
 
+  const handleClear = useCallback(() => setValue(''), []);
+
   return (
     <SearchWrapper $direction='column' $fullWidth>
-      <SearchInput
-        handleOpen={handleOpen}
-        handleChange={handleChange}
-        defaultValue={defaultValue}
-      />
-      {isFocused && <SearchList queryValue={debounced} />}
+      <SearchInput value={value} handleOpen={handleOpen} handleChange={handleChange} />
+      {isFocused && <SearchList queryValue={debounced} handleClear={handleClear} />}
     </SearchWrapper>
   );
 }

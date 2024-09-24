@@ -1,4 +1,4 @@
-import { selectCurrentUser } from '@/entities/user/model';
+import { selectCurrentUser } from '@/entities/user';
 import {
   BookmarkIcon,
   BookmarkIconFilled,

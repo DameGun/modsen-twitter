@@ -1,7 +1,8 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 import { createUser } from '@/entities/user';
-import type { UserCreate, UserDoc } from '@/entities/user/types';
+import type { UserDoc } from '@/entities/user/types';
+import { UserCreate } from '@/entities/user/types/auth';
 import { firebaseApi } from '@/shared/api';
 
 export async function signUpEmail(userData: UserCreate) {

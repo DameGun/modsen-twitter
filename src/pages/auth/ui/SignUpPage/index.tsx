@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AuthError, AuthErrorCodes } from 'firebase/auth';
 
-import type { UserCreate } from '@/entities/user/types';
+import { UserCreate } from '@/entities/user/types/auth';
 import { signUpEmail } from '@/features/auth';
 import { DateOfBirthControl } from '@/features/user';
 import { DocumentTitle } from '@/shared/constants/documentTitle';

@@ -17,23 +17,6 @@ type UserSubcriptionProps = {
   previousFollowing: string[];
 };
 
-type UserState = {
-  currentUser?: UserDoc;
-};
-
-type UserCreate = {
-  fullName: string;
-  userName: string;
-  email: string;
-  password: string;
-  dateOfBirth: number;
-};
-
-type UserLogin = {
-  email: string;
-  password: string;
-};
-
 type UserDoc = FirestoreObj & {
   email: string;
   bio?: string;
@@ -52,13 +35,4 @@ type EditUser = Pick<
   'avatarUrl' | 'bio' | 'backgroundImageUrl' | 'fullName' | 'dateOfBirth'
 >;
 
-export type {
-  EditUser,
-  UpdateUserProps,
-  UserConnectionsProps,
-  UserCreate,
-  UserDoc,
-  UserLogin,
-  UserState,
-  UserSubcriptionProps,
-};
+export type { EditUser, UpdateUserProps, UserConnectionsProps, UserDoc, UserSubcriptionProps };

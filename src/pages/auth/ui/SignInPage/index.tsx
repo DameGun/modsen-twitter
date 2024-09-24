@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AuthError, AuthErrorCodes } from 'firebase/auth';
 
-import { UserLogin } from '@/entities/user/types';
+import { UserLogin } from '@/entities/user/types/auth';
 import { GoogleAuthButton, signInEmail } from '@/features/auth';
 import { DocumentTitle } from '@/shared/constants/documentTitle';
 import { Routes } from '@/shared/constants/routes';

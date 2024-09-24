@@ -1,6 +1,6 @@
 import { Paragraph } from '@/shared/ui';
 
-import { parseUserName } from '../../lib';
+import { parseUserName } from '../../lib/mappings';
 
 type UserNameProps = {
   userName: string;

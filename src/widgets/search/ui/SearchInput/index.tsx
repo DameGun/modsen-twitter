@@ -5,9 +5,13 @@ import { StyledIcon } from '@/shared/ui';
 
 import { SearchInputWrapper, StyledSearchInput } from './styled';
 
-import { SearchInputProps } from '../../types';
+type SearchInputProps = {
+  handleChange(value: string): void;
+  handleOpen(isOpen: boolean): void;
+  value: string;
+};
 
-export function SearchInput({ handleChange, handleOpen, defaultValue }: SearchInputProps) {
+export function SearchInput({ handleChange, handleOpen, value }: SearchInputProps) {
   const onChange = (e: ChangeEvent<HTMLInputElement>) => handleChange(e.target.value);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -25,12 +29,7 @@ export function SearchInput({ handleChange, handleOpen, defaultValue }: SearchIn
       <StyledIcon $size='sm'>
         <SearchIcon />
       </StyledIcon>
-      <StyledSearchInput
-        ref={inputRef}
-        defaultValue={defaultValue}
-        onChange={onChange}
-        placeholder='Search'
-      />
+      <StyledSearchInput ref={inputRef} value={value} onChange={onChange} placeholder='Search' />
     </SearchInputWrapper>
   );
 }

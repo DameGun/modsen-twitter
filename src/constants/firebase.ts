@@ -1,5 +1,8 @@
-enum FirestoreCollections {
+export enum FirestoreCollections {
   Users = 'users',
 }
 
-export { FirestoreCollections };
+export const StoragePaths = {
+  usersAvatars: (uid: string) => `usersAvatars/${uid}`,
+  usersBackgrounds: (uid: string) => `usersBackgrounds/${uid}`,
+} as const;

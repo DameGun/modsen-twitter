@@ -4,71 +4,75 @@ import { commonControlWithLabelStyles, commonLabelStyles } from '@/styles/common
 
 import { StyledIcon } from '../StyledIcon';
 
-export interface ControlStylesProps {
+export type ControlStylesProps = {
   $isInvalid?: boolean;
-}
+};
 
-export const StyledInputWrapper = styled.span`
+export const StyledInputWrapper = styled.span<ControlStylesProps>`
   position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+  flex-direction: column;
 
-export const StyledInput = styled.input<ControlStylesProps>`
-  ${commonControlWithLabelStyles};
+  padding: ${(props) => props.theme.variables.spacing.sm};
+
+  border: ${(props) => props.theme.variables.borderWidth.sm} solid;
+  border-radius: ${(props) => props.theme.variables.borderRadius.sm};
+
+  border-color: ${(props) => props.theme.colors.secondary};
+
+  &:focus-within {
+    border-color: ${({ theme, $isInvalid }) =>
+      $isInvalid ? theme.colors.error : theme.colors.accent};
+  }
 
   ${({ theme, $isInvalid }) =>
     $isInvalid &&
     css`
-      &,
-      &:focus {
-        border-color: ${theme.colors.error};
-      }
+      border-color: ${theme.colors.error};
     `}
+
+  &:focus-within > *:not(:nth-child(2)) {
+    color: ${({ theme, $isInvalid }) => ($isInvalid ? theme.colors.error : theme.colors.accent)};
+  }
+`;
+
+export const StyledInputInfoWrapper = styled.span`
+  background-color: ${(props) => props.theme.colors.main};
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+`;
+
+export const StyledInput = styled.input`
+  ${commonControlWithLabelStyles};
+  resize: none;
+
+  &:focus {
+    outline: none;
+  }
 
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,
   &:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px ${(props) => props.theme.colors.focus} inset;
+    -webkit-box-shadow: 0 0 0 30px ${(props) => props.theme.colors.main} inset;
     -webkit-text-fill-color: ${(props) => props.theme.colors.textMain};
   }
 `;
 
-export const StyledInputLabel = styled.label<ControlStylesProps>`
+export const StyledInputLabel = styled.label`
   ${commonLabelStyles};
 
   ${StyledInput}:not(:placeholder-shown) + &, ${StyledInput}:focus + & {
-    transform: translateY(-${(props) => props.theme.variables.spacing.md});
+    transform: translateY(-${(props) => props.theme.variables.spacing.sm});
     font-size: ${(props) => props.theme.font.size.sm};
-    color: ${({ theme, $isInvalid }) => ($isInvalid ? theme.colors.error : theme.colors.accent)};
-  }
-
-  ${StyledInput}:not(:focus) + & {
-    color: ${(props) => props.theme.colors.secondary};
-  }
-`;
-
-export const LengthConstraint = styled.span<ControlStylesProps>`
-  position: absolute;
-  pointer-events: none;
-  right: ${(props) => props.theme.variables.spacing.sm};
-  transform: translateY(-${(props) => props.theme.variables.spacing.md});
-  font-size: ${(props) => props.theme.font.size.md};
-  color: ${(props) => props.theme.colors.secondary};
-
-  ${StyledInput}:focus ~ & {
-    color: ${({ theme, $isInvalid }) => ($isInvalid ? theme.colors.error : theme.colors.accent)};
-  }
-
-  ${StyledInput}:not(:focus) ~ & {
-    color: ${(props) => props.theme.colors.secondary};
   }
 `;
 
 export const VisibilityOption = styled(StyledIcon)<ControlStylesProps>`
   position: absolute;
+  top: ${(props) => props.theme.variables.spacing.md};
   right: ${(props) => props.theme.variables.spacing.sm};
   cursor: pointer;
 
@@ -83,4 +87,16 @@ export const VisibilityOption = styled(StyledIcon)<ControlStylesProps>`
   ${StyledInput}:not(:focus) ~ & > svg {
     fill: ${(props) => props.theme.colors.secondary};
   }
+`;
+
+export const LengthConstraint = styled.span`
+  width: 100%;
+  text-align: end;
+  align-self: flex-end;
+  pointer-events: none;
+  font-size: ${(props) => props.theme.font.size.sm};
+  color: ${(props) => props.theme.colors.secondary};
+  background-color: ${(props) => props.theme.colors.main};
+  color: ${(props) => props.theme.colors.secondary};
+  min-height: 20px;
 `;

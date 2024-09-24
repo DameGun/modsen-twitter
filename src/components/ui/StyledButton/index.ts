@@ -1,23 +1,19 @@
 import styled from 'styled-components';
 
+import { ButtonVariants } from '@/constants/theme';
 import { commonButtonStyles } from '@/styles/common';
 
-interface StyledButtonProps {
+type StyledButtonProps = {
   isDisabled?: boolean;
-}
+  variant?: keyof typeof ButtonVariants;
+};
 
-export const StyledButton = styled.button<StyledButtonProps>`
+export const StyledButton = styled.button.attrs((props) => ({
+  type: props.type ? props.type : 'button',
+}))<StyledButtonProps>`
   ${commonButtonStyles};
 
-  color: ${(props) => props.theme.colors.textMain};
-
-  border-color: ${(props) => props.theme.colors.secondary};
-
-  background-color: ${(props) => props.theme.colors.accent};
-
-  &:hover {
-    background-color: ${(props) => props.theme.colors.buttonHover.accent};
-  }
+  ${({ variant = 'primary' }) => ButtonVariants[variant]}
 
   ${({ isDisabled, theme }) =>
     isDisabled &&

@@ -1,7 +1,14 @@
-import { ChangeEvent, forwardRef, InputHTMLAttributes, useState } from 'react';
+import {
+  ChangeEvent,
+  forwardRef,
+  InputHTMLAttributes,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 
 import { VisibilityIcon, VisibilityOffIcon } from '@/assets/icons';
-import type { FormatStyledProps } from '@/types/misc';
+import type { FormatStyledProps } from '@/types/styles';
 
 import {
   ControlStylesProps,
@@ -13,20 +20,36 @@ import {
 } from './styled';
 
 type CustomInputProps = FormatStyledProps<ControlStylesProps> &
-  InputHTMLAttributes<HTMLInputElement>;
+  InputHTMLAttributes<HTMLInputElement> & {
+    asTextArea?: boolean;
+  };
 
 export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(function CustomInput(
-  { placeholder, isInvalid, onChange, maxLength, type, ...rest }: CustomInputProps,
+  {
+    placeholder,
+    isInvalid,
+    onChange,
+    maxLength,
+    type,
+    defaultValue,
+    asTextArea,
+    ...rest
+  }: CustomInputProps,
   ref
 ) {
-  const [currentLength, setCurrentLength] = useState(0);
+  const [currentLength, setCurrentLength] = useState(defaultValue?.toString().length ?? 0);
   const [inputType, setInputType] = useState(type);
   const [showPassword, setShowPassword] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useImperativeHandle(ref, () => inputRef.current as HTMLInputElement, []);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCurrentLength(e.target.value.length);
     onChange?.(e);
   };
+
+  const handleFocus = () => inputRef.current && inputRef.current.focus();
 
   const handleShowPassword = () => {
     if (showPassword) {
@@ -39,26 +62,26 @@ export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(functi
   };
 
   return (
-    <StyledInputWrapper>
+    <StyledInputWrapper $isInvalid={isInvalid} onClick={handleFocus}>
+      <LengthConstraint>{maxLength && `${currentLength} / ${maxLength}`}</LengthConstraint>
       <StyledInput
-        ref={ref}
+        as={asTextArea ? 'textarea' : 'input'}
+        ref={inputRef}
         type={inputType}
         placeholder=' '
-        $isInvalid={isInvalid}
         maxLength={maxLength}
+        defaultValue={defaultValue}
         {...rest}
         onChange={handleChange}
       />
-      <StyledInputLabel $isInvalid={isInvalid} htmlFor={rest.name}>
-        {placeholder}
-      </StyledInputLabel>
-      {maxLength && (
-        <LengthConstraint $isInvalid={isInvalid}>
-          {currentLength} / {maxLength}
-        </LengthConstraint>
-      )}
+      <StyledInputLabel htmlFor={rest.name}>{placeholder}</StyledInputLabel>
       {type === 'password' && (
-        <VisibilityOption size='sm' $isInvalid={isInvalid} onClick={handleShowPassword}>
+        <VisibilityOption
+          $size='sm'
+          $isInvalid={isInvalid}
+          $notInvertColor
+          onClick={handleShowPassword}
+        >
           {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
         </VisibilityOption>
       )}

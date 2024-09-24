@@ -2,12 +2,19 @@ import styled from 'styled-components';
 
 import type { VariablesConstants } from '@/types/styles';
 
-interface ContainerProps {
-  size?: keyof VariablesConstants['containerSize'];
-}
+import { FlexContainer } from '../FlexContainer';
 
-export const Container = styled.div<ContainerProps>`
-  align-self: center;
+type ContainerProps = {
+  size?: keyof VariablesConstants['containerSize'];
+  isCentered?: boolean;
+};
+
+export const Container = styled(FlexContainer)<ContainerProps>`
+  align-self: ${({ isCentered }) => isCentered && 'center'};
   width: 100%;
   max-width: ${({ theme, size = 'md' }) => theme.variables.containerSize[size]};
+
+  & > * {
+    flex-grow: 1;
+  }
 `;

@@ -1,5 +1,16 @@
+export { default as BookmarkIcon } from './bookmark-icon.svg?react';
+export { default as BookmarkIconFilled } from './bookmark-icon-filled.svg?react';
+export { default as CalendarIcon } from './calendar-icon.svg?react';
+export { default as CloseIcon } from './close-icon.svg?react';
+export { default as DarkModeIcon } from './dark-mode-icon.svg?react';
+export { default as FeedIcon } from './feed-icon.svg?react';
+export { default as FeedIconFilled } from './feed-icon-filled.svg?react';
 export { default as GoogleIcon } from './google-icon.svg?react';
-export { default as Logo } from './logo.svg?react';
+export { default as LightModeIcon } from './light-mode-icon.svg?react';
+export { default as LogoIcon } from './logo-icon.svg?react';
 export { default as MailIcon } from './mail-icon.svg?react';
+export { default as PhotoIcon } from './photo-icon.svg?react';
+export { default as ProfileIcon } from './profile-icon.svg?react';
+export { default as ProfileIconFilled } from './profile-icon-filled.svg?react';
 export { default as VisibilityIcon } from './visibility-icon.svg?react';
 export { default as VisibilityOffIcon } from './visibility-off-icon.svg?react';

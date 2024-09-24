@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { ColorMode } from '@/constants/theme';
+import { ColorMode, THEME_KEY_LOCALSTORAGE } from '@/constants/theme';
 import type { RootState } from '@/types/store';
 import type { ThemeState } from '@/types/theme';
 import { getThemeFromLocalStorage } from '@/utils/theme';
@@ -15,6 +15,7 @@ const themeSlice = createSlice({
   reducers: {
     changeTheme: (state) => {
       const newMode = state.mode === ColorMode.Light ? ColorMode.Dark : ColorMode.Light;
+      localStorage.setItem(THEME_KEY_LOCALSTORAGE, newMode);
       state.mode = newMode;
     },
   },

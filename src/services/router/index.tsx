@@ -1,8 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import { AuthGate } from '@/components/common';
+import { Layout } from '@/components/common/Layout';
 import { Routes } from '@/constants/routes';
-import { FeedPage, LoginPage, SignUpPage, WelcomePage } from '@/pages';
+import { FeedPage, LoginPage, ProfilePage, SignUpPage, WelcomePage } from '@/pages';
 
 export const router = createBrowserRouter([
   {
@@ -15,11 +16,11 @@ export const router = createBrowserRouter([
       },
       {
         path: Routes.SignIn,
-        element: <LoginPage />,
+        element: <LoginPage isLoaderFullScreen />,
       },
       {
         path: Routes.SignUp,
-        element: <SignUpPage />,
+        element: <SignUpPage isLoaderFullScreen />,
       },
     ],
   },
@@ -27,9 +28,17 @@ export const router = createBrowserRouter([
     element: <AuthGate isProtectedRoute />,
     children: [
       {
-        index: true,
-        path: Routes.Feed,
-        element: <FeedPage />,
+        element: <Layout />,
+        children: [
+          {
+            path: Routes.Feed,
+            element: <FeedPage />,
+          },
+          {
+            path: Routes.Profile(':userName'),
+            element: <ProfilePage />,
+          },
+        ],
       },
     ],
   },

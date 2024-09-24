@@ -32,6 +32,7 @@ const variables: VariablesConstants = {
     md: '28px',
     lg: '40px',
     xl: '50px',
+    xl2: '100px',
   },
   spacing: {
     sm: '10px',
@@ -52,7 +53,7 @@ const variables: VariablesConstants = {
   borderRadius: {
     sm: '5px',
     md: '20px',
-    lg: '30px',
+    lg: '50px',
   },
   transition: {
     sm: '0.2s',
@@ -79,13 +80,8 @@ export const darkTheme: DefaultTheme = {
     textSecondary: '#525355',
     accent: '#1d9bf0',
     accentAlpha: '#72b8eb',
-    focus: '#708285',
+    focus: '#222324',
     error: '#b6151f',
-    buttonHover: {
-      main: '#708285',
-      accent: '#147fc7',
-      secondary: '#495154',
-    },
   },
 };
 
@@ -104,10 +100,5 @@ export const lightTheme: DefaultTheme = {
     accentAlpha: '#72b8eb',
     focus: '#e5e5e5',
     error: '#b6151f',
-    buttonHover: {
-      main: '#e5e5e5',
-      accent: '#147fc7',
-      secondary: '#c2c0c0',
-    },
   },
 };

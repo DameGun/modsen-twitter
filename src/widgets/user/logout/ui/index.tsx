@@ -4,9 +4,9 @@ import { Avatar, selectCurrentUser, UserName } from '@/entities/user';
 import { firebaseApi } from '@/shared/api';
 import { LogoutIcon } from '@/shared/assets/icons';
 import { useAppSelector } from '@/shared/lib/store';
-import { FlexContainer, Heading4, StyledButton, StyledIcon } from '@/shared/ui';
+import { Heading4, StyledButton, StyledIcon } from '@/shared/ui';
 
-import { UserButtonInfoWrapper } from './styled';
+import { UserButtonInfoWrapper, UserButtonWrapper } from './styled';
 
 export function UserButton() {
   const { avatarUrl, fullName, userName } = useAppSelector(selectCurrentUser);
@@ -20,7 +20,7 @@ export function UserButton() {
   };
 
   return (
-    <FlexContainer $align='center'>
+    <UserButtonWrapper $align='center'>
       <StyledButton>
         <Avatar url={avatarUrl} />
         <UserButtonInfoWrapper>
@@ -28,11 +28,11 @@ export function UserButton() {
           <UserName userName={userName} />
         </UserButtonInfoWrapper>
       </StyledButton>
-      <StyledButton variant='icon' onClick={handleLogout}>
+      <StyledButton $variant='icon' onClick={handleLogout}>
         <StyledIcon $size='sm'>
-          <LogoutIcon />
+          <LogoutIcon title='Log out' />
         </StyledIcon>
       </StyledButton>
-    </FlexContainer>
+    </UserButtonWrapper>
   );
 }

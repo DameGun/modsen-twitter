@@ -1,8 +1,13 @@
 import type { ReactElement, ReactNode, SyntheticEvent } from 'react';
 
 import type { PropsWithChildren } from './common';
+import { FormatStyledProps } from './styles';
 
 type ChildrenWithContext = ((context: ModalContextType) => ReactNode) | ReactNode;
+
+type StyledModalContentProps = {
+  $isMobileFullscreen?: boolean;
+};
 
 type ModalContextType = {
   isOpen: boolean;
@@ -28,7 +33,7 @@ type ModalButtonProps = {
   children: ChildrenWithContext;
 };
 
-type ModalContentProps = {
+type ModalContentProps = FormatStyledProps<StyledModalContentProps> & {
   children: ModalContentChildren;
 };
 
@@ -52,4 +57,5 @@ export type {
   ModalContextType,
   ModalHeaderProps,
   ModalProps,
+  StyledModalContentProps,
 };

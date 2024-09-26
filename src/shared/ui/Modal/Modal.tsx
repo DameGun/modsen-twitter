@@ -1,4 +1,4 @@
-import { SyntheticEvent, useCallback, useMemo, useState } from 'react';
+import { Fragment, SyntheticEvent, useCallback, useMemo, useState } from 'react';
 
 import type { ModalProps } from '@/shared/types/modal';
 
@@ -37,7 +37,9 @@ export function Modal({ children }: ModalProps) {
 
   return (
     <ModalContext.Provider value={contextValue}>
-      {children.map((child) => child)}
+      {children.map((child, index) => (
+        <Fragment key={index}>{child}</Fragment>
+      ))}
     </ModalContext.Provider>
   );
 }

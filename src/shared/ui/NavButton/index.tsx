@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { StyledNavButton } from './styled';
 
 import { StyledIcon } from '../StyledIcon';
+import { Paragraph } from '../Text';
 
 type NavButtonProps = {
   IconComponent: ReactNode;
@@ -25,7 +26,9 @@ export function NavButton({
       {({ isActive }) => (
         <StyledNavButton $isActive={isActive}>
           <StyledIcon>{isActive ? ActiveIconComponent : IconComponent}</StyledIcon>
-          {children}
+          <Paragraph $weight='semibold' $size='xl'>
+            {children}
+          </Paragraph>
         </StyledNavButton>
       )}
     </NavLink>

@@ -18,12 +18,12 @@ export function TweetLike({ isLiked, likesCount, uid }: TweetLikeProps) {
 
   return (
     <TweetLikeWrapper $align='center' $isLiked={isLiked}>
-      <StyledTweetLike variant='icon' $isLiked={isLiked} onClick={handleTweetLike}>
+      <StyledTweetLike $variant='icon' $isLiked={isLiked} onClick={handleTweetLike}>
         <StyledIcon $size='xs' $notInvertColor>
-          {isLiked ? <LikeIconFilled /> : <LikeIcon />}
+          {isLiked ? <LikeIconFilled title='Liked' /> : <LikeIcon title='Like' />}
         </StyledIcon>
       </StyledTweetLike>
-      <Paragraph color='textSecondary' weight='semibold' size='sm'>
+      <Paragraph $color='textSecondary' $weight='semibold' $size='sm'>
         {formatTweetLikesCount(likesCount)}
       </Paragraph>
     </TweetLikeWrapper>

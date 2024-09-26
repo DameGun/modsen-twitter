@@ -12,7 +12,7 @@ export function FormField({ children, errorText }: FormFieldProps) {
   return (
     <FlexContainer $direction='column' $justify='space-between' $gap='sm'>
       {children}
-      <Paragraph color='error'>{errorText}</Paragraph>
+      <Paragraph $color='error'>{errorText}</Paragraph>
     </FlexContainer>
   );
 }

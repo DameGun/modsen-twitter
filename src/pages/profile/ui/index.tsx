@@ -1,10 +1,10 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { getUserByUserName, NotFound, selectCurrentUser } from '@/entities/user';
-import type { UserDoc } from '@/entities/user/types';
 import { useAppSelector } from '@/shared/lib/store';
 import { useAsyncWithLoading } from '@/shared/lib/useAsyncWithLoading';
+import { useModifyDocumentTitle } from '@/shared/lib/useModifyDocumentTitle';
 import { withLoader } from '@/shared/lib/withLoader';
 import type { ManualLoadingHandleProps } from '@/shared/types/loader';
 import { UserProfile } from '@/widgets/user';
@@ -16,28 +16,26 @@ function BaseProfilePage({ handleLoading }: ManualLoadingHandleProps) {
     () => userName === currentAuthenticatedUser.userName,
     [currentAuthenticatedUser, userName]
   );
-  const [displayedUser, setDisplayedUser] = useState<UserDoc | undefined>(
-    isCurrentUser ? currentAuthenticatedUser : undefined
-  );
+  useModifyDocumentTitle(userName!);
 
-  const { isLoading } = useAsyncWithLoading({
+  const { data, isLoading } = useAsyncWithLoading({
     call: getUserByUserName,
     args: userName,
     handleLoading,
     loadInitially: !isCurrentUser,
-    handleResult: setDisplayedUser,
-    triggerVariable: currentAuthenticatedUser,
+    triggerVariable: userName,
   });
 
-  useEffect(() => {
-    if (isCurrentUser && displayedUser !== currentAuthenticatedUser) {
-      setDisplayedUser(currentAuthenticatedUser);
-    }
-  }, [userName]);
+  if (data || isCurrentUser) {
+    return (
+      <UserProfile
+        user={data && !isCurrentUser ? data : currentAuthenticatedUser}
+        isCurrentUser={isCurrentUser}
+      />
+    );
+  }
 
-  if (displayedUser) return <UserProfile user={displayedUser} isCurrentUser={isCurrentUser} />;
-
-  if (!isLoading && !displayedUser) return <NotFound userName={userName!} />;
+  if (!isLoading && !data) return <NotFound userName={userName!} />;
 }
 
 export const ProfilePage = withLoader(BaseProfilePage);

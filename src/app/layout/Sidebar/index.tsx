@@ -1,4 +1,4 @@
-import { selectCurrentUser } from '@/entities/user/model';
+import { selectCurrentUser } from '@/entities/user';
 import {
   BookmarkIcon,
   BookmarkIconFilled,
@@ -9,9 +9,11 @@ import {
 } from '@/shared/assets/icons';
 import { Routes } from '@/shared/constants/routes';
 import { useAppSelector } from '@/shared/lib/store';
-import { FlexContainer, NavButton } from '@/shared/ui';
+import { NavButton } from '@/shared/ui';
 import { CreateTweetModal } from '@/widgets/tweet/create/ui';
 import { UserButton } from '@/widgets/user/logout/ui';
+
+import { SidebarButtonsWrapper } from './styled';
 
 import { SidebarHeader } from '../SidebarHeader';
 
@@ -20,31 +22,31 @@ export function Sidebar() {
 
   return (
     <>
-      <FlexContainer $direction='column' $gap='sm'>
+      <SidebarButtonsWrapper $direction='column' $gap='sm'>
         <SidebarHeader />
         <NavButton
-          IconComponent={<FeedIcon />}
-          ActiveIconComponent={<FeedIconFilled />}
+          IconComponent={<FeedIcon title='Home' />}
+          ActiveIconComponent={<FeedIconFilled title='Home active' />}
           to={Routes.Feed}
         >
           Feed
         </NavButton>
         <NavButton
-          IconComponent={<BookmarkIcon />}
-          ActiveIconComponent={<BookmarkIconFilled />}
+          IconComponent={<BookmarkIcon title='Bookmarks' />}
+          ActiveIconComponent={<BookmarkIconFilled title='Bookmarks active' />}
           to={Routes.Bookmarks}
         >
           Bookmarks
         </NavButton>
         <NavButton
-          IconComponent={<ProfileIcon />}
-          ActiveIconComponent={<ProfileIconFilled />}
+          IconComponent={<ProfileIcon title='Profile' />}
+          ActiveIconComponent={<ProfileIconFilled title='Profile active' />}
           to={Routes.Profile(currentUser.userName)}
           state={currentUser}
         >
           Profile
         </NavButton>
-      </FlexContainer>
+      </SidebarButtonsWrapper>
       <CreateTweetModal />
       <UserButton />
     </>

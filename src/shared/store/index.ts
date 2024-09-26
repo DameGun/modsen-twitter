@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import themeReducer from '@/app/model/theme';
-import userReducer from '@/entities/user/model';
+import { userReducer, usersCacheReducer } from '@/entities/user';
 
 import { apiSlice } from '../api/redux';
 
@@ -10,6 +10,7 @@ export const store = configureStore({
     [apiSlice.reducerPath]: apiSlice.reducer,
     theme: themeReducer,
     user: userReducer,
+    usersCache: usersCacheReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
 });

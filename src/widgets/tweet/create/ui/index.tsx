@@ -1,33 +1,30 @@
 import { CreateTweetForm } from '@/features/tweet';
-import {
-  Modal,
-  ModalBody,
-  ModalButton,
-  ModalContent,
-  ModalHeader,
-  StyledButton,
-} from '@/shared/ui';
+import { PostIcon } from '@/shared/assets/icons';
+import * as Components from '@/shared/ui';
 
-import { CreateTweetModalWrapper } from './styled';
+import { CreateTweetButton, CreateTweetModalWrapper } from './styled';
 
 export function CreateTweetModal() {
   return (
-    <Modal>
-      <ModalButton>
+    <Components.Modal>
+      <Components.ModalButton>
         {({ handleOpen }) => (
-          <StyledButton variant='filled' onClick={handleOpen()}>
-            Post
-          </StyledButton>
+          <CreateTweetButton $variant='filled' onClick={handleOpen()}>
+            <Components.StyledIcon>
+              <PostIcon title='Post' />
+            </Components.StyledIcon>
+            <Components.Heading4>Post</Components.Heading4>
+          </CreateTweetButton>
         )}
-      </ModalButton>
-      <ModalContent>
-        <ModalHeader />
-        <ModalBody>
+      </Components.ModalButton>
+      <Components.ModalContent isMobileFullscreen>
+        <Components.ModalHeader />
+        <Components.ModalBody>
           <CreateTweetModalWrapper>
             <CreateTweetForm isLoaderFullScreen />
           </CreateTweetModalWrapper>
-        </ModalBody>
-      </ModalContent>
-    </Modal>
+        </Components.ModalBody>
+      </Components.ModalContent>
+    </Components.Modal>
   );
 }

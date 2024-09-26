@@ -14,9 +14,13 @@ import { useGetUsersBySearchTermQuery } from '../../api/getUsersBySearchTerm';
 
 type SearchListProps = {
   queryValue: string;
+  handleClear: VoidFunction;
 };
 
-export const SearchList = memo(function SearchListMemoized({ queryValue }: SearchListProps) {
+export const SearchList = memo(function SearchListMemoized({
+  queryValue,
+  handleClear,
+}: SearchListProps) {
   const { data, isFetching } = useGetUsersBySearchTermQuery(queryValue, { skip: !queryValue });
 
   const Content = useMemo(() => {
@@ -27,7 +31,7 @@ export const SearchList = memo(function SearchListMemoized({ queryValue }: Searc
     if (!queryValue) {
       return (
         <InfoTextWrapper>
-          <Paragraph color='textSecondary'>Try searching for people or tweets</Paragraph>
+          <Paragraph $color='textSecondary'>Try searching for people or tweets</Paragraph>
         </InfoTextWrapper>
       );
     }
@@ -36,7 +40,9 @@ export const SearchList = memo(function SearchListMemoized({ queryValue }: Searc
       return (
         <SearchListInnerWrapper $direction='column'>
           {data.map((user) => (
-            <UserCell key={user.uid} user={user} variant='short' />
+            <span key={user.uid} onClick={handleClear}>
+              <UserCell user={user} variant='short' />
+            </span>
           ))}
         </SearchListInnerWrapper>
       );
@@ -44,7 +50,7 @@ export const SearchList = memo(function SearchListMemoized({ queryValue }: Searc
 
     return (
       <NotFoundWrapper>
-        <Paragraph color='textSecondary'>No result found for: &quot;{queryValue}&quot;</Paragraph>
+        <Paragraph $color='textSecondary'>No result found for: &quot;{queryValue}&quot;</Paragraph>
       </NotFoundWrapper>
     );
   }, [queryValue, data, isFetching]);

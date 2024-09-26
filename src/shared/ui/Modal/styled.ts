@@ -1,4 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+import type { StyledModalContentProps } from '@/shared/types/modal';
 
 import { FlexContainer } from '../FlexContainer';
 
@@ -43,7 +45,7 @@ export const StyledModalHeader = styled(FlexContainer)`
   text-align: left;
 `;
 
-export const StyledModalContainerWrapper = styled.div`
+export const StyledModalContainerWrapper = styled.div<StyledModalContentProps>`
   min-height: 20%;
   max-height: 70%;
 
@@ -53,4 +55,15 @@ export const StyledModalContainerWrapper = styled.div`
   scrollbar-gutter: unset;
 
   z-index: ${(props) => props.theme.variables.zIndex.xl};
+
+  @media ${(props) => props.theme.media.mobile} {
+    ${({ $isMobileFullscreen }) =>
+      $isMobileFullscreen &&
+      css`
+        max-height: 100vh;
+        height: 100%;
+        width: 100vw;
+        border-radius: 0;
+      `}
+  }
 `;

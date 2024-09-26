@@ -5,7 +5,9 @@ import { DarkModeIcon, LightModeIcon, LogoIcon } from '@/shared/assets/icons';
 import { Routes } from '@/shared/constants/routes';
 import { ColorMode } from '@/shared/constants/theme';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/store';
-import { FlexContainer, StyledButton, StyledIcon } from '@/shared/ui';
+import { StyledButton, StyledIcon } from '@/shared/ui';
+
+import { SidebarHeaderWrapper } from './styled';
 
 export function SidebarHeader() {
   const currentTheme = useAppSelector(selectCurrentTheme);
@@ -14,19 +16,23 @@ export function SidebarHeader() {
   const handleTheme = () => dispatch(changeTheme());
 
   return (
-    <FlexContainer $justify='space-between' $align='center'>
+    <SidebarHeaderWrapper $justify='space-between' $align='center'>
       <Link to={Routes.Feed}>
-        <StyledButton variant='icon'>
+        <StyledButton $variant='icon'>
           <StyledIcon $notInvertColor>
-            <LogoIcon />
+            <LogoIcon title='Logo' />
           </StyledIcon>
         </StyledButton>
       </Link>
-      <StyledButton variant='icon' onClick={handleTheme}>
+      <StyledButton $variant='icon' onClick={handleTheme}>
         <StyledIcon>
-          {currentTheme === ColorMode.Dark ? <LightModeIcon /> : <DarkModeIcon />}
+          {currentTheme === ColorMode.Dark ? (
+            <LightModeIcon title='Light mode' />
+          ) : (
+            <DarkModeIcon title='Dark mode' />
+          )}
         </StyledIcon>
       </StyledButton>
-    </FlexContainer>
+    </SidebarHeaderWrapper>
   );
 }

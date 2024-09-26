@@ -6,19 +6,7 @@ import { DeleteIcon } from '@/shared/assets/icons';
 import { useQueryWithLoading } from '@/shared/lib/useQueryWithLoading';
 import { withLoader } from '@/shared/lib/withLoader';
 import type { ManualLoadingHandleProps } from '@/shared/types/loader';
-import {
-  Container,
-  FlexContainer,
-  Heading3,
-  Heading4,
-  Modal,
-  ModalBody,
-  ModalButton,
-  ModalContent,
-  Paragraph,
-  StyledButton,
-  StyledIcon,
-} from '@/shared/ui';
+import * as Components from '@/shared/ui';
 
 type DeleteButtonProps = ManualLoadingHandleProps & {
   tweetId: string;
@@ -36,41 +24,47 @@ function BaseDeleteTweet({ tweetId, handleLoading, withRedirect }: DeleteButtonP
   }, [tweetId, withRedirect]);
 
   return (
-    <Modal>
-      <ModalButton>
+    <Components.Modal>
+      <Components.ModalButton>
         {({ handleOpen }) => (
-          <StyledButton variant='icon' onClick={handleOpen()}>
-            <StyledIcon $size='xs'>
-              <DeleteIcon />
-            </StyledIcon>
-          </StyledButton>
+          <Components.StyledButton $variant='icon' onClick={handleOpen()}>
+            <Components.StyledIcon $size='xs'>
+              <DeleteIcon title='Delete' />
+            </Components.StyledIcon>
+          </Components.StyledButton>
         )}
-      </ModalButton>
-      <ModalContent>
-        <ModalBody>
+      </Components.ModalButton>
+      <Components.ModalContent>
+        <Components.ModalBody>
           {({ handleClose }) => (
-            <Container $align='left' size='xs' $direction='column' $gap='md' $justify='center'>
-              <FlexContainer $direction='column' $gap='sm'>
-                <Heading3>Delete tweet?</Heading3>
-                <Paragraph color='textSecondary'>
+            <Components.Container
+              $align='left'
+              $size='xs'
+              $direction='column'
+              $gap='md'
+              $justify='center'
+            >
+              <Components.FlexContainer $direction='column' $gap='sm'>
+                <Components.Heading3>Delete tweet?</Components.Heading3>
+                <Components.Paragraph $color='textSecondary'>
                   This can’t be undone and it will be removed from your profile, the timeline of any
                   accounts that follow you, and from search results.
-                </Paragraph>
-              </FlexContainer>
-              <FlexContainer $direction='column' $gap='sm'>
-                <StyledButton variant='filled' onClick={handleClose(handleDelete)}>
-                  <Heading4>Delete</Heading4>
-                </StyledButton>
+                </Components.Paragraph>
+              </Components.FlexContainer>
+              <Components.FlexContainer $direction='column' $gap='sm'>
+                <Components.StyledButton $variant='filled' onClick={handleClose(handleDelete)}>
+                  <Components.Heading4>Delete</Components.Heading4>
+                </Components.StyledButton>
 
-                <StyledButton variant='outline' onClick={handleClose()}>
-                  <Heading4>Cancel</Heading4>
-                </StyledButton>
-              </FlexContainer>
-            </Container>
+                <Components.StyledButton $variant='outline' onClick={handleClose()}>
+                  <Components.Heading4>Cancel</Components.Heading4>
+                </Components.StyledButton>
+              </Components.FlexContainer>
+            </Components.Container>
           )}
-        </ModalBody>
-      </ModalContent>
-    </Modal>
+        </Components.ModalBody>
+      </Components.ModalContent>
+    </Components.Modal>
   );
 }
 

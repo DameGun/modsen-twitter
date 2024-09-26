@@ -17,16 +17,16 @@ export function ModalHeader({ children, showSubmitButton, handleSubmit }: ModalH
   return (
     <StyledModalHeader $align='center' $justify='space-between'>
       <FlexContainer $align='center' $gap='sm'>
-        <StyledButton onClick={handleClose()} variant='icon'>
+        <StyledButton onClick={handleClose()} $variant='icon'>
           <StyledIcon $size='sm'>
-            <CloseIcon />
+            <CloseIcon title='Close' />
           </StyledIcon>
         </StyledButton>
         {children}
       </FlexContainer>
       {showSubmitButton && (
         <StyledButton
-          variant='filled'
+          $variant='filled'
           type='submit'
           $isDisabled={!isFormValid}
           onClick={handleSubmit}

@@ -24,6 +24,15 @@ export const commonButtonStyles = css`
   transition: ${(props) => props.theme.variables.transition.sm};
 
   color: ${(props) => props.theme.colors.textMain};
+
+  @media ${(props) => props.theme.media.tablet} {
+    & > :nth-child(2) {
+      display: none;
+    }
+
+    min-width: max-content;
+    padding: ${(props) => props.theme.variables.spacing.sm};
+  }
 `;
 
 export const primaryButtonStyles = css`

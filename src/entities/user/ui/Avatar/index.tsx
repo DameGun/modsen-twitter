@@ -20,6 +20,7 @@ export function Avatar({ url, size, children }: UserPhotoProps) {
         src={url || avatarFallbackImg}
         onError={handleImageError}
         referrerPolicy='no-referrer'
+        alt='Avatar'
       />
     </UserPhotoWrapper>
   );

@@ -5,6 +5,12 @@ export const WelcomePageWrapper = styled.div`
   height: 100vh;
   grid-template-columns: 1fr 1fr;
   column-gap: ${(props) => props.theme.variables.spacing.xl};
+
+  @media ${(props) => props.theme.media.tablet} {
+    grid-template-columns: 1fr;
+    padding: ${(props) => props.theme.variables.spacing.xl};
+    height: max-content;
+  }
 `;
 
 export const WelcomePageImageWrapper = styled.span`
@@ -15,6 +21,10 @@ export const WelcomePageImageWrapper = styled.span`
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  @media ${(props) => props.theme.media.tablet} {
+    display: none;
   }
 `;
 

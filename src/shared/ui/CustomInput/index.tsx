@@ -9,10 +9,10 @@ import {
 } from 'react';
 
 import { VisibilityIcon, VisibilityOffIcon } from '@/shared/assets/icons';
+import type { ControlStylesProps } from '@/shared/types/control';
 import type { FormatStyledProps } from '@/shared/types/styles';
 
 import {
-  ControlStylesProps,
   LengthConstraint,
   StyledInput,
   StyledInputLabel,

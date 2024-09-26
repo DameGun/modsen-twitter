@@ -3,28 +3,21 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AuthError, AuthErrorCodes } from 'firebase/auth';
 
-import { UserLogin } from '@/entities/user/types';
-import { GoogleAuthButton, signInEmail } from '@/features/auth';
+import { UserLogin } from '@/entities/user/types/auth';
+import { GoogleAuthButton, GoogleAuthType, signInEmail } from '@/features/auth';
+import { DocumentTitle } from '@/shared/constants/documentTitle';
 import { Routes } from '@/shared/constants/routes';
 import { useAsyncWithLoading } from '@/shared/lib/useAsyncWithLoading';
+import { useModifyDocumentTitle } from '@/shared/lib/useModifyDocumentTitle';
 import { withLoader } from '@/shared/lib/withLoader';
 import type { ManualLoadingHandleProps } from '@/shared/types/loader';
-import {
-  Container,
-  CustomInput,
-  FlexContainer,
-  FormField,
-  Heading2,
-  Logo,
-  Paragraph,
-  StyledButton,
-  StyledLink,
-} from '@/shared/ui';
+import * as Components from '@/shared/ui';
 
 import { signInValidationSchema } from '../../model/signin-schema';
 import { AuthWrapper } from '../AuthWrapper';
 
 function BaseSignInPage({ handleLoading }: ManualLoadingHandleProps) {
+  useModifyDocumentTitle(DocumentTitle.SignIn);
   const {
     register,
     handleSubmit,
@@ -49,39 +42,39 @@ function BaseSignInPage({ handleLoading }: ManualLoadingHandleProps) {
   const handleFormSubmit = async (data: UserLogin) => await call(data);
 
   return (
-    <Container size='sm' isCentered>
+    <Components.Container $size='sm' $isCentered>
       <AuthWrapper onSubmit={handleSubmit(handleFormSubmit)}>
-        <Logo />
-        <Heading2>Log in to Twitter</Heading2>
-        <FormField errorText={errors.email?.message}>
-          <CustomInput
+        <Components.Logo />
+        <Components.Heading2>Log in to Twitter</Components.Heading2>
+        <Components.FormField errorText={errors.email?.message}>
+          <Components.CustomInput
             id='email'
             placeholder='Email'
             {...register('email')}
             isInvalid={!!errors.email}
           />
-        </FormField>
-        <FormField errorText={errors.password?.message}>
-          <CustomInput
+        </Components.FormField>
+        <Components.FormField errorText={errors.password?.message}>
+          <Components.CustomInput
             id='password'
             placeholder='Password'
             type='password'
             {...register('password')}
             isInvalid={!!errors.password}
           />
-        </FormField>
-        <GoogleAuthButton type='signIn' isLoaderFullScreen />
-        <StyledButton type='submit' $isDisabled={!isValid} variant='filled'>
+        </Components.FormField>
+        <GoogleAuthButton type={GoogleAuthType.SignIn} isLoaderFullScreen />
+        <Components.StyledButton type='submit' $isDisabled={!isValid} $variant='filled'>
           Log in
-        </StyledButton>
-        <FlexContainer $gap='sm'>
-          <Paragraph>Dont have an account yet?</Paragraph>
-          <Paragraph>
-            <StyledLink to={Routes.SignUp}>Sign up to twitter</StyledLink>
-          </Paragraph>
-        </FlexContainer>
+        </Components.StyledButton>
+        <Components.FlexContainer $gap='sm'>
+          <Components.Paragraph>Dont have an account yet?</Components.Paragraph>
+          <Components.Paragraph>
+            <Components.StyledLink to={Routes.SignUp}>Sign up to twitter</Components.StyledLink>
+          </Components.Paragraph>
+        </Components.FlexContainer>
       </AuthWrapper>
-    </Container>
+    </Components.Container>
   );
 }
 

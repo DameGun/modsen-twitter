@@ -1,6 +1,7 @@
 export {
   useCreateTweetMutation,
   useDeleteTweetMutation,
+  useGetTweetByIdQuery,
   useGetTweetsQuery,
   useLikeTweetMutation,
 } from './api';
@@ -14,5 +15,8 @@ export {
   formatTweetLikesCount,
   getExtendedTweetLikes,
   mapTweetDoc,
+  setOrRemoveLike,
+  updateBothTweetsCache,
+  updateCurrentDisplayedTweetLikes,
   updateMainTweetsCache,
 } from './lib';

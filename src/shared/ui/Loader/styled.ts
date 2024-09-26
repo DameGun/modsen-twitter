@@ -1,10 +1,7 @@
 import styled, { css, keyframes } from 'styled-components';
 
 import { SPINNER_ANIMATION_DURATION } from '@/shared/constants/loader';
-
-export type StyledLoaderProps = {
-  $isLoaderFullScreen?: boolean;
-};
+import type { StyledLoaderProps } from '@/shared/types/loader';
 
 export const StyledLoader = styled.div<StyledLoaderProps>`
   display: flex;

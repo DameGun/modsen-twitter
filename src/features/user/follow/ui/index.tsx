@@ -11,18 +11,7 @@ import { useAppDispatch, useAppSelector } from '@/shared/lib/store';
 import { useAsyncWithLoading } from '@/shared/lib/useAsyncWithLoading';
 import { withLoader } from '@/shared/lib/withLoader';
 import type { ManualLoadingHandleProps } from '@/shared/types/loader';
-import {
-  Container,
-  FlexContainer,
-  Heading3,
-  Heading4,
-  Modal,
-  ModalBody,
-  ModalButton,
-  ModalContent,
-  Paragraph,
-  StyledButton,
-} from '@/shared/ui';
+import * as Components from '@/shared/ui';
 
 import { StyledFollowButton } from './styled';
 
@@ -66,46 +55,57 @@ function BaseFollowButton({ targetUid, targetUserName, handleLoading }: FollowBu
   };
 
   return (
-    <Modal>
-      <ModalButton>
+    <Components.Modal>
+      <Components.ModalButton>
         {({ handleOpen }) =>
           targetUid !== currentUser.uid && (
             <StyledFollowButton
               $isFollowed={isFollowed}
-              variant={isFollowed ? 'outline' : 'filled'}
+              $variant={isFollowed ? 'outline' : 'filled'}
               onClick={isFollowed ? handleOpen() : handleFollowButton}
             >
-              <Paragraph weight='semibold'>{isFollowed ? 'Following' : 'Follow'}</Paragraph>
+              <Components.Paragraph $weight='semibold'>
+                {isFollowed ? 'Following' : 'Follow'}
+              </Components.Paragraph>
             </StyledFollowButton>
           )
         }
-      </ModalButton>
-      <ModalContent>
-        <ModalBody>
+      </Components.ModalButton>
+      <Components.ModalContent>
+        <Components.ModalBody>
           {({ handleClose }) => (
-            <Container $align='left' size='xs' $direction='column' $gap='md' $justify='center'>
-              <FlexContainer $direction='column' $gap='sm'>
-                <Heading3>Unfollow {parseUserName(targetUserName)}?</Heading3>
-                <Paragraph color='textSecondary'>
+            <Components.Container
+              $align='left'
+              $size='xs'
+              $direction='column'
+              $gap='md'
+              $justify='center'
+            >
+              <Components.FlexContainer $direction='column' $gap='sm'>
+                <Components.Heading3>Unfollow {parseUserName(targetUserName)}?</Components.Heading3>
+                <Components.Paragraph $color='textSecondary'>
                   Their posts will no longer show up in your For You timeline. You can still view
                   their profile, unless their posts are protected.
-                </Paragraph>
-              </FlexContainer>
+                </Components.Paragraph>
+              </Components.FlexContainer>
 
-              <FlexContainer $direction='column' $gap='sm'>
-                <StyledButton variant='filled' onClick={handleClose(handleUnfollowButton)}>
-                  <Heading4>Unfollow</Heading4>
-                </StyledButton>
+              <Components.FlexContainer $direction='column' $gap='sm'>
+                <Components.StyledButton
+                  $variant='filled'
+                  onClick={handleClose(handleUnfollowButton)}
+                >
+                  <Components.Heading4>Unfollow</Components.Heading4>
+                </Components.StyledButton>
 
-                <StyledButton variant='outline' onClick={handleClose()}>
-                  <Heading4>Cancel</Heading4>
-                </StyledButton>
-              </FlexContainer>
-            </Container>
+                <Components.StyledButton $variant='outline' onClick={handleClose()}>
+                  <Components.Heading4>Cancel</Components.Heading4>
+                </Components.StyledButton>
+              </Components.FlexContainer>
+            </Components.Container>
           )}
-        </ModalBody>
-      </ModalContent>
-    </Modal>
+        </Components.ModalBody>
+      </Components.ModalContent>
+    </Components.Modal>
   );
 }
 

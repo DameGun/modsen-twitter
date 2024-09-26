@@ -1,2 +1,3 @@
 export { findOrAddUserInCache } from './cache';
-export { getCurrentUser, parseUserName, parseUserRegisterDate } from './mappings';
+export { parseUserName, parseUserRegisterDate } from './mappings';
+export { getCurrentUser } from './state';

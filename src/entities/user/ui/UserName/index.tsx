@@ -7,5 +7,5 @@ type UserNameProps = {
 };
 
 export function UserName({ userName }: UserNameProps) {
-  return <Paragraph color='textSecondary'>{parseUserName(userName)}</Paragraph>;
+  return <Paragraph $color='textSecondary'>{parseUserName(userName)}</Paragraph>;
 }

@@ -85,7 +85,7 @@ const BaseEditProfileForm = forwardRef<HTMLFormElement, ManualLoadingHandleProps
 
     return (
       <Container
-        size='sm'
+        $size='sm'
         $direction='column'
         $gap='md'
         as={'form'}

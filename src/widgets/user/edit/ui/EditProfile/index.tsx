@@ -1,15 +1,6 @@
 import { useRef } from 'react';
 
-import {
-  Heading3,
-  Modal,
-  ModalBody,
-  ModalButton,
-  ModalContent,
-  ModalHeader,
-  Paragraph,
-  StyledButton,
-} from '@/shared/ui';
+import * as Components from '@/shared/ui';
 
 import { EditProfileForm } from '../EditProfileForm';
 
@@ -23,22 +14,22 @@ export function EditProfile() {
   };
 
   return (
-    <Modal>
-      <ModalButton>
+    <Components.Modal>
+      <Components.ModalButton>
         {({ handleOpen }) => (
-          <StyledButton variant='outline' onClick={handleOpen()}>
-            <Paragraph weight='semibold'>Edit profile</Paragraph>
-          </StyledButton>
+          <Components.StyledButton $variant='outline' onClick={handleOpen()}>
+            <Components.Paragraph $weight='semibold'>Edit profile</Components.Paragraph>
+          </Components.StyledButton>
         )}
-      </ModalButton>
-      <ModalContent isMobileFullscreen>
-        <ModalHeader showSubmitButton handleSubmit={handleSubmit}>
-          <Heading3>Edit profile</Heading3>
-        </ModalHeader>
-        <ModalBody>
+      </Components.ModalButton>
+      <Components.ModalContent isMobileFullscreen>
+        <Components.ModalHeader showSubmitButton handleSubmit={handleSubmit}>
+          <Components.Heading3>Edit profile</Components.Heading3>
+        </Components.ModalHeader>
+        <Components.ModalBody>
           <EditProfileForm ref={formRef} isLoaderFullScreen />
-        </ModalBody>
-      </ModalContent>
-    </Modal>
+        </Components.ModalBody>
+      </Components.ModalContent>
+    </Components.Modal>
   );
 }

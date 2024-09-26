@@ -5,7 +5,7 @@ import { StyledIcon } from '../StyledIcon';
 export function Logo() {
   return (
     <StyledIcon $size='xl' $notInvertColor>
-      <LogoIcon />
+      <LogoIcon title='Logo' />
     </StyledIcon>
   );
 }

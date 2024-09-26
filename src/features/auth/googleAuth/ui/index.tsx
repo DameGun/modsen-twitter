@@ -5,9 +5,10 @@ import type { ManualLoadingHandleProps } from '@/shared/types/loader';
 import { Paragraph, StyledButton, StyledIcon } from '@/shared/ui';
 
 import { signInWithGoogle } from '../api';
+import { GoogleAuthType } from '../constants';
 
 type GoogleAuthButtonProps = ManualLoadingHandleProps & {
-  type: 'signIn' | 'signUp';
+  type: GoogleAuthType;
 };
 
 function BaseGoogleAuthButton({ type, handleLoading }: GoogleAuthButtonProps) {
@@ -18,14 +19,14 @@ function BaseGoogleAuthButton({ type, handleLoading }: GoogleAuthButtonProps) {
 
   return (
     <>
-      <StyledButton onClick={call} variant='outline'>
+      <StyledButton onClick={call} $variant='outline'>
         <StyledIcon $notInvertColor>
-          <GoogleIcon />
+          <GoogleIcon title='Google logo' />
         </StyledIcon>
-        {type === 'signIn' ? 'Log in with Google' : 'Sign up with Google'}
+        {type === GoogleAuthType.SignIn ? 'Log in with Google' : 'Sign up with Google'}
       </StyledButton>
       {isError && (
-        <Paragraph color='error'>Some error occured while trying to sign up with Google</Paragraph>
+        <Paragraph $color='error'>Some error occured while trying to sign up with Google</Paragraph>
       )}
     </>
   );

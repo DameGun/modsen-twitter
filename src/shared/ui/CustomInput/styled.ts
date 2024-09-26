@@ -1,13 +1,9 @@
 import styled, { css } from 'styled-components';
 
 import { commonControlWithLabelStyles, commonLabelStyles } from '@/shared/styles/common';
+import type { ControlStylesProps } from '@/shared/types/control';
 
 import { StyledIcon } from '../StyledIcon';
-
-export type ControlStylesProps = {
-  $isInvalid?: boolean;
-  $variant?: 'primary' | 'unstyled';
-};
 
 export const StyledInputWrapper = styled.span<ControlStylesProps>`
   position: relative;

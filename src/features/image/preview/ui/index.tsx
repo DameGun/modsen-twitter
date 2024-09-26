@@ -14,9 +14,9 @@ export function ImagePreview({ id, url, handleDelete }: ImagePreviewProps) {
 
   return (
     <ImagePreviewWrapper>
-      <StyledButton variant='icon' onClick={handleClick}>
+      <StyledButton $variant='icon' onClick={handleClick}>
         <StyledIcon $size='xs'>
-          <CloseIcon />
+          <CloseIcon title='Close' />
         </StyledIcon>
       </StyledButton>
       <img src={url} />

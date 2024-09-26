@@ -28,9 +28,9 @@ export function UserButton() {
           <UserName userName={userName} />
         </UserButtonInfoWrapper>
       </StyledButton>
-      <StyledButton variant='icon' onClick={handleLogout}>
+      <StyledButton $variant='icon' onClick={handleLogout}>
         <StyledIcon $size='sm'>
-          <LogoutIcon />
+          <LogoutIcon title='Log out' />
         </StyledIcon>
       </StyledButton>
     </UserButtonWrapper>

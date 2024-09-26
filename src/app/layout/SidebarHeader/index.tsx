@@ -18,15 +18,19 @@ export function SidebarHeader() {
   return (
     <SidebarHeaderWrapper $justify='space-between' $align='center'>
       <Link to={Routes.Feed}>
-        <StyledButton variant='icon'>
+        <StyledButton $variant='icon'>
           <StyledIcon $notInvertColor>
-            <LogoIcon />
+            <LogoIcon title='Logo' />
           </StyledIcon>
         </StyledButton>
       </Link>
-      <StyledButton variant='icon' onClick={handleTheme}>
+      <StyledButton $variant='icon' onClick={handleTheme}>
         <StyledIcon>
-          {currentTheme === ColorMode.Dark ? <LightModeIcon /> : <DarkModeIcon />}
+          {currentTheme === ColorMode.Dark ? (
+            <LightModeIcon title='Light mode' />
+          ) : (
+            <DarkModeIcon title='Dark mode' />
+          )}
         </StyledIcon>
       </StyledButton>
     </SidebarHeaderWrapper>

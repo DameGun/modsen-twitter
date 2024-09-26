@@ -27,7 +27,7 @@ export function SearchInput({ handleChange, handleOpen, value }: SearchInputProp
   return (
     <SearchInputWrapper $noShrink $gap='sm' onClick={handleFocus} onBlur={handleBlur}>
       <StyledIcon $size='sm'>
-        <SearchIcon />
+        <SearchIcon title='Search' />
       </StyledIcon>
       <StyledSearchInput ref={inputRef} value={value} onChange={onChange} placeholder='Search' />
     </SearchInputWrapper>

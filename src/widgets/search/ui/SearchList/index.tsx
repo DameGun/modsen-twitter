@@ -31,7 +31,7 @@ export const SearchList = memo(function SearchListMemoized({
     if (!queryValue) {
       return (
         <InfoTextWrapper>
-          <Paragraph color='textSecondary'>Try searching for people or tweets</Paragraph>
+          <Paragraph $color='textSecondary'>Try searching for people or tweets</Paragraph>
         </InfoTextWrapper>
       );
     }
@@ -50,7 +50,7 @@ export const SearchList = memo(function SearchListMemoized({
 
     return (
       <NotFoundWrapper>
-        <Paragraph color='textSecondary'>No result found for: &quot;{queryValue}&quot;</Paragraph>
+        <Paragraph $color='textSecondary'>No result found for: &quot;{queryValue}&quot;</Paragraph>
       </NotFoundWrapper>
     );
   }, [queryValue, data, isFetching]);

@@ -22,9 +22,9 @@ export function SectionHeader({ isNavigatable, headerText, children }: SectionHe
   return (
     <StyledSectionHeader $align='center' $gap='md'>
       {isNavigatable && (
-        <StyledButton variant='icon' onClick={handlePreviousPageClick}>
+        <StyledButton $variant='icon' onClick={handlePreviousPageClick}>
           <StyledIcon $size='sm'>
-            <ArrowBackIcon />
+            <ArrowBackIcon title='Go back' />
           </StyledIcon>
         </StyledButton>
       )}

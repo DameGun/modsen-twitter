@@ -50,9 +50,9 @@ function BaseImageEditButton({
   return (
     <StyledImageEditButtonWrapper $absolute={absolute}>
       <span>
-        <StyledButton variant='icon' onClick={handleClick}>
+        <StyledButton $variant='icon' onClick={handleClick}>
           <StyledIcon $size={size}>
-            <PhotoIcon />
+            <PhotoIcon title='Media' />
           </StyledIcon>
         </StyledButton>
         <input

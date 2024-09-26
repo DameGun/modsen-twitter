@@ -25,22 +25,22 @@ export function Sidebar() {
       <SidebarButtonsWrapper $direction='column' $gap='sm'>
         <SidebarHeader />
         <NavButton
-          IconComponent={<FeedIcon />}
-          ActiveIconComponent={<FeedIconFilled />}
+          IconComponent={<FeedIcon title='Home' />}
+          ActiveIconComponent={<FeedIconFilled title='Home active' />}
           to={Routes.Feed}
         >
           Feed
         </NavButton>
         <NavButton
-          IconComponent={<BookmarkIcon />}
-          ActiveIconComponent={<BookmarkIconFilled />}
+          IconComponent={<BookmarkIcon title='Bookmarks' />}
+          ActiveIconComponent={<BookmarkIconFilled title='Bookmarks active' />}
           to={Routes.Bookmarks}
         >
           Bookmarks
         </NavButton>
         <NavButton
-          IconComponent={<ProfileIcon />}
-          ActiveIconComponent={<ProfileIconFilled />}
+          IconComponent={<ProfileIcon title='Profile' />}
+          ActiveIconComponent={<ProfileIconFilled title='Profile active' />}
           to={Routes.Profile(currentUser.userName)}
           state={currentUser}
         >

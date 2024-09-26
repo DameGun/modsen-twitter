@@ -6,7 +6,7 @@ export function BackgroundImage({ url, children }: ImageProps) {
   return (
     <UserBackgroundPhotoWrapper>
       {children}
-      {url && <img src={url} />}
+      {url && <img src={url} alt='User background image' />}
     </UserBackgroundPhotoWrapper>
   );
 }

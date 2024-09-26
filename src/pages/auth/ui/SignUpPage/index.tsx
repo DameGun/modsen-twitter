@@ -18,16 +18,7 @@ import { useAsyncWithLoading } from '@/shared/lib/useAsyncWithLoading';
 import { useModifyDocumentTitle } from '@/shared/lib/useModifyDocumentTitle';
 import { withLoader } from '@/shared/lib/withLoader';
 import type { ManualLoadingHandleProps } from '@/shared/types/loader';
-import {
-  Container,
-  CustomInput,
-  FormField,
-  Heading2,
-  Logo,
-  Paragraph,
-  StyledButton,
-  StyledListItem,
-} from '@/shared/ui';
+import * as Components from '@/shared/ui';
 
 import { signUpValidationSchema } from '../../model/signup-schema';
 import { AuthWrapper } from '../AuthWrapper';
@@ -62,12 +53,12 @@ export function BaseSignUpPage({ handleLoading }: ManualLoadingHandleProps) {
   const handleFormSubmit = async (data: UserCreate) => await call(data);
 
   return (
-    <Container size='sm' isCentered>
+    <Components.Container $size='sm' $isCentered>
       <AuthWrapper onSubmit={handleSubmit(handleFormSubmit)}>
-        <Logo />
-        <Heading2>Create an account</Heading2>
-        <FormField errorText={errors.fullName?.message}>
-          <CustomInput
+        <Components.Logo />
+        <Components.Heading2>Create an account</Components.Heading2>
+        <Components.FormField errorText={errors.fullName?.message}>
+          <Components.CustomInput
             id='fullName'
             placeholder='Full name'
             type='text'
@@ -75,9 +66,9 @@ export function BaseSignUpPage({ handleLoading }: ManualLoadingHandleProps) {
             maxLength={FULLNAME_LENGTH_CONSTRAINT}
             isInvalid={!!errors.fullName}
           />
-        </FormField>
-        <FormField errorText={errors.userName?.message}>
-          <CustomInput
+        </Components.FormField>
+        <Components.FormField errorText={errors.userName?.message}>
+          <Components.CustomInput
             id='userName'
             placeholder='Username'
             type='text'
@@ -85,24 +76,24 @@ export function BaseSignUpPage({ handleLoading }: ManualLoadingHandleProps) {
             maxLength={USERNAME_LENGTH_CONTSTRAINT}
             isInvalid={!!errors.userName}
           />
-        </FormField>
-        <FormField errorText={errors.email?.message}>
-          <CustomInput
+        </Components.FormField>
+        <Components.FormField errorText={errors.email?.message}>
+          <Components.CustomInput
             id='email'
             placeholder='Email'
             type='email'
             {...register('email')}
             isInvalid={!!errors.email}
           />
-        </FormField>
-        <FormField
+        </Components.FormField>
+        <Components.FormField
           errorText={
             errors.password?.message === ValidationErrorsText.Required
               ? errors.password?.message
               : undefined
           }
         >
-          <CustomInput
+          <Components.CustomInput
             id='password'
             placeholder='Password'
             type='password'
@@ -110,39 +101,39 @@ export function BaseSignUpPage({ handleLoading }: ManualLoadingHandleProps) {
             {...register('password')}
             isInvalid={!!errors.password}
           />
-        </FormField>
+        </Components.FormField>
         <div>
-          <Paragraph>Password should:</Paragraph>
+          <Components.Paragraph>Password should:</Components.Paragraph>
           <ul>
-            <StyledListItem
-              color={
+            <Components.StyledListItem
+              $color={
                 errors.password?.message === PasswordValidationChecks.Capital ? 'error' : undefined
               }
             >
               contain at least 1 capital letter
-            </StyledListItem>
-            <StyledListItem
-              color={
+            </Components.StyledListItem>
+            <Components.StyledListItem
+              $color={
                 errors.password?.message === PasswordValidationChecks.Digit ? 'error' : undefined
               }
             >
               contain at least 1 digit
-            </StyledListItem>
-            <StyledListItem
-              color={
+            </Components.StyledListItem>
+            <Components.StyledListItem
+              $color={
                 errors.password?.message === PasswordValidationChecks.Length ? 'error' : undefined
               }
             >
               contain minimum 8 characters
-            </StyledListItem>
+            </Components.StyledListItem>
           </ul>
         </div>
         <DateOfBirthControl onChange={setValue} errorText={errors.dateOfBirth?.message} />
-        <StyledButton type='submit' $isDisabled={!isValid} variant='filled'>
+        <Components.StyledButton type='submit' $isDisabled={!isValid} $variant='filled'>
           Next
-        </StyledButton>
+        </Components.StyledButton>
       </AuthWrapper>
-    </Container>
+    </Components.Container>
   );
 }
 

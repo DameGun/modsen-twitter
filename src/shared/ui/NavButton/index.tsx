@@ -26,7 +26,7 @@ export function NavButton({
       {({ isActive }) => (
         <StyledNavButton $isActive={isActive}>
           <StyledIcon>{isActive ? ActiveIconComponent : IconComponent}</StyledIcon>
-          <Paragraph weight='semibold' size='xl'>
+          <Paragraph $weight='semibold' $size='xl'>
             {children}
           </Paragraph>
         </StyledNavButton>

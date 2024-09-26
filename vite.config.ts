@@ -6,7 +6,16 @@ import svgr from 'vite-plugin-svgr';
 
 export default defineConfig({
   plugins: [
-    svgr(),
+    svgr({
+      svgrOptions: {
+        exportType: 'named',
+        namedExport: 'ReactComponent',
+        ref: true,
+        titleProp: true,
+        svgProps: { role: 'img' },
+      },
+      include: '**/*.svg',
+    }),
     legacy({
       targets: ['defaults', 'not IE 11'],
     }),

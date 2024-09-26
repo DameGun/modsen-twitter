@@ -46,11 +46,11 @@ export function Tweet({ tweet }: TweetProps) {
               state={tweet.author}
               onClick={handleNameClick}
             >
-              <Heading4 weight='bold'>{tweet.author.fullName}</Heading4>
+              <Heading4 $weight='bold'>{tweet.author.fullName}</Heading4>
             </StyledLink>
             <UserName userName={tweet.author.userName} />
             &#x2022;
-            <Paragraph color='textSecondary'>{formatTweetCreationTime(tweet.createdAt)}</Paragraph>
+            <Paragraph $color='textSecondary'>{formatTweetCreationTime(tweet.createdAt)}</Paragraph>
           </FlexContainer>
           {tweet.author.uid === currentUser.uid && (
             <DeleteTweet tweetId={tweet.uid} withRedirect={withRedirect} isLoaderFullScreen />
@@ -63,7 +63,7 @@ export function Tweet({ tweet }: TweetProps) {
           {tweet.media.length > 0 && (
             <TweetMediaWrapper $itemsCount={tweet.media.length}>
               {tweet.media.map((url, index) => (
-                <img key={index} src={url} />
+                <img key={index} src={url} alt='Tweet media' />
               ))}
             </TweetMediaWrapper>
           )}

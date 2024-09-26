@@ -5,15 +5,7 @@ import { FollowButton } from '@/features/user';
 import { CalendarIcon } from '@/shared/assets/icons';
 import { Routes } from '@/shared/constants/routes';
 import { ConnectionType } from '@/shared/constants/user';
-import {
-  FlexContainer,
-  Heading3,
-  Paragraph,
-  Section,
-  SectionHeader,
-  StyledIcon,
-  StyledLink,
-} from '@/shared/ui';
+import * as Components from '@/shared/ui';
 import { TweetsList } from '@/widgets/tweet';
 
 import { EditProfile } from '../../edit/ui/EditProfile';
@@ -26,9 +18,9 @@ type UserProfileProps = {
 export function UserProfile({ user, isCurrentUser }: UserProfileProps) {
   return (
     <>
-      <SectionHeader isNavigatable headerText={user.fullName} />
+      <Components.SectionHeader isNavigatable headerText={user.fullName} />
       <BackgroundImage url={user?.backgroundImageUrl} />
-      <Section $direction='column' $gap='md'>
+      <Components.Section $direction='column' $gap='md'>
         <AvatarWrapper $align='end' $justify='flex-end'>
           <Avatar url={user?.avatarUrl} size='xl2' />
           {isCurrentUser ? (
@@ -37,40 +29,40 @@ export function UserProfile({ user, isCurrentUser }: UserProfileProps) {
             <FollowButton isLoaderFullScreen targetUid={user.uid} targetUserName={user.userName} />
           )}
         </AvatarWrapper>
-        <FlexContainer $direction='column'>
-          <Heading3>{user.fullName}</Heading3>
+        <Components.FlexContainer $direction='column'>
+          <Components.Heading3>{user.fullName}</Components.Heading3>
           <UserName userName={user.userName} />
-        </FlexContainer>
-        <FlexContainer $direction='column' $gap='md'>
-          {user.bio && <Paragraph>{user.bio}</Paragraph>}
-          <FlexContainer $align='center' $gap='sm'>
-            <StyledIcon $size='sm'>
-              <CalendarIcon />
-            </StyledIcon>
-            <Paragraph color='textSecondary'>
+        </Components.FlexContainer>
+        <Components.FlexContainer $direction='column' $gap='md'>
+          {user.bio && <Components.Paragraph>{user.bio}</Components.Paragraph>}
+          <Components.FlexContainer $align='center' $gap='sm'>
+            <Components.StyledIcon $size='sm'>
+              <CalendarIcon title='Calendar' />
+            </Components.StyledIcon>
+            <Components.Paragraph $color='textSecondary'>
               Joined {parseUserRegisterDate(user.createdAt)}
-            </Paragraph>
-          </FlexContainer>
-          <FlexContainer $gap='sm' $align='center'>
-            <StyledLink
+            </Components.Paragraph>
+          </Components.FlexContainer>
+          <Components.FlexContainer $gap='sm' $align='center'>
+            <Components.StyledLink
               to={Routes.Connections(user.userName, ConnectionType.Followers)}
               state={user}
               $color='textMain'
             >
-              <Paragraph>{user.followers.length}</Paragraph>
-              <Paragraph color='textSecondary'>Followers</Paragraph>
-            </StyledLink>
-            <StyledLink
+              <Components.Paragraph>{user.followers.length}</Components.Paragraph>
+              <Components.Paragraph $color='textSecondary'>Followers</Components.Paragraph>
+            </Components.StyledLink>
+            <Components.StyledLink
               to={Routes.Connections(user.userName, ConnectionType.Following)}
               state={user}
               $color='textMain'
             >
-              <Paragraph>{user.following.length}</Paragraph>
-              <Paragraph color='textSecondary'>Following</Paragraph>
-            </StyledLink>
-          </FlexContainer>
-        </FlexContainer>
-      </Section>
+              <Components.Paragraph>{user.following.length}</Components.Paragraph>
+              <Components.Paragraph $color='textSecondary'>Following</Components.Paragraph>
+            </Components.StyledLink>
+          </Components.FlexContainer>
+        </Components.FlexContainer>
+      </Components.Section>
       <TweetsList targetUser={user} />
     </>
   );

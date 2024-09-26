@@ -17,14 +17,7 @@ import { useQueryWithLoading } from '@/shared/lib/useQueryWithLoading';
 import { withLoader } from '@/shared/lib/withLoader';
 import type { ImageWithKey } from '@/shared/types/image';
 import type { ManualLoadingHandleProps } from '@/shared/types/loader';
-import {
-  CustomInput,
-  FlexContainer,
-  FormField,
-  Heading4,
-  ModalContext,
-  StyledButton,
-} from '@/shared/ui';
+import * as Components from '@/shared/ui';
 
 import { MediaWrapper, MediaWrapperInner } from './styled';
 
@@ -33,7 +26,7 @@ import { createTweetValidationSchema } from '../model/validation';
 function BaseCreateTweetForm({ handleLoading }: ManualLoadingHandleProps) {
   const currentUser = useAppSelector(selectCurrentUser);
   const [createTweet, { isLoading }] = useCreateTweetMutation();
-  const { handleClose } = useContext(ModalContext);
+  const { handleClose } = useContext(Components.ModalContext);
   useQueryWithLoading({ isLoading, handleLoading });
 
   const {
@@ -104,17 +97,17 @@ function BaseCreateTweetForm({ handleLoading }: ManualLoadingHandleProps) {
   };
 
   return (
-    <FlexContainer
+    <Components.FlexContainer
       $gap='sm'
       $fullWidth
       as='form'
       onSubmit={handleClose(handleSubmit(handleFormSubmit))}
     >
-      <FlexContainer>
+      <Components.FlexContainer>
         <Avatar url={currentUser.avatarUrl} />
-      </FlexContainer>
-      <FlexContainer $fullWidth $direction='column'>
-        <CustomInput
+      </Components.FlexContainer>
+      <Components.FlexContainer $fullWidth $direction='column'>
+        <Components.CustomInput
           asTextArea
           maxLength={TWEET_CONTENT_LENGTH_CONSTRAINT}
           placeholder='Whats happening?'
@@ -122,7 +115,7 @@ function BaseCreateTweetForm({ handleLoading }: ManualLoadingHandleProps) {
           variant='unstyled'
           {...register('content')}
         />
-        <FormField errorText={errors.media?.message}>
+        <Components.FormField errorText={errors.media?.message}>
           {imagesList && imagesList.length > 0 && (
             <MediaWrapper>
               <MediaWrapperInner $gap='sm'>
@@ -132,19 +125,19 @@ function BaseCreateTweetForm({ handleLoading }: ManualLoadingHandleProps) {
               </MediaWrapperInner>
             </MediaWrapper>
           )}
-        </FormField>
-        <FlexContainer $justify='space-between'>
+        </Components.FormField>
+        <Components.FlexContainer $justify='space-between'>
           <ImageEditButton
             handleChange={handleImageChange}
             handleError={handleImageError}
             size='sm'
           />
-          <StyledButton type='submit' $isDisabled={!isValid} variant='filled'>
-            <Heading4>Post</Heading4>
-          </StyledButton>
-        </FlexContainer>
-      </FlexContainer>
-    </FlexContainer>
+          <Components.StyledButton type='submit' $isDisabled={!isValid} $variant='filled'>
+            <Components.Heading4>Post</Components.Heading4>
+          </Components.StyledButton>
+        </Components.FlexContainer>
+      </Components.FlexContainer>
+    </Components.FlexContainer>
   );
 }
 

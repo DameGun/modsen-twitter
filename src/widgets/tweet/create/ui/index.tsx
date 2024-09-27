@@ -9,7 +9,7 @@ export function CreateTweetModal() {
     <Components.Modal>
       <Components.ModalButton>
         {({ handleOpen }) => (
-          <CreateTweetButton $variant='filled' onClick={handleOpen()}>
+          <CreateTweetButton data-testid='create-post' $variant='filled' onClick={handleOpen()}>
             <Components.StyledIcon>
               <PostIcon title='Post' />
             </Components.StyledIcon>
@@ -20,7 +20,7 @@ export function CreateTweetModal() {
       <Components.ModalContent isMobileFullscreen>
         <Components.ModalHeader />
         <Components.ModalBody>
-          <CreateTweetModalWrapper>
+          <CreateTweetModalWrapper data-testid='create-post-modal'>
             <CreateTweetForm isLoaderFullScreen />
           </CreateTweetModalWrapper>
         </Components.ModalBody>

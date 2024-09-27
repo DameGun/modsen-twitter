@@ -19,7 +19,7 @@ function BaseGoogleAuthButton({ type, handleLoading }: GoogleAuthButtonProps) {
 
   return (
     <>
-      <StyledButton onClick={call} $variant='outline'>
+      <StyledButton onClick={call} $variant='outline' data-testid='google-auth-button'>
         <StyledIcon $notInvertColor>
           <GoogleIcon title='Google logo' />
         </StyledIcon>

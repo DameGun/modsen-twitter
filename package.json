@@ -9,6 +9,8 @@
     "lint": "eslint .",
     "format": "prettier . --write",
     "test:jest": "jest",
+    "test:cypress": "cypress run --browser chrome",
+    "cypress": "cypress open",
     "preview": "vite preview",
     "postinstall": "husky install",
     "prepare": "husky && husky install"
@@ -31,6 +33,7 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-legacy": "^5.4.2",
     "@vitejs/plugin-react": "^4.3.1",
+    "cypress": "^13.15.0",
     "eslint": "^9.9.0",
     "eslint-plugin-react": "^7.35.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",

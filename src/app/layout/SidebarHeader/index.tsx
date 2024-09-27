@@ -24,7 +24,12 @@ export function SidebarHeader() {
           </StyledIcon>
         </StyledButton>
       </Link>
-      <StyledButton $variant='icon' onClick={handleTheme}>
+      <StyledButton
+        role='switch'
+        aria-roledescription={currentTheme}
+        $variant='icon'
+        onClick={handleTheme}
+      >
         <StyledIcon>
           {currentTheme === ColorMode.Dark ? (
             <LightModeIcon title='Light mode' />

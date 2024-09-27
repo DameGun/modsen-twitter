@@ -13,7 +13,7 @@ export function ImagePreview({ id, url, handleDelete }: ImagePreviewProps) {
   const handleClick = () => handleDelete(id);
 
   return (
-    <ImagePreviewWrapper>
+    <ImagePreviewWrapper data-testid='tweet-image-preview'>
       <StyledButton $variant='icon' onClick={handleClick}>
         <StyledIcon $size='xs'>
           <CloseIcon title='Close' />

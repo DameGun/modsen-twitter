@@ -48,6 +48,7 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           start: yarn dev
+          browser: chrome
           wait-on: 'http://localhost:5173'
         env:
           VITE_FIREBASE_APIKEY: ${{ secrets.VITE_FIREBASE_APIKEY }}

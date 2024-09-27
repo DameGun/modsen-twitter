@@ -1,3 +1,8 @@
-export { updateBothTweetsCache, updateMainTweetsCache } from './cache';
-export { getExtendedTweetLikes, setOrRemoveLike, updateCurrentDisplayedTweetLikes } from './likes';
-export { formatTweetCreationTime, formatTweetLikesCount, mapTweetDoc } from './mappings';
+export {
+  updateBothTweetsCache,
+  updateCurrentDisplayedTweetLikes,
+  updateMainTweetsCache,
+} from './cache';
+export { formatTweetCreationTime, formatTweetLikesCount } from './formatters';
+export { getExtendedTweetLikes, setOrRemoveLike } from './likes';
+export { mapTweetDoc } from './mappings';

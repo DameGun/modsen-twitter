@@ -27,7 +27,11 @@ function BaseDeleteTweet({ tweetId, handleLoading, withRedirect }: DeleteButtonP
     <Components.Modal>
       <Components.ModalButton>
         {({ handleOpen }) => (
-          <Components.StyledButton $variant='icon' onClick={handleOpen()}>
+          <Components.StyledButton
+            data-testid='toggle-delete'
+            $variant='icon'
+            onClick={handleOpen()}
+          >
             <Components.StyledIcon $size='xs'>
               <DeleteIcon title='Delete' />
             </Components.StyledIcon>
@@ -52,7 +56,11 @@ function BaseDeleteTweet({ tweetId, handleLoading, withRedirect }: DeleteButtonP
                 </Components.Paragraph>
               </Components.FlexContainer>
               <Components.FlexContainer $direction='column' $gap='sm'>
-                <Components.StyledButton $variant='filled' onClick={handleClose(handleDelete)}>
+                <Components.StyledButton
+                  data-testid='delete-post'
+                  $variant='filled'
+                  onClick={handleClose(handleDelete)}
+                >
                   <Components.Heading4>Delete</Components.Heading4>
                 </Components.StyledButton>
 

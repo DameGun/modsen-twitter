@@ -2,6 +2,7 @@ export { AuthGate } from './AuthGate';
 export { Container } from './Container';
 export { CustomInput } from './CustomInput';
 export { CustomSelect } from './CustomSelect';
+export { ErrorBoundary } from './ErrorBoundary';
 export { Fallback } from './Fallback';
 export { FlexContainer } from './FlexContainer';
 export { FormField } from './FormField';

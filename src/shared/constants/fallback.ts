@@ -2,7 +2,7 @@ export enum FallbackTextMain {
   Followers = 'Looking for followers?',
   Following = 'Be in the know',
   Profile = 'This account doesnt exist',
-  Main = 'Someting went wrong',
+  Main = 'Something went wrong',
 }
 
 export enum FallbackTextSecondary {

@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": false
+  },
+  "include": ["src"],
+  "extends": "./tsconfig.app.json"
+}

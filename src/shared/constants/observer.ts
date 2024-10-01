@@ -1,0 +1,1 @@
+export const SCROLL_MAX_VISIBLE_ITEMS = 10;

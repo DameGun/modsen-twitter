@@ -1,0 +1,4 @@
+export const MAX_SEARCH_WINDOW_ITEMS = 10;
+export const SEARCH_WINDOW_CLOSE_DELAY = 150;
+export const SEARCH_WINDOW_MAX_HEIGHT = '300px';
+export const SEARCH_WINDOW_MIN_HEIGHT = '100px';

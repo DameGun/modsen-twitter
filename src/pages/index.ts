@@ -1,5 +1,5 @@
-export { FeedPage } from './Feed';
-export { LoginPage } from './Login';
-export { ProfilePage } from './Profile';
-export { SignUpPage } from './SignUp';
-export { WelcomePage } from './Welcome';
+export { SignInPage, SignUpPage, WelcomePage } from './auth';
+export { ConnectionsPage } from './connections';
+export { FeedPage } from './feed';
+export { ProfilePage } from './profile';
+export { TweetPage } from './tweet';

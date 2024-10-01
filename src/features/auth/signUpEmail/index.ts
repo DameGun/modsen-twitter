@@ -1,0 +1,1 @@
+export { signUpEmail } from './api';

@@ -1,14 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 
-import { FollowButton } from '@/features/user';
+import { Avatar, UserName } from '@/entities/user/';
+import { UserDoc } from '@/entities/user/types';
 import { Routes } from '@/shared/constants/routes';
 import { FlexContainer, Heading4, Paragraph } from '@/shared/ui';
 
 import { UserCellWrapper } from './styled';
 
-import { UserDoc } from '../../types';
-import { Avatar } from '../Avatar';
-import { UserName } from '../UserName';
+import { FollowButton } from '../../follow';
 
 type UserCellProps = {
   user: UserDoc;

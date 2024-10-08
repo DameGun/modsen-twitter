@@ -6,14 +6,15 @@ export {
   unfollowUser,
   updateUser,
 } from './api';
-export { findOrAddUserInCache, getCurrentUser, parseUserName, parseUserRegisterDate } from './lib';
+export { parseUserName, parseUserRegisterDate } from './lib';
 export {
-  addToUsersCache,
+  fetchOrAddUserById,
   selectCurrentUser,
+  selectUserFromCacheById,
   selectUsersCache,
   setCurrentUser,
   updateCurrentUser,
   userReducer,
   usersCacheReducer,
 } from './model';
-export { Avatar, AvatarWrapper, BackgroundImage, NotFound, UserCell, UserName } from './ui';
+export { Avatar, AvatarWrapper, BackgroundImage, NotFound, UserName } from './ui';

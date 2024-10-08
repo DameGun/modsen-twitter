@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { FlexContainer } from '@/shared/ui';
+import { FlexContainer } from '../FlexContainer';
 
 export const StickyContainer = styled(FlexContainer)`
   position: sticky;

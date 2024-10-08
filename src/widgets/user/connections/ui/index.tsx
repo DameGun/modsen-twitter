@@ -1,4 +1,5 @@
-import { getUserConnections, UserCell } from '@/entities/user';
+import { getUserConnections } from '@/entities/user';
+import { UserCell } from '@/features/user';
 import { FallbackTextMain, FallbackTextSecondary } from '@/shared/constants/fallback';
 import { ConnectionType } from '@/shared/constants/user';
 import { reverseMapType } from '@/shared/lib/mappings';

@@ -3,6 +3,7 @@ import { deleteDoc } from 'firebase/firestore';
 import { apiSlice, deleteImages } from '@/shared/api';
 import { FirestoreCollections, StoragePaths } from '@/shared/constants/firebase';
 import { getDataById } from '@/shared/lib/firestore';
+import { RootState } from '@/shared/types/store';
 
 import { updateBothTweetsCache } from '../lib';
 
@@ -24,11 +25,13 @@ const deleteTweetApiSlice = apiSlice.injectEndpoints({
           return { error };
         }
       },
-      onQueryStarted: async (tweetId, { queryFulfilled }) => {
+      onQueryStarted: async (tweetId, { queryFulfilled, dispatch, getState }) => {
         try {
           await queryFulfilled;
 
-          updateBothTweetsCache((draft) => {
+          const user = (getState() as RootState).user.currentUser!;
+
+          updateBothTweetsCache(dispatch, user, (draft) => {
             const tweetIndex = draft.collection.findIndex(({ uid }) => uid === tweetId);
             draft.collection.splice(tweetIndex, 1);
           });

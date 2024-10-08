@@ -1,4 +1,4 @@
-import { findOrAddUserInCache } from '@/entities/user';
+import { fetchOrAddUserById, selectUserFromCacheById } from '@/entities/user';
 import type { UserDoc } from '@/entities/user/types';
 import { store } from '@/shared/store';
 
@@ -10,13 +10,21 @@ export async function mapTweetDoc(
   tweet: TweetDoc,
   targetUser?: UserDoc
 ): Promise<TweetType | undefined> {
-  const currentUser = store.getState().user.currentUser!;
+  const { getState, dispatch } = store;
+  const state = getState();
+  const currentUser = state.user.currentUser!;
   let author: UserDoc | undefined;
 
   if (targetUser) {
     author = targetUser;
   } else {
-    author = await findOrAddUserInCache(tweet.author);
+    let userInCache = selectUserFromCacheById(state, tweet.author);
+
+    if (!userInCache) {
+      userInCache = await dispatch(fetchOrAddUserById(tweet.author)).unwrap();
+    }
+
+    author = userInCache;
   }
 
   const [isLiked, likesCount] = getExtendedTweetLikes(currentUser.uid, tweet.likes);

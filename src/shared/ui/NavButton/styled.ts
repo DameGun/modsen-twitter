@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { StyledButton } from '@/shared/ui';
+import { StyledButton } from '../StyledButton';
 
 export type StyledNavButtonProps = {
   $isActive: boolean;

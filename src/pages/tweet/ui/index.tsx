@@ -14,6 +14,7 @@ function BaseTweetPage({ handleLoading }: ManualLoadingHandleProps) {
   const { data, isFetching } = useGetTweetByIdQuery(tweetId!);
   useQueryWithLoading({ isLoading: isFetching, handleLoading });
   useModifyDocumentTitle(DocumentTitle.Tweet(userName!));
+  console.log(data);
 
   return (
     <>

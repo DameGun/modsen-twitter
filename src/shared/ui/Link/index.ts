@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 
-import { ColorsConstants } from '@/shared/types/styles';
+import type { ColorsConstants } from '@/app/providers/theme';
 
 type StyledLinkProps = {
   $color?: keyof ColorsConstants;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import type { VariablesConstants } from '@/shared/types/styles';
+import type { VariablesConstants } from '@/app/providers/theme';
 
 type FlexContainerProps = {
   $gap?: keyof VariablesConstants['spacing'];

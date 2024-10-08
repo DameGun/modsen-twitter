@@ -1,7 +1,19 @@
 import styled from 'styled-components';
 
-import { ButtonVariants } from '@/shared/constants/theme';
-import { commonButtonStyles } from '@/shared/styles/common';
+import {
+  commonButtonStyles,
+  filledButtonStyles,
+  iconButtonStyles,
+  outlineButtonStyles,
+  primaryButtonStyles,
+} from '@/shared/styles/common';
+
+const ButtonVariants = {
+  primary: primaryButtonStyles,
+  filled: filledButtonStyles,
+  outline: outlineButtonStyles,
+  icon: iconButtonStyles,
+} as const;
 
 type StyledButtonProps = {
   $isDisabled?: boolean;

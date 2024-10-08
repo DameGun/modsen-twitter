@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { ColorMode } from '@/shared/constants/theme';
-import type { VariablesConstants } from '@/shared/types/styles';
+import { ColorMode, type VariablesConstants } from '@/app/providers/theme';
 
 export type StyledIconProps = {
   $size?: keyof VariablesConstants['iconSize'];

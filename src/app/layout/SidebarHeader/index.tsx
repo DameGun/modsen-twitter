@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 
-import { changeTheme, selectCurrentTheme } from '@/app/model/theme';
+import { ColorMode } from '@/app/providers/theme/model/constants';
+import { changeTheme, selectCurrentTheme } from '@/app/providers/theme/model/slice';
 import { DarkModeIcon, LightModeIcon, LogoIcon } from '@/shared/assets/icons';
 import { Routes } from '@/shared/constants/routes';
-import { ColorMode } from '@/shared/constants/theme';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/store';
 import { StyledButton, StyledIcon } from '@/shared/ui';
 

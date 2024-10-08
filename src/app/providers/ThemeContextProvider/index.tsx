@@ -2,12 +2,12 @@ import { useEffect } from 'react';
 
 import { ThemeProvider } from 'styled-components';
 
-import { disableTransitionOnThemeChange } from '@/app/lib/theme';
 import { selectCurrentTheme } from '@/app/model/theme';
 import GlobalStyles from '@/app/styles/global';
 import { darkTheme, lightTheme } from '@/app/styles/theme';
 import { ColorMode } from '@/shared/constants/theme';
 import { useAppSelector } from '@/shared/lib/store';
+import { disableTransitionOnThemeChange } from '@/shared/lib/theme';
 import type { PropsWithChildren } from '@/shared/types/common';
 
 export function ThemeContextProvider({ children }: PropsWithChildren) {

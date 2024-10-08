@@ -5,7 +5,7 @@ import {
 } from '@/shared/constants/theme';
 
 export function getThemeFromLocalStorage() {
-  return (localStorage.getItem(THEME_KEY_LOCALSTORAGE) ?? 'Light') as ColorMode;
+  return (localStorage.getItem(THEME_KEY_LOCALSTORAGE) ?? ColorMode.Light) as ColorMode;
 }
 
 export function disableTransitionOnThemeChange() {

@@ -3,7 +3,7 @@ import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
-import { firebaseConfig } from '@/app/config/firebase';
+import { firebaseConfig } from '@/shared/config/firebase';
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);

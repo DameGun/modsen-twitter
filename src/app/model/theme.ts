@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { ColorMode, THEME_KEY_LOCALSTORAGE } from '@/shared/constants/theme';
 import type { RootState } from '@/shared/types/store';
 
-import { getThemeFromLocalStorage } from '../lib/theme';
+import { getThemeFromLocalStorage } from '../../shared/lib/theme';
 import type { ThemeState } from '../types/theme';
 
 const initialState: ThemeState = {

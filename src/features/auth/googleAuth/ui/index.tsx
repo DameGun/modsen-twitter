@@ -5,7 +5,7 @@ import type { ManualLoadingHandleProps } from '@/shared/types/loader';
 import { Paragraph, StyledButton, StyledIcon } from '@/shared/ui';
 
 import { signInWithGoogle } from '../api';
-import { GoogleAuthType } from '../constants';
+import { GoogleAuthText, GoogleAuthType } from '../constants';
 
 type GoogleAuthButtonProps = ManualLoadingHandleProps & {
   type: GoogleAuthType;
@@ -23,7 +23,7 @@ function BaseGoogleAuthButton({ type, handleLoading }: GoogleAuthButtonProps) {
         <StyledIcon $notInvertColor>
           <GoogleIcon title='Google logo' />
         </StyledIcon>
-        {type === GoogleAuthType.SignIn ? 'Log in with Google' : 'Sign up with Google'}
+        {GoogleAuthText[type]}
       </StyledButton>
       {isError && (
         <Paragraph $color='error'>Some error occured while trying to sign up with Google</Paragraph>

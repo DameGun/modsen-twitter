@@ -8,7 +8,7 @@ export default {
 
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
 
-  testMatch: ['**/__tests__/(entities|shared)/**/*.(ts|tsx|js|jsx)'],
+  testMatch: ['<rootDir>/**/*.test.(ts|tsx|js|jsx)'],
 
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',

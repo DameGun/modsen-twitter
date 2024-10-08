@@ -1,10 +1,10 @@
+import { Helmet } from 'react-helmet-async';
 import { NavLink, useLocation, useParams } from 'react-router-dom';
 
 import { parseUserName } from '@/entities/user';
 import { DocumentTitle } from '@/shared/constants/documentTitle';
 import { Routes } from '@/shared/constants/routes';
 import { ConnectionType } from '@/shared/constants/user';
-import { useModifyDocumentTitle } from '@/shared/lib/useModifyDocumentTitle';
 import type { ConnectionsPageParams, PageWithUserStateLocation } from '@/shared/types/router';
 import { Heading4, SectionHeader, StickyContainer, Tab, Tabs } from '@/shared/ui';
 import { ConnectionsList } from '@/widgets/user';
@@ -12,10 +12,12 @@ import { ConnectionsList } from '@/widgets/user';
 export function ConnectionsPage() {
   const { connectionType, userName } = useParams<ConnectionsPageParams>();
   const { state } = useLocation() as PageWithUserStateLocation;
-  useModifyDocumentTitle(DocumentTitle[connectionType!](userName!));
 
   return (
     <>
+      <Helmet>
+        <title>{DocumentTitle[connectionType!](userName!)}</title>
+      </Helmet>
       <StickyContainer $direction='column'>
         <SectionHeader
           isNavigatable

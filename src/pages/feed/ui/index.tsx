@@ -1,14 +1,17 @@
+import { Helmet } from 'react-helmet-async';
+
 import { CreateTweetForm } from '@/features/tweet';
-import { useModifyDocumentTitle } from '@/shared/lib/useModifyDocumentTitle';
+import { DocumentTitle } from '@/shared/constants/documentTitle';
 import { TweetsList } from '@/widgets/tweet';
 
 import { CreateTweetFormWrapper } from './styled';
 
 export function FeedPage() {
-  useModifyDocumentTitle('Feed');
-
   return (
     <>
+      <Helmet>
+        <title>{DocumentTitle.Feed}</title>
+      </Helmet>
       <CreateTweetFormWrapper>
         <CreateTweetForm isLoaderFullScreen />
       </CreateTweetFormWrapper>

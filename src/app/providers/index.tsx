@@ -1,3 +1,4 @@
+import { HelmetProvider } from 'react-helmet-async';
 import { Provider } from 'react-redux';
 
 import { store } from '@/shared/store';
@@ -7,8 +8,10 @@ import { ThemeContextProvider } from './theme';
 
 export function Providers({ children }: PropsWithChildren) {
   return (
-    <Provider store={store}>
-      <ThemeContextProvider>{children}</ThemeContextProvider>
-    </Provider>
+    <HelmetProvider>
+      <Provider store={store}>
+        <ThemeContextProvider>{children}</ThemeContextProvider>
+      </Provider>
+    </HelmetProvider>
   );
 }

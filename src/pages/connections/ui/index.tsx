@@ -6,7 +6,10 @@ import { DocumentTitle } from '@/shared/constants/documentTitle';
 import { Routes } from '@/shared/constants/routes';
 import { ConnectionType } from '@/shared/constants/user';
 import type { ConnectionsPageParams, PageWithUserStateLocation } from '@/shared/types/router';
-import { Heading4, SectionHeader, StickyContainer, Tab, Tabs } from '@/shared/ui';
+import { SectionHeader } from '@/shared/ui/SectionHeader';
+import { StickyContainer } from '@/shared/ui/StickyContainer';
+import { Tab, Tabs } from '@/shared/ui/Tabs';
+import { Heading4 } from '@/shared/ui/Text';
 import { ConnectionsList } from '@/widgets/user';
 
 export function ConnectionsPage() {

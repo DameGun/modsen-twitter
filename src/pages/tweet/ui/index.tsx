@@ -6,7 +6,7 @@ import { DocumentTitle } from '@/shared/constants/documentTitle';
 import { useQueryWithLoading } from '@/shared/lib/useQueryWithLoading';
 import { withLoader } from '@/shared/lib/withLoader';
 import { ManualLoadingHandleProps } from '@/shared/types/loader';
-import { SectionHeader } from '@/shared/ui';
+import { SectionHeader } from '@/shared/ui/SectionHeader';
 import { Tweet } from '@/widgets/tweet';
 
 function BaseTweetPage({ handleLoading }: ManualLoadingHandleProps) {

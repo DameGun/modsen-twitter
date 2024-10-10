@@ -1,2 +1,2 @@
 export * from './model';
-export { ThemeContextProvider } from './ui';
+export { ThemeContextProvider, ThemeSwitcher } from './ui';

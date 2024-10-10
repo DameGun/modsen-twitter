@@ -1,10 +1,10 @@
 import { GoogleIcon } from '@/shared/assets/icons';
-import { useAsyncWithLoading } from '@/shared/lib/useAsyncWithLoading';
+import { useQueryWithLoading } from '@/shared/lib/useQueryWithLoading';
 import { withLoader } from '@/shared/lib/withLoader';
 import type { ManualLoadingHandleProps } from '@/shared/types/loader';
 import { Paragraph, StyledButton, StyledIcon } from '@/shared/ui';
 
-import { signInWithGoogle } from '../api';
+import { useSignInWithGoogleMutation } from '../api';
 import { GoogleAuthText, GoogleAuthType } from '../constants';
 
 type GoogleAuthButtonProps = ManualLoadingHandleProps & {
@@ -12,14 +12,14 @@ type GoogleAuthButtonProps = ManualLoadingHandleProps & {
 };
 
 function BaseGoogleAuthButton({ type, handleLoading }: GoogleAuthButtonProps) {
-  const { call, isError } = useAsyncWithLoading({
-    call: signInWithGoogle,
-    handleLoading,
-  });
+  const [signIn, { isLoading, isError }] = useSignInWithGoogleMutation();
+  useQueryWithLoading({ isLoading, handleLoading });
+
+  const handleSignIn = async () => await signIn();
 
   return (
     <>
-      <StyledButton onClick={call} $variant='outline' data-testid='google-auth-button'>
+      <StyledButton onClick={handleSignIn} $variant='outline' data-testid='google-auth-button'>
         <StyledIcon $notInvertColor>
           <GoogleIcon title='Google logo' />
         </StyledIcon>

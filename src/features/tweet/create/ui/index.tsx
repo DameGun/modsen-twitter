@@ -10,7 +10,6 @@ import {
 } from '@/entities/tweet';
 import type { CreateTweetFormType, TweetDoc } from '@/entities/tweet/types';
 import { Avatar, selectCurrentUser } from '@/entities/user';
-import { ImageEditButton, ImagePreview } from '@/features/image';
 import { ValidationErrorsText } from '@/shared/constants/validation';
 import { useAppSelector } from '@/shared/lib/store';
 import { useQueryWithLoading } from '@/shared/lib/useQueryWithLoading';
@@ -18,6 +17,8 @@ import { withLoader } from '@/shared/lib/withLoader';
 import type { ImageWithKey } from '@/shared/types/image';
 import type { ManualLoadingHandleProps } from '@/shared/types/loader';
 import * as Components from '@/shared/ui';
+import { ImageEdit } from '@/shared/ui/ImageEdit';
+import { ImagePreview } from '@/shared/ui/ImagePreview';
 
 import { MediaWrapper, MediaWrapperInner } from './styled';
 
@@ -127,11 +128,7 @@ function BaseCreateTweetForm({ handleLoading }: ManualLoadingHandleProps) {
           )}
         </Components.FormField>
         <Components.FlexContainer $justify='space-between'>
-          <ImageEditButton
-            handleChange={handleImageChange}
-            handleError={handleImageError}
-            size='sm'
-          />
+          <ImageEdit handleChange={handleImageChange} handleError={handleImageError} size='sm' />
           <Components.StyledButton type='submit' $isDisabled={!isValid} $variant='filled'>
             <Components.Heading4>Post</Components.Heading4>
           </Components.StyledButton>

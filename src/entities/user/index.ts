@@ -1,11 +1,4 @@
-export {
-  createUser,
-  followUser,
-  getUserByUserName,
-  getUserConnections,
-  unfollowUser,
-  updateUser,
-} from './api';
+export { createUser, getUserByUserName, getUserConnections, updateUser } from './api';
 export { parseUserName, parseUserRegisterDate } from './lib';
 export {
   fetchOrAddUserById,

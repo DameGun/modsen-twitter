@@ -12,7 +12,6 @@ import {
   updateUser,
 } from '@/entities/user';
 import type { EditUser } from '@/entities/user/types';
-import { ImageEditButton } from '@/features/image';
 import { DateOfBirthControl } from '@/features/user';
 import { BIO_LENGTH_CONSTRAINT, FULLNAME_LENGTH_CONSTRAINT } from '@/shared/constants/validation';
 import {
@@ -25,6 +24,7 @@ import { useAsyncWithLoading } from '@/shared/lib/useAsyncWithLoading';
 import { withLoader } from '@/shared/lib/withLoader';
 import type { ManualLoadingHandleProps } from '@/shared/types/loader';
 import { Container, CustomInput, FormField, ModalContext } from '@/shared/ui';
+import { ImageEdit } from '@/shared/ui/ImageEdit';
 
 import { editProfileValidationSchema } from '../../model/validation';
 
@@ -94,7 +94,7 @@ const BaseEditProfileForm = forwardRef<HTMLFormElement, ManualLoadingHandleProps
       >
         <FormField errorText={errors.backgroundImageUrl?.message}>
           <BackgroundImage url={uploadedBackgroundImageUrl || backgroundImageUrl}>
-            <ImageEditButton
+            <ImageEdit
               handleError={handleErrorManually('backgroundImageUrl')}
               handleChange={handleBackgroundImageUrlChange}
               absolute
@@ -104,7 +104,7 @@ const BaseEditProfileForm = forwardRef<HTMLFormElement, ManualLoadingHandleProps
         <AvatarWrapper $align='end' $justify='flex-end'>
           <FormField errorText={errors.avatarUrl?.message}>
             <Avatar url={uploadedAvatarUrl || avatarUrl} size='xl2'>
-              <ImageEditButton
+              <ImageEdit
                 handleError={handleErrorManually('avatarUrl')}
                 handleChange={handleAvatarUrlChange}
                 absolute

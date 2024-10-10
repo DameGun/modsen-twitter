@@ -1,6 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import { Layout } from '@/app/layout';
 import {
   ConnectionsPage,
   FeedPage,
@@ -11,7 +10,9 @@ import {
   WelcomePage,
 } from '@/pages';
 import { Routes } from '@/shared/constants/routes';
-import { AuthGate, Fallback } from '@/shared/ui';
+import { AuthGate } from '@/shared/ui/AuthGate';
+import { Fallback } from '@/shared/ui/Fallback';
+import { Layout } from '@/widgets/layout';
 
 export const router = createBrowserRouter([
   {

@@ -1,19 +1,15 @@
 import { MouseEvent, useMemo } from 'react';
 
-import {
-  followUser,
-  parseUserName,
-  selectCurrentUser,
-  unfollowUser,
-  updateCurrentUser,
-} from '@/entities/user';
-import { useAppDispatch, useAppSelector } from '@/shared/lib/store';
-import { useAsyncWithLoading } from '@/shared/lib/useAsyncWithLoading';
+import { parseUserName, selectCurrentUser } from '@/entities/user';
+import { useAppSelector } from '@/shared/lib/store';
+import { useQueryWithLoading } from '@/shared/lib/useQueryWithLoading';
 import { withLoader } from '@/shared/lib/withLoader';
 import type { ManualLoadingHandleProps } from '@/shared/types/loader';
 import * as Components from '@/shared/ui';
 
 import { StyledFollowButton } from './styled';
+
+import { useFollowUserMutation, useUnfollowUserMutation } from '../api';
 
 type FollowButtonProps = ManualLoadingHandleProps & {
   targetUid: string;
@@ -22,36 +18,23 @@ type FollowButtonProps = ManualLoadingHandleProps & {
 
 function BaseFollowButton({ targetUid, targetUserName, handleLoading }: FollowButtonProps) {
   const currentUser = useAppSelector(selectCurrentUser);
-  const dispatch = useAppDispatch();
   const isFollowed = useMemo(
     () => currentUser.following.includes(targetUid),
     [currentUser, targetUid]
   );
-  const { call } = useAsyncWithLoading({
-    call: unfollowUser,
-    handleLoading,
-  });
+
+  const [followUser] = useFollowUserMutation();
+  const [unfollowUser, { isLoading }] = useUnfollowUserMutation();
+  useQueryWithLoading({ isLoading, handleLoading });
 
   const handleFollowButton = async (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
 
-    const updatedUser = await followUser({
-      targetUid,
-      uid: currentUser.uid,
-      previousFollowing: currentUser.following,
-    });
-
-    dispatch(updateCurrentUser(updatedUser));
+    await followUser(targetUid);
   };
 
   const handleUnfollowButton = async () => {
-    const updatedUser = await call({
-      targetUid,
-      uid: currentUser.uid,
-      previousFollowing: currentUser.following,
-    });
-
-    if (updatedUser) dispatch(updateCurrentUser(updatedUser));
+    await unfollowUser(targetUid);
   };
 
   return (

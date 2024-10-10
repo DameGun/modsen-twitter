@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import type { ColorsConstants, FontConstants } from '@/shared/types/styles';
+import type { ColorsConstants, FontConstants } from '@/app/providers/theme';
 
 type TextProps = {
   $color?: keyof ColorsConstants;

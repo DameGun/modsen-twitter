@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import themeReducer from '@/app/model/theme';
+import { themeReducer } from '@/app/providers/theme';
 import { userReducer, usersCacheReducer } from '@/entities/user';
 
 import { apiSlice } from '../api/redux';

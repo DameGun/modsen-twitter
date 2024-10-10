@@ -25,7 +25,7 @@ export function Tweet({ tweet }: TweetProps) {
   const currentUser = useAppSelector(selectCurrentUser);
 
   const handleNavigate = () => {
-    navigate(Routes.Tweet(tweet.author.userName, tweet.uid), { state: tweet });
+    navigate(Routes.Tweet(tweet.author.userName, tweet.uid));
   };
 
   const handleNameClick = (e: MouseEvent<HTMLAnchorElement>) => {

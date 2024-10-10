@@ -9,4 +9,5 @@ export const DocumentTitle = {
   SignIn: 'Sign In',
   SignUp: 'Sign Up',
   Welcome: 'Welcome',
+  Default: 'Twitter',
 } as const;

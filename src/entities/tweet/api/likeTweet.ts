@@ -1,6 +1,6 @@
 import { updateDoc } from 'firebase/firestore';
 
-import { getCurrentUser } from '@/entities/user';
+import { selectUserFromCacheById } from '@/entities/user';
 import { apiSlice } from '@/shared/api';
 import { FirestoreCollections } from '@/shared/constants/firebase';
 import { getDataById } from '@/shared/lib/firestore';
@@ -40,18 +40,22 @@ const likeTweetApiSlice = apiSlice.injectEndpoints({
           return { error };
         }
       },
-      onQueryStarted: async (_, { queryFulfilled }) => {
+      onQueryStarted: async (_, { queryFulfilled, dispatch, getState }) => {
         try {
           const { data: updatedTweet } = await queryFulfilled;
-          const { uid: userId } = getCurrentUser();
+          const state = getState() as RootState;
+          const currentUserId = state.user.currentUser!.uid;
+          const author = selectUserFromCacheById(state, updatedTweet.author);
 
-          updateBothTweetsCache((draft) => {
+          if (!author) return;
+
+          updateBothTweetsCache(dispatch, author, (draft) => {
             const tweet = draft.collection.find(({ uid }) => uid === updatedTweet.uid);
 
-            if (tweet) setOrRemoveLike(tweet, updatedTweet.likes, userId);
+            if (tweet) setOrRemoveLike(tweet, updatedTweet.likes, currentUserId);
           });
 
-          updateCurrentDisplayedTweetLikes(updatedTweet, userId);
+          updateCurrentDisplayedTweetLikes(dispatch, updatedTweet, currentUserId);
         } catch (error) {
           console.log(error);
         }

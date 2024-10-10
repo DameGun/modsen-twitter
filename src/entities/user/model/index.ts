@@ -1,4 +1,9 @@
-export { addToUsersCache, selectUsersCache, default as usersCacheReducer } from './usersCacheSlice';
+export {
+  fetchOrAddUserById,
+  selectUserFromCacheById,
+  selectUsersCache,
+  default as usersCacheReducer,
+} from './usersCacheSlice';
 export {
   selectCurrentUser,
   setCurrentUser,

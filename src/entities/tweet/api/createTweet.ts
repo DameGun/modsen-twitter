@@ -3,8 +3,10 @@ import { addDoc, updateDoc } from 'firebase/firestore';
 import { apiSlice, uploadImageCollectionById } from '@/shared/api';
 import { FirestoreCollections } from '@/shared/constants/firebase';
 import { getCollectionRef, getDataById } from '@/shared/lib/firestore';
+import { RootState } from '@/shared/types/store';
 
-import { mapTweetDoc, updateBothTweetsCache } from '../lib';
+import { updateBothTweetsCache } from '../lib/cache';
+import { mapTweetDoc } from '../lib/mappings';
 import type { TweetDoc, TweetType } from '../types';
 
 const createTweetApiSlice = apiSlice.injectEndpoints({
@@ -40,11 +42,12 @@ const createTweetApiSlice = apiSlice.injectEndpoints({
           return { error };
         }
       },
-      onQueryStarted: async (_, { queryFulfilled }) => {
+      onQueryStarted: async (_, { queryFulfilled, dispatch, getState }) => {
         try {
           const { data: createdTweet } = await queryFulfilled;
+          const user = (getState() as RootState).user.currentUser!;
 
-          updateBothTweetsCache((draft) => {
+          updateBothTweetsCache(dispatch, user, (draft) => {
             draft.collection.unshift(createdTweet);
           });
         } catch (err) {

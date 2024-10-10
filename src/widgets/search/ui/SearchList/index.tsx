@@ -1,6 +1,6 @@
 import { memo, useMemo } from 'react';
 
-import { UserCell } from '@/entities/user';
+import { UserCell } from '@/features/user';
 import { Loader, Paragraph } from '@/shared/ui';
 
 import {

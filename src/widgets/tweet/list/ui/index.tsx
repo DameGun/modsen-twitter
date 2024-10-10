@@ -7,7 +7,8 @@ import { useQueryWithLoading } from '@/shared/lib/useQueryWithLoading';
 import { withLoader } from '@/shared/lib/withLoader';
 import type { ManualLoadingHandleProps } from '@/shared/types/loader';
 import { TriggerElement } from '@/shared/ui';
-import { Tweet } from '@/widgets/tweet';
+
+import { Tweet } from '../../base';
 
 type TweetsList = ManualLoadingHandleProps & {
   targetUser?: UserDoc;
